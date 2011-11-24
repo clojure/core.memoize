@@ -22,13 +22,8 @@
   "
   {:author "fogus"}
 
-  (:require clojure.core.cache)
-  (:import [clojure.core.cache CacheProtocol])
-  (:import [clojure.core.cache BasicCache])
-  (:import [clojure.core.cache FIFOCache])
-  (:import [clojure.core.cache LRUCache])
-  (:import [clojure.core.cache LUCache])
-  (:import [clojure.core.cache TTLCache]))
+  (:require [clojure.core.cache :as cache])
+  (:import [clojure.core.cache CacheProtocol]))
 
 ;; Plugging Interface
 
@@ -46,49 +41,6 @@
     (PluggableMemoization. f (clojure.core.cache/seed cache base)))
   Object
   (toString [_] (str cache)))
-
-(defn- basic-cache-factory
-  "Returns a pluggable basic cache initialied to `base`"
-  [f base]
-  {:pre [(fn? f) (map? base)]}
-  (PluggableMemoization. f (BasicCache. base)))
-
-(defn- fifo-cache-factory
-  "Returns a pluggable FIFO cache with the cache and FIFO queue initialied to `base` --
-   the queue is filled as the values are pulled out of `seq`. (maybe this should be
-   randomized?)"
-  [f limit base]
-  {:pre [(fn? f)
-         (number? limit) (< 0 limit)
-         (map? base)]}
-  (PluggableMemoization. f (clojure.core.cache/seed (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY limit) base)))
-
-(defn- lru-cache-factory
-  "Returns a pluggable LRU cache with the cache and usage-table initialied to `base` --
-   each entry is initialized with the same usage value. (maybe this should be
-   randomized?)"
-  [f limit base]
-  {:pre [(fn? f)
-         (number? limit) (< 0 limit)
-         (map? base)]}
-  (PluggableMemoization. f (clojure.core.cache/seed (LRUCache. {} {} 0 limit) base)))
-
-(defn- ttl-cache-factory
-  "Returns a pluggable TTL cache with the cache and expiration-table initialied to `base` --
-   each with the same time-to-live."
-  [f ttl base]
-  {:pre [(fn? f)
-         (number? ttl) (<= 0 ttl)
-         (map? base)]}
-  (PluggableMemoization. f (TTLCache. base {} ttl)))
-
-(defn- lu-cache-factory
-  "Returns a pluggable LU cache with the cache and usage-table initialied to `base`."
-  [f limit base]
-  {:pre [(fn? f)
-         (number? limit) (< 0 limit)
-         (map? base)]}
-  (PluggableMemoization. f (clojure.core.cache/seed (LUCache. {} {} limit) base)))
 
 
 ;; # Auxilliary functions
@@ -196,7 +148,7 @@
   ([f] (memo f {}))
   ([f seed]
      (build-memoizer
-       basic-cache-factory
+       #(PluggableMemoization. %1 (cache/basic-cache-factory %2))
        f
        seed)))
 
@@ -224,7 +176,7 @@
   ([f limit] (memo-fifo f limit {}))
   ([f limit base]
      (build-memoizer
-       fifo-cache-factory
+       #(PluggableMemoization. %1 (cache/fifo-cache-factory %2 %3))
        f
        limit
        base)))
@@ -262,7 +214,7 @@
   ([f limit] (memo-lru f limit {}))
   ([f limit base]
      (build-memoizer
-       lru-cache-factory
+       #(PluggableMemoization. %1 (cache/lru-cache-factory %2 %3))
        f
        limit
        base)))
@@ -288,7 +240,7 @@
   ([f limit] (memo-ttl f limit {}))
   ([f limit base]
      (build-memoizer
-       ttl-cache-factory
+       #(PluggableMemoization. %1 (cache/ttl-cache-factory %2 %3))
        f
        limit
        {})))
@@ -311,7 +263,7 @@
   ([f limit] (memo-lu f limit {}))
   ([f limit base]
      (build-memoizer
-       lu-cache-factory
+       #(PluggableMemoization. %1 (cache/lu-cache-factory %2 %3))
        f
        limit
        base)))
