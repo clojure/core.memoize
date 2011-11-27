@@ -35,6 +35,8 @@
     (PluggableMemoization. f (clojure.core.cache/hit cache item)))
   (miss [_ item result]
     (PluggableMemoization. f (clojure.core.cache/miss cache item result)))
+  (evict [_ key]
+    (PluggableMemoization. f (clojure.core.cache/evict cache key)))
   (lookup [_ item]
     (clojure.core.cache/lookup cache item))
   (seed [_ base]
