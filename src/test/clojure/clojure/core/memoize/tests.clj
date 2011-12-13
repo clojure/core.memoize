@@ -10,7 +10,10 @@
       :author "Michael Fogus"}
   clojure.core.memoize.tests
   (:use [clojure.core.memoize] :reload-all)
-  (:use [clojure.test]))
+  (:use [clojure.test]
+        [clojure.core.cache :only [defcache lookup has? hit miss seed ttl-cache-factory]])
+  (:import (clojure.core.memoize PluggableMemoization)
+           (clojure.core.cache CacheProtocol)))
 
 (def id (memo identity))
 
@@ -126,3 +129,29 @@
       (is (memo-swap! id {[42] 24}))
       (is 24 (id 42))
       (is 42 ((memo-unwrap id) 42)))))
+
+(defcache PassThrough [impl]
+  CacheProtocol
+  (lookup [_ item]
+          (if (has? impl item)
+            (lookup impl item)
+            (delay nil)))
+  (has? [_ item]
+        (has? impl item))
+  (hit [this item]
+       (PassThrough. (hit impl item)))
+  (miss [this item result]
+        (PassThrough. (miss impl item result)))
+  (seed [_ base]
+        (PassThrough. (seed impl base))))
+
+(defn memo-pass-through [f limit]
+  (build-memoizer
+       #(PluggableMemoization. %1 (PassThrough. (ttl-cache-factory %2 %3)))
+       f
+       limit
+       {}))
+
+(deftest test-snapshot-without-cache-field
+  (testing "that we can call snapshot against an object without a 'cache' field"
+    (is (= {} (snapshot (memo-pass-through identity 2000))))))
