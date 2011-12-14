@@ -16,32 +16,8 @@ core.memoize is a new Clojure contrib library providing the following features:
 
 core.memoize is based on a library named Unk, found at <http://github.com/fogus/unk> that is planned for deprecation.
 
-
-Absorb
-------
-
-You can use core.memoize in your [Leiningen](https://github.com/technomancy/leiningen) and [Cake](https://github.com/flatland/cake) projects with the following `:dependencies` directive in your `project.clj` file:
-
-    [org.clojure/core.memoize "0.5.1"]
-
-For Maven-driven projects, use the following slice of XML in your `pom.xml`'s `<dependencies>` section:
-
-    <dependency>
-	  <groupId>org.clojure</groupId>
-	  <artifactId>core.memoize</artifactId>
-	  <version>0.5.1</version>
-	</dependency>
-
-Enjoy!
-
-
-Places
-------
-
 * [Source code](https://github.com/clojure/core.memoize)
 * [Ticket system](http://dev.clojure.org/jira/browse/CMEMOIZE)
-* [Announcement](http://groups.google.com/group/clojure/browse_frm/thread/69d08572ab265dc7)
-* Examples and documentation -- in progress
 
 Changes from Unk
 -------------------
