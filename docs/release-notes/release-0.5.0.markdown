@@ -1,4 +1,4 @@
-core.memoize v0.5.0 Release Notes
+core.memoize v0.5.1 Release Notes
 =================================
 
 core.memoize is a new Clojure contrib library providing the following features:
@@ -22,14 +22,14 @@ Absorb
 
 You can use core.memoize in your [Leiningen](https://github.com/technomancy/leiningen) and [Cake](https://github.com/flatland/cake) projects with the following `:dependencies` directive in your `project.clj` file:
 
-    [org.clojure/core.memoize "0.5.0"]
+    [org.clojure/core.memoize "0.5.1"]
 
 For Maven-driven projects, use the following slice of XML in your `pom.xml`'s `<dependencies>` section:
 
     <dependency>
 	  <groupId>org.clojure</groupId>
 	  <artifactId>core.memoize</artifactId>
-	  <version>0.5.0</version>
+	  <version>0.5.1</version>
 	</dependency>
 
 Enjoy!
@@ -46,7 +46,7 @@ Places
 Changes from Unk
 -------------------
 
-The v0.5.0 version of core.memoize is based almost wholly on the final version of Unk, with the following changes:
+The v0.5.1 version of core.memoize is based almost wholly on the final version of Unk, with the following changes:
 
 * All cache factory functions have been moved to core.cache
 * The `SoftCache` backed implementation was buggy and removed for now
