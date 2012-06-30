@@ -81,13 +81,19 @@
   "Reaches into an core.memo-memoized function and clears the cache.  This is a
    destructive operation and should be used with care.
 
+   When the second argument is a vector of input arguments, clears cache only
+   for argument vector.
+
    Keep in mind that depending on what other threads or doing, an
    immediate call to `snapshot` may not yield an empty cache.  That's
    cool though, we've learned to deal with that stuff in Clojure by
    now."
-  [f]
-  (when-let [cache (cache-id f)]
-    (swap! cache (constantly (clojure.core.cache/seed @cache {})))))
+  ([f]
+     (when-let [cache (cache-id f)]
+       (swap! cache (constantly (clojure.core.cache/seed @cache {})))))
+  ([f args]
+     (when-let [cache (cache-id f)]
+       (swap! cache (constantly (clojure.core.cache/evict @cache args))))))
 
 (defn memo-swap!
   "Takes a core.memo-populated function and a map and replaces the memoization cache
