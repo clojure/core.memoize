@@ -147,7 +147,7 @@
 
 (defn memo-pass-through [f limit]
   (build-memoizer
-       #(PluggableMemoization. %1 (PassThrough. (ttl-cache-factory %2 %3)))
+       #(PluggableMemoization. %1 (PassThrough. (ttl-cache-factory %3 :ttl %2)))
        f
        limit
        {}))

@@ -178,7 +178,7 @@
   ([f limit] (memo-fifo f limit {}))
   ([f limit base]
      (build-memoizer
-       #(PluggableMemoization. %1 (cache/fifo-cache-factory %2 %3))
+       #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
        f
        limit
        base)))
@@ -216,7 +216,7 @@
   ([f limit] (memo-lru f limit {}))
   ([f limit base]
      (build-memoizer
-       #(PluggableMemoization. %1 (cache/lru-cache-factory %2 %3))
+       #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
        f
        limit
        base)))
@@ -242,7 +242,7 @@
   ([f limit] (memo-ttl f limit {}))
   ([f limit base]
      (build-memoizer
-       #(PluggableMemoization. %1 (cache/ttl-cache-factory %2 %3))
+       #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
        f
        limit
        {})))
@@ -265,7 +265,7 @@
   ([f limit] (memo-lu f limit {}))
   ([f limit base]
      (build-memoizer
-       #(PluggableMemoization. %1 (cache/lu-cache-factory %2 %3))
+       #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
        f
        limit
        base)))
