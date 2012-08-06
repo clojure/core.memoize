@@ -1,6 +1,6 @@
 {:namespaces
  ({:source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize/clojure.core.memoize-api.html",
    :name "clojure.core.memoize",
@@ -12,9 +12,9 @@
    :name "build-memoizer",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj#L119",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L119",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/build-memoizer",
    :doc
@@ -26,9 +26,9 @@
    :name "memo",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj#L133",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L133",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo",
    :doc
@@ -40,9 +40,9 @@
    :name "memo-clear!",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj#L80",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L80",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-clear!",
    :doc
@@ -54,9 +54,9 @@
    :name "memo-fifo",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj#L157",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L157",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-fifo",
    :doc
@@ -68,9 +68,9 @@
    :name "memo-lru",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj#L186",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L186",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-lru",
    :doc
@@ -82,9 +82,9 @@
    :name "memo-lu",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj#L250",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L250",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-lu",
    :doc
@@ -96,9 +96,9 @@
    :name "memo-swap!",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj#L92",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L92",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-swap!",
    :doc
@@ -110,9 +110,9 @@
    :name "memo-ttl",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj#L224",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L224",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-ttl",
    :doc
@@ -124,9 +124,9 @@
    :name "memoized?",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj#L75",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L75",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memoized?",
    :doc
@@ -138,9 +138,9 @@
    :name "snapshot",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj#L65",
+   "https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L65",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/dd0122bcaefdeb68b50f59f7bed8374af54c1990/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/snapshot",
    :doc
