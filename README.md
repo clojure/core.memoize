@@ -1,4 +1,5 @@
-# clojure.core.memoize - A Clojure Memoization Library
+clojure.core.memoize
+========================================
 
 core.memoize is a new Clojure contrib library providing the following features:
 
@@ -13,62 +14,78 @@ core.memoize is a new Clojure contrib library providing the following features:
 
 * Functions for manipulating the memoization cache of `core.memoize` backed functions
 
-core.memoize is based on a library named Unk, found at http://github.com/fogus/unk that is planned for deprecation.
 
 
-Usage
------
+Releases and Dependency Information
+========================================
 
-You can use core.memoize in your [Leiningen](https://github.com/technomancy/leiningen) and [Cake](https://github.com/flatland/cake) projects with the following `:dependencies` directive in your `project.clj` file:
+Latest stable release: 0.5.2
 
-    [org.clojure/core.memoize "0.5.1"]
+* [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 
-For Maven-driven projects, use the following slice of XML in your `pom.xml`'s `<dependencies>` section:
+* [Development Snapshot Versions](https://oss.sonatype.org/index.html#nexus-search;gav~org.clojure~core.memoize~~~)
+
+[Leiningen](https://github.com/technomancy/leiningen) dependency information:
+
+    [org.clojure/core.memoize "0.5.2"]
+
+[Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
-	  <groupId>org.clojure</groupId>
-	  <artifactId>core.memoize</artifactId>
-	  <version>0.5.1</version>
-	</dependency>
-
-Enjoy!
+      <groupId>org.clojure</groupId>
+      <artifactId>core.memoize</artifactId>
+      <version>0.5.2</version>
+    </dependency>
 
 
-Places
-------
 
-* [Source code](https://github.com/clojure/core.memoize)
-* [Ticket system](http://dev.clojure.org/jira/browse/CMEMOIZE)
-* [Announcement](http://groups.google.com/group/clojure/browse_frm/thread/69d08572ab265dc7)
-* Examples and documentation -- in progress
+Example Usage
+========================================
 
-Changes from Unk
--------------------
+```clojure
+    (use 'clojure.core.memoize)
+   
+     (def id (memo-lu #(do (Thread/sleep 5000) (identity %)) 3))
 
-The v0.5.1 version of core.memoize is based almost wholly on the final version of Unk, with the following changes:
+    (id 42)
+    ; ... waits 5 seconds
+    ;=> 42
 
-* All cache factory functions have been moved to core.cache
-* The `SoftCache` backed implementation was buggy and removed for now
+    (id 42)
+    ; instantly
+    ;=> 42 
+```
 
-Plans
------
-
-The following capabilities are under design, development, or consideration for future versions of core.memoize:
-
-* LIRS backed memoization
-* A [defn-memo](https://github.com/richhickey/clojure-contrib/blob/1c805bd0e515ea57028721ea54e6db4b0c791e20/src/main/clojure/clojure/contrib/def.clj#L143) macro
-* A [MapMaker](http://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/MapMaker.html) style ctor interface
-* Reimplementation of a cache based on soft references
-* test.generative usage
-* Deprecation of Unk
-* Documentation and examples
-
-More planning is needed around capabilities not listed nor thought of.
+Refer to docstrings in the `clojure.core.memoize` namespace.
 
 
-License
--------
 
-Copyright Rich Hickey, Stuart Halloway, and contributors.
+Developer Information
+========================================
 
-Licensed under the EPL. (See the file epl.html.)
+* [GitHub project](https://github.com/clojure/core.memoize)
+
+* [Bug Tracker](http://dev.clojure.org/jira/browse/memoize)
+
+* [Continuous Integration](http://build.clojure.org/job/core.memoize/)
+
+* [Compatibility Test Matrix](http://build.clojure.org/job/core.memoize-test-matrix/)
+
+
+
+Change Log
+====================
+
+* Release 0.5.2 on 2012.07.13
+  * Works with core.cache v0.6.1
+* Release 0.5.1 on 2011.12.13
+  * Removed SoftCache memoization
+* Release 0.5.0 on 2011.12.13
+  * Rolled in basis of Unk
+
+
+Copyright and License
+========================================
+
+Copyright (c) Rich Hickey and Michael Fogus, 2012. All rights reserved.  The use and distribution terms for this software are covered by the Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php) which can be found in the file epl-v10.html at the root of this distribution. By using this software in any fashion, you are agreeing to be bound bythe terms of this license.  You must not remove this notice, or any other, from this software.
+
