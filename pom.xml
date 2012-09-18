@@ -25,7 +25,7 @@
     <developer>
       <id>fogus</id>
       <name>Fogus</name>
-      <url>http://fogus.me</url>
+      <url>http://www.fogus.me</url>
     </developer>
   </developers>
 
@@ -33,7 +33,7 @@
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.cache</artifactId>
-      <version>0.6.1</version>
+      <version>0.6.2</version>
     </dependency>
   </dependencies>
 
