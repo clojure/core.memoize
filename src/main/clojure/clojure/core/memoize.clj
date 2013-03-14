@@ -47,7 +47,9 @@
 
 ;; # Auxilliary functions
 
-(defn- through
+#_(def through* clojure.core.cache/through)
+
+(defn- through*
   "The basic hit/miss logic for the cache system.  Clojure delays are used
    to hold the cache value."
   [cache f item]
@@ -125,7 +127,7 @@
      (let [cache (atom (apply cache-factory f args))]
        (with-meta
         (fn [& args] 
-          (let [cs (swap! cache through f args)]
+          (let [cs (swap! cache through* f args)]
             @(clojure.core.cache/lookup cs args)))
         {:unk cache
          :unk-orig f}))))
