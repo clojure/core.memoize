@@ -47,9 +47,14 @@
 
 ;; # Auxilliary functions
 
-#_(def through* clojure.core.cache/through)
+(defn through* [cache f item]
+  (clojure.core.cache/through
+    #(delay (%1 %2))
+    #(clojure.core/apply f %)
+    cache
+    item))
 
-(defn- through*
+#_(defn- through*
   "The basic hit/miss logic for the cache system.  Clojure delays are used
    to hold the cache value."
   [cache f item]
