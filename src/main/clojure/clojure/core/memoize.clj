@@ -48,19 +48,13 @@
 ;; # Auxilliary functions
 
 (defn through* [cache f item]
+  "The basic hit/miss logic for the cache system based on `core.cache/through`.
+  Clojure delays are used to hold the cache value."
   (clojure.core.cache/through
     #(delay (%1 %2))
     #(clojure.core/apply f %)
     cache
     item))
-
-#_(defn- through*
-  "The basic hit/miss logic for the cache system.  Clojure delays are used
-   to hold the cache value."
-  [cache f item]
-  (if (clojure.core.cache/has? cache item)
-    (clojure.core.cache/hit cache item)
-    (clojure.core.cache/miss cache item (delay (apply f item)))))
 
 (def ^{:private true
        :doc "Returns a function's cache identity."}
