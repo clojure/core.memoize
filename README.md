@@ -19,7 +19,7 @@ core.memoize is a new Clojure contrib library providing the following features:
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.5.2
+Latest stable release: 0.5.3
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 
@@ -27,14 +27,14 @@ Latest stable release: 0.5.2
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "0.5.2"]
+    [org.clojure/core.memoize "0.5.3"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>0.5.2</version>
+      <version>0.5.3</version>
     </dependency>
 
 
@@ -76,6 +76,8 @@ Developer Information
 Change Log
 ====================
 
+* Release 0.5.3 on 2013.03.18
+  * Works with core.cache v0.6.3
 * Release 0.5.2 on 2012.07.13
   * Works with core.cache v0.6.1
 * Release 0.5.1 on 2011.12.13
