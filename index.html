@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>clojure.core.memoize - A manipulable, pluggable, memoization framework 0.5.3 API documentation</title>
+    <title>clojure.core.memoize - A manipulable, pluggable, memoization framework 0.5.4 API documentation</title>
     <link href="static/favicon.png" rel="icon" />
     <link href="static/favicon.png" rel="shortcut icon" />
     <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
@@ -25,7 +25,7 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
-    <span class="toc-header"><span id="project-name">A manipulable, pluggable, memoization framework</span> <span id="version">0.5.3</span> API</span><br />
+    <span class="toc-header"><span id="project-name">A manipulable, pluggable, memoization framework</span> <span id="version">0.5.4</span> API</span><br />
     <ul>
       <li><a class="wiki_link" href="index.html">Overview</a></li>
       <li><a class="wiki_link" href="api-index.html">API Index</a></li>
@@ -55,46 +55,13 @@ namespace.
       
     </div>
   </div><div style="margin-left: 1em;" class="toc-section">
-    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
-    <div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/-&gt;PluggableMemoization">-&gt;PluggableMemoization</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/build-memoizer">build-memoizer</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/memo">memo</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/memo-clear!">memo-clear!</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/memo-fifo">memo-fifo</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/memo-lru">memo-lru</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/memo-lu">memo-lu</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/memo-swap!">memo-swap!</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/memo-ttl">memo-ttl</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/memoized?">memoized?</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.memoize/snapshot">snapshot</a>
-      
-    </div>
+    <a href="#" style="margin-top: 3px;"></a>
+    
   </div>
 </div>
 </div>
                 <div id="content-tag"><h1 id="overview">API for <span id="clojure.core.memoize">clojure.core.memoize</span>
-  - <span id="header-project">A manipulable, pluggable, memoization framework</span> <span id="header-version">0.5.3</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
+  - <span id="header-project">A manipulable, pluggable, memoization framework</span> <span id="header-version">0.5.4</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 <span id="author-line">by <span id="author-name">fogus</span><br /></span>
 <br />Full namespace name: <span id="long-name">clojure.core.memoize</span>
@@ -133,248 +100,7 @@ clear it, modify it, and save it for later.
     Interfaces: <span id="type-interfaces"></span><br />
   </div>
 </div>
-<div id="var-section">
-  <p></p>
-  <h2>Public Variables and Functions</h2>
-  <div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/-&gt;PluggableMemoization">-&gt;PluggableMemoization</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (-&gt;PluggableMemoization f cache)
-</pre>
-    <pre id="var-docstr">Positional factory function for class clojure.core.memoize.PluggableMemoization.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L30" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/build-memoizer">build-memoizer</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (build-memoizer cache-factory f &amp; args)
-</pre>
-    <pre id="var-docstr">Builds a function that given a function, returns a pluggable memoized
-version of it.  `build-memoizer` Takes a cache factory function, a function
-to memoize, and the arguments to the factory.  At least one of those
-functions should be the function to be memoized.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L119" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/memo">memo</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (memo f)
-       (memo f seed)
-</pre>
-    <pre id="var-docstr">Used as a more flexible alternative to Clojure's core `memoization`
-function.  Memoized functions built using `memo` will respond to
-the core unk manipulable memoization utilities.  As a nice bonus,
-you can use `memo` in place of `memoize` without any additional
-changes.
 
-The default way to use this function is to simply apply a function
-that will be memoized.  Additionally, you may also supply a map
-of the form `'{[42] 42, [108] 108}` where keys are a vector 
-mapping expected argument values to arity positions.  The map values
-are the return values of the memoized function.
-
-You can access the memoization cache directly via the `:unk` key
-on the memoized function's metadata.  However, it is advised to
-use the unk primitives instead as implementation details may
-change over time.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L133" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/memo-clear!">memo-clear!</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (memo-clear! f)
-</pre>
-    <pre id="var-docstr">Reaches into an unk-memoized function and clears the cache.  This is a
-destructive operation and should be used with care.
-
-Keep in mind that depending on what other threads or doing, an
-immediate call to `snapshot` may not yield an empty cache.  That's
-cool though, we've learned to deal with that stuff in Clojure by
-now.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L80" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/memo-fifo">memo-fifo</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (memo-fifo f)
-       (memo-fifo f limit)
-       (memo-fifo f limit base)
-</pre>
-    <pre id="var-docstr">Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
-when a given threshold is breached.  Observe the following:
-
-    (def id (memo-fifo identity 2))
-    
-    (id 42)
-    (id 43)
-    (snapshot id)
-    ;=&gt; {[42] 42, [43] 43}
-
-As you see, the limit of `2` has not been breached yet, but if you call again with another
-value, then it will:
-
-    (id 44)
-    (snapshot id)
-    ;=&gt; {[44] 44, [43] 43}
-
-That is, the oldest entry `42` is pushed out of the memoization cache.  This is the standard
-**F**irst **I**n **F**irst **O**ut behavior.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L157" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/memo-lru">memo-lru</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (memo-lru f)
-       (memo-lru f limit)
-       (memo-lru f limit base)
-</pre>
-    <pre id="var-docstr">Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
-when a given threshold is breached.  Observe the following:
-
-    (def id (memo-lru identity 2))
-    
-    (id 42)
-    (id 43)
-    (snapshot id)
-    ;=&gt; {[42] 42, [43] 43}
- 
-At this point the cache has not yet crossed the set threshold of `2`, but if you execute
-yet another call the story will change:
-
-    (id 44)
-    (snapshot id)
-    ;=&gt; {[44] 44, [43] 43}
-
-At this point the operation of the LRU cache looks exactly the same at the FIFO cache.
-However, the difference becomes apparent on further use:
-
-    (id 43)
-    (id 0)
-    (snapshot id)
-    ;=&gt; {[0] 0, [43] 43}
-
-As you see, once again calling `id` with the argument `43` will expose the LRU nature
-of the underlying cache.  That is, when the threshold is passed, the cache will expel
-the **L**east **R**ecently **U**sed element in favor of the new.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L186" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/memo-lu">memo-lu</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (memo-lu f)
-       (memo-lu f limit)
-       (memo-lu f limit base)
-</pre>
-    <pre id="var-docstr">Similar to the implementation of memo-lru, except that this function removes all cache
-values whose usage value is smallest.
-
-    (def id (memo-lu identity 3))
-
-    (id 42)
-    (id 42)
-    (id 43)
-    (id 44)
-    (snapshot id)
-    ;=&gt; {[44] 44, [42] 42}
-
-The **L**east **U**sed values are cleared on cache misses.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L250" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/memo-swap!">memo-swap!</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (memo-swap! f base)
-</pre>
-    <pre id="var-docstr">Takes an unk-populated function and a map and replaces the memoization cache
-with the supplied map.  This is potentially some serious voodoo,
-since you can effectively change the semantics of a function on the fly.
-
-    (def id (memo identity))
-    (memo-swap! id '{[13] :omg})
-    (id 13)
-    ;=&gt; :omg
-
-With great power comes ... yadda yadda yadda.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L92" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/memo-ttl">memo-ttl</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (memo-ttl f)
-       (memo-ttl f limit)
-       (memo-ttl f limit base)
-</pre>
-    <pre id="var-docstr">Unlike many of the other unk memoization functions, `memo-ttl`'s cache policy is time-based
-rather than algortihmic or explicit.  When memoizing a function using `memo-ttl` you should
-should provide a **T**ime **T**o **L**ive parameter in milliseconds.
-
-    (def id (memo-ttl identity 5000))
-
-    (id 42)
-    (snapshot id)
-    ;=&gt; {[42] 42}
-
-    ... wait 5 seconds ...
-    (id 43)
-    (snapshot id)
-    ;=&gt; {[43] 43}
-
-The expired cache entries will be removed on each cache miss.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L224" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/memoized?">memoized?</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (memoized? f)
-</pre>
-    <pre id="var-docstr">Returns true if a function has an unk-placed cache, false otherwise.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L75" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.memoize/snapshot">snapshot</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (snapshot memoized-fn)
-</pre>
-    <pre id="var-docstr">Returns a snapshot of an unk-placed memoization cache.  By snapshot
-you can infer that what you get is only the cache contents at a
-moment in time.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.memoize/blob/e6e3aff9a7e0d782a373664506f0b859992b7d09/src/main/clojure/clojure/core/memoize.clj#L65" id="var-source">Source</a>
-  </div>
-</div>
 
 
 </div>
