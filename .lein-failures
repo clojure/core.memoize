@@ -1,1 +1,1 @@
-#{}
+#{clojure.core.memoize.tests}
