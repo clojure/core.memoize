@@ -94,12 +94,12 @@
          {[44] 44, [42] 42} (snapshot id))))
 
 (deftest test-memoization-utils
-  (let [CACHE_IDENTITY (:unk (meta id))]
-    (testing "That an unk-populated function looks correct at its inception"
+  (let [CACHE_IDENTITY (:clojure.core.memoize/cache (meta id))]
+    (testing "That an populated function looks correct at its inception"
       (is (memoized? id))
       (is (snapshot id))
       (is (empty? (snapshot id))))
-    (testing "That an unk-populated function looks correct after some interactions"
+    (testing "That an populated function looks correct after some interactions"
       ;; Memoize once
       (is (= 42 (id 42)))
       ;; Now check to see if it looks right.
@@ -117,7 +117,7 @@
         (is (memo-clear! id))
         (is (empty? (snapshot id)))))
     (testing "that after all manipulations, the cache maintains its identity"
-      (is (identical? CACHE_IDENTITY (:unk (meta id)))))
+      (is (identical? CACHE_IDENTITY (:clojure.core.memoize/cache (meta id)))))
     (testing "that a cache can be seeded and used normally"
       (is (memo-swap! id {[42] 42}))
       (is (= 42 (id 42)))
