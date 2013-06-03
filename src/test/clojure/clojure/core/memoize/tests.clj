@@ -95,11 +95,13 @@
 
 (deftest test-memoization-utils
   (let [CACHE_IDENTITY (:clojure.core.memoize/cache (meta id))]
-    (testing "That an populated function looks correct at its inception"
+    (testing "that the stored cache is not null"
+      (is (not= nil CACHE_IDENTITY)))
+    (testing "that an populated function looks correct at its inception"
       (is (memoized? id))
       (is (snapshot id))
       (is (empty? (snapshot id))))
-    (testing "That an populated function looks correct after some interactions"
+    (testing "that an populated function looks correct after some interactions"
       ;; Memoize once
       (is (= 42 (id 42)))
       ;; Now check to see if it looks right.
