@@ -58,28 +58,28 @@
 
 (def ^{:private true
        :doc "Returns a function's cache identity."}
-  cache-id #(:unk (meta %)))
+  cache-id #(::cache (meta %)))
 
 
 ;; # Public Utilities API
 
 (defn snapshot
-  "Returns a snapshot of an unk-placed memoization cache.  By snapshot
+  "Returns a snapshot of a core.memo-placed memoization cache.  By snapshot
    you can infer that what you get is only the cache contents at a
    moment in time."
   [memoized-fn]
-  (when-let [cache (:unk (meta memoized-fn))]
+  (when-let [cache (::cache (meta memoized-fn))]
     (into {}
           (for [[k v] (.cache @cache)]
             [(vec k) @v]))))
 
 (defn memoized?
-  "Returns true if a function has an unk-placed cache, false otherwise."
+  "Returns true if a function has an core.memo-placed cache, false otherwise."
   [f]
-  (boolean (:unk (meta f))))
+  (boolean (::cache (meta f))))
 
 (defn memo-clear!
-  "Reaches into an unk-memoized function and clears the cache.  This is a
+  "Reaches into an core.memo-memoized function and clears the cache.  This is a
    destructive operation and should be used with care.
 
    Keep in mind that depending on what other threads or doing, an
@@ -91,7 +91,7 @@
     (swap! cache (constantly (clojure.core.cache/seed @cache {})))))
 
 (defn memo-swap!
-  "Takes an unk-populated function and a map and replaces the memoization cache
+  "Takes a core.memo-populated function and a map and replaces the memoization cache
    with the supplied map.  This is potentially some serious voodoo,
    since you can effectively change the semantics of a function on the fly.
 
@@ -113,7 +113,7 @@
 
 (defn memo-unwrap
   [f]
-  (:unk-orig (meta f)))
+  (::original (meta f)))
 
 ;; # Public memoization API
 
@@ -129,13 +129,13 @@
           (let [cs  (swap! cache through* f args)
                 val (clojure.core.cache/lookup cs args)]
             (and val @val)))
-        {:unk cache
-         :unk-orig f}))))
+        {::cache cache
+         ::original f}))))
 
 (defn memo
   "Used as a more flexible alternative to Clojure's core `memoization`
    function.  Memoized functions built using `memo` will respond to
-   the core unk manipulable memoization utilities.  As a nice bonus,
+   the core.memo manipulable memoization utilities.  As a nice bonus,
    you can use `memo` in place of `memoize` without any additional
    changes.
 
@@ -145,9 +145,9 @@
    mapping expected argument values to arity positions.  The map values
    are the return values of the memoized function.
 
-   You can access the memoization cache directly via the `:unk` key
+   You can access the memoization cache directly via the `:clojure.core.memoize/cache` key
    on the memoized function's metadata.  However, it is advised to
-   use the unk primitives instead as implementation details may
+   use the core.memo primitives instead as implementation details may
    change over time."
   ([f] (memo f {}))
   ([f seed]
@@ -224,7 +224,7 @@
        base)))
 
 (defn memo-ttl
-  "Unlike many of the other unk memoization functions, `memo-ttl`'s cache policy is time-based
+  "Unlike many of the other core.memo memoization functions, `memo-ttl`'s cache policy is time-based
    rather than algortihmic or explicit.  When memoizing a function using `memo-ttl` you should
    should provide a **T**ime **T**o **L**ive parameter in milliseconds.
 
