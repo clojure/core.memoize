@@ -125,9 +125,10 @@
   ([cache-factory f & args]
      (let [cache (atom (apply cache-factory f args))]
        (with-meta
-        (fn [& args] 
-          (let [cs (swap! cache through* f args)]
-            @(clojure.core.cache/lookup cs args)))
+        (fn [& args]
+          (let [cs  (swap! cache through* f args)
+                val (clojure.core.cache/lookup cs args)]
+            (and val @val)))
         {:unk cache
          :unk-orig f}))))
 
@@ -140,7 +141,7 @@
 
    The default way to use this function is to simply apply a function
    that will be memoized.  Additionally, you may also supply a map
-   of the form `'{[42] 42, [108] 108}` where keys are a vector 
+   of the form `'{[42] 42, [108] 108}` where keys are a vector
    mapping expected argument values to arity positions.  The map values
    are the return values of the memoized function.
 
@@ -160,7 +161,7 @@
    when a given threshold is breached.  Observe the following:
 
        (def id (memo-fifo identity 2))
-       
+
        (id 42)
        (id 43)
        (snapshot id)
@@ -189,12 +190,12 @@
    when a given threshold is breached.  Observe the following:
 
        (def id (memo-lru identity 2))
-       
+
        (id 42)
        (id 43)
        (snapshot id)
        ;=> {[42] 42, [43] 43}
-    
+
    At this point the cache has not yet crossed the set threshold of `2`, but if you execute
    yet another call the story will change:
 
@@ -228,11 +229,11 @@
    should provide a **T**ime **T**o **L**ive parameter in milliseconds.
 
        (def id (memo-ttl identity 5000))
-   
+
        (id 42)
        (snapshot id)
        ;=> {[42] 42}
-   
+
        ... wait 5 seconds ...
        (id 43)
        (snapshot id)
@@ -253,7 +254,7 @@
    values whose usage value is smallest.
 
        (def id (memo-lu identity 3))
-   
+
        (id 42)
        (id 42)
        (id 43)
