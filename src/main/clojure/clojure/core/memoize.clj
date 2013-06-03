@@ -128,6 +128,10 @@
         (fn [& args]
           (let [cs  (swap! cache through* f args)
                 val (clojure.core.cache/lookup cs args)]
+            ;; The assumption here is that if what we got
+            ;; from the cache was non-nil, then we can dereference
+            ;; it.  core.memo currently wraps all of its values in
+            ;; a `delay`.
             (and val @val)))
         {::cache cache
          ::original f}))))
