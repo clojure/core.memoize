@@ -1,7 +1,7 @@
-core.memoize v0.5.3 Release Notes
+core.memoize v0.5.4 Release Notes
 =================================
 
-core.memoize is a Clojure contrib library providing the following features:
+[core.memoize](https://github.com/clojure/core.memoize) is a Clojure contrib library providing the following features:
 
 * An underlying `PluggableMemoization` protocol that allows the use of customizable and swappable memoization caches that adhere to the synchronous `CacheProtocol` found in [core.cache](http://github.com/clojure/core.cache)
 
@@ -14,6 +14,21 @@ core.memoize is a Clojure contrib library providing the following features:
 
 * Functions for manipulating the memoization cache of `core.memoize` backed functions
 
+Usage
+-----
+
+[Leiningen](https://github.com/technomancy/leiningen) dependency information:
+
+    [org.clojure/core.memoize "0.5.4"]
+
+[Maven](http://maven.apache.org/) dependency information:
+
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>core.memoize</artifactId>
+      <version>0.5.4</version>
+    </dependency>
+
 Places
 ------
 
@@ -21,10 +36,10 @@ Places
 * [Ticket system](http://dev.clojure.org/jira/browse/CMEMOIZE)
 * [API Reference](https://clojure.github.com/core.memoize)
 
-Changes from v0.5.2
+Changes from v0.5.3
 -------------------
 
-The v0.5.3 version of core.memoize is updated to work with the v0.6.3 version of [core.cache](http://github.com/clojure/core.cache/wiki).  In addition, the following bug has been fixed:
+The v0.5.4 version of core.memoize works with the v0.6.3 version of [core.cache](http://github.com/clojure/core.cache/wiki).  In addition, the following bugs have been fixed:
 
  * [CMEMOIZE-5](http://dev.clojure.org/jira/browse/CMEMOIZE-5): Changed to never assume that the value retrieved from the cache is non-nil.  This was causing an occassional issue with TTL caches that timed out between checking for a value and retrieving it.
  * [CMEMOIZE-2](http://dev.clojure.org/jira/browse/CMEMOIZE-2): All references to Unk have been removed.

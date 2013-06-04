@@ -1,7 +1,7 @@
 clojure.core.memoize
 ========================================
 
-core.memoize is a new Clojure contrib library providing the following features:
+[core.memoize](https://github.com/clojure/core.memoize) is a new Clojure contrib library providing the following features:
 
 * An underlying `PluggableMemoization` protocol that allows the use of customizable and swappable memoization caches that adhere to the synchronous `CacheProtocol` found in [core.cache](http://github.com/clojure/core.cache)
 
