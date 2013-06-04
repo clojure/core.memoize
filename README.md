@@ -19,7 +19,7 @@ core.memoize is a new Clojure contrib library providing the following features:
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.5.3
+Latest stable release: 0.5.4
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 
@@ -27,14 +27,14 @@ Latest stable release: 0.5.3
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "0.5.3"]
+    [org.clojure/core.memoize "0.5.4"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>0.5.3</version>
+      <version>0.5.4</version>
     </dependency>
 
 
@@ -43,9 +43,10 @@ Example Usage
 ========================================
 
 ```clojure
-    (use 'clojure.core.memoize)
-   
-     (def id (memo-lu #(do (Thread/sleep 5000) (identity %)) 3))
+    (ns my.cool.lib
+      (:require [clojure.core.memoize :refer (memo-lu)]))
+
+    (def id (memo-lu #(do (Thread/sleep 5000) (identity %)) 3))
 
     (id 42)
     ; ... waits 5 seconds
@@ -53,7 +54,7 @@ Example Usage
 
     (id 42)
     ; instantly
-    ;=> 42 
+    ;=> 42
 ```
 
 Refer to docstrings in the `clojure.core.memoize` namespace.
@@ -76,6 +77,9 @@ Developer Information
 Change Log
 ====================
 
+* Release 0.5.4 on 2013.06.03
+  * Fixes [CMEMOIZE-5](http://dev.clojure.org/jira/browse/CMEMOIZE-5)
+  * Fixes [CMEMOIZE-2](http://dev.clojure.org/jira/browse/CMEMOIZE-2)
 * Release 0.5.3 on 2013.03.18
   * Works with core.cache v0.6.3
 * Release 0.5.2 on 2012.07.13
@@ -89,5 +93,5 @@ Change Log
 Copyright and License
 ========================================
 
-Copyright (c) Rich Hickey and Michael Fogus, 2012. All rights reserved.  The use and distribution terms for this software are covered by the Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php) which can be found in the file epl-v10.html at the root of this distribution. By using this software in any fashion, you are agreeing to be bound bythe terms of this license.  You must not remove this notice, or any other, from this software.
+Copyright (c) Rich Hickey and Michael Fogus, 2012, 2013. All rights reserved.  The use and distribution terms for this software are covered by the Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php) which can be found in the file epl-v10.html at the root of this distribution. By using this software in any fashion, you are agreeing to be bound bythe terms of this license.  You must not remove this notice, or any other, from this software.
 
