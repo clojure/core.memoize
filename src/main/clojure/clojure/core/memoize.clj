@@ -227,7 +227,7 @@
    the **L**east **R**ecently **U**sed element in favor of the new."
   ([f] (!! 'lru) (memo-lru f 32))
   ([f limit] (!! 'lru) (memo-lru f limit {}))
-  ([f limit base] (!! 'lru) (memo-lru f base :lru/threshold 32))
+  ([f limit base] (!! 'lru) (memo-lru f base :lru/threshold limit))
   ([f base _ & [threshold & _]]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
@@ -254,11 +254,12 @@
    The expired cache entries will be removed on each cache miss."
   ([f] (!! 'ttl) (memo-ttl f 3000 {}))
   ([f limit] (!! 'ttl) (memo-ttl f limit {}))
-  ([f limit base]
+  ([f limit base] (!! 'ttl) (memo-ttl f base :ttl/threshold limit))
+  ([f base _ & [threshold & _]]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
        f
-       limit
+       (or threshold 32)
        {})))
 
 (defn memo-lu
