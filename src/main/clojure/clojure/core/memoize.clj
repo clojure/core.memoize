@@ -260,7 +260,7 @@
        #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
        f
        (or threshold 32)
-       {})))
+       base)))
 
 (defn memo-lu
   "Similar to the implementation of memo-lru, except that this function removes all cache
