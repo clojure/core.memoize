@@ -167,8 +167,14 @@
            "cache; prefered way is:"
            (str "(memo-" c "<function> <base> :" c "/threshold <num>)")))
 
+(defmacro def-deprecated [nom ds & arities]
+  `(defn ~(symbol (str "memo-" (name nom))) ~ds
+      ~@(for [[args body] arities]
+          (list args `(!! (quote ~nom)) body))))
 
-(defn memo-fifo
+
+
+(defn fifo
   "Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
    when a given threshold is breached.  Observe the following:
 
