@@ -276,8 +276,8 @@
        ;=> {[44] 44, [42] 42}
 
    The **L**east **U**sed values are cleared on cache misses."
-  ([f] (memo-lu f 32))
-  ([f limit] (memo-lu f limit {}))
+  ([f] (!! 'lu) (memo-lu f 32))
+  ([f limit] (!! 'lu) (memo-lu f limit {}))
   ([f limit base]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
