@@ -225,8 +225,8 @@
    As you see, once again calling `id` with the argument `43` will expose the LRU nature
    of the underlying cache.  That is, when the threshold is passed, the cache will expel
    the **L**east **R**ecently **U**sed element in favor of the new."
-  ([f] (memo-lru f 32))
-  ([f limit] (memo-lru f limit {}))
+  ([f] (!! 'lru) (memo-lru f 32))
+  ([f limit] (!! 'lru) (memo-lru f limit {}))
   ([f limit base]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
