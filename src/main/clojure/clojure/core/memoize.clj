@@ -165,7 +165,7 @@
   (println "WARNING - Deprecated construction method for"
            c
            "cache; prefered way is:"
-           (str "(memo-" c "<function> <base> :" c "/threshold <num>)")))
+           (str "(clojure.core.memoize/" c "<function> <base> :" c "/threshold <num>)")))
 
 (defmacro def-deprecated [nom ds & arities]
   `(defn ~(symbol (str "memo-" (name nom))) ~ds
