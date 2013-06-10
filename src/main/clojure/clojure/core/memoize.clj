@@ -162,8 +162,8 @@
 
 (defn ^:private !! [c new-form]
   (println "WARNING - Deprecated construction method for"
-           fun
-           "prefered way is:"
+           c
+           "cache prefered way is:"
            (str "(memo-" c " <base> :" c "/threshold <num>)")))
 
 (defn memo-fifo
