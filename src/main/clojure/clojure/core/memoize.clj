@@ -160,12 +160,6 @@
        f
        seed)))
 
-(defn ^:private !! [c]
-  (println "WARNING - Deprecated construction method for"
-           c
-           "cache; prefered way is:"
-           (str "(memo-" c "<function> <base> :" c "/threshold <num>)")))
-
 (defn memo-fifo
   "Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
    when a given threshold is breached.  Observe the following:
@@ -186,14 +180,13 @@
 
    That is, the oldest entry `42` is pushed out of the memoization cache.  This is the standard
    **F**irst **I**n **F**irst **O**ut behavior."
-  ([f] (!! 'fifo) (memo-fifo f 32 {}))
-  ([f limit] (!! 'fifo) (memo-fifo f limit {}))
-  ([f limit base] (!! 'fifo) (memo-fifo f base :fifo/threshold limit))
-  ([f base _ & [threshold & _]]
+  ([f] (memo-fifo f 32 {}))
+  ([f limit] (memo-fifo f limit {}))
+  ([f limit base]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
        f
-       (or threshold 32)
+       limit
        base)))
 
 (defn memo-lru
@@ -225,14 +218,13 @@
    As you see, once again calling `id` with the argument `43` will expose the LRU nature
    of the underlying cache.  That is, when the threshold is passed, the cache will expel
    the **L**east **R**ecently **U**sed element in favor of the new."
-  ([f] (!! 'lru) (memo-lru f 32))
-  ([f limit] (!! 'lru) (memo-lru f limit {}))
-  ([f limit base] (!! 'lru) (memo-lru f base :lru/threshold limit))
-  ([f base _ & [threshold & _]]
+  ([f] (memo-lru f 32))
+  ([f limit] (memo-lru f limit {}))
+  ([f limit base]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
        f
-       (or threshold 32)
+       limit
        base)))
 
 (defn memo-ttl
@@ -252,15 +244,14 @@
        ;=> {[43] 43}
 
    The expired cache entries will be removed on each cache miss."
-  ([f] (!! 'ttl) (memo-ttl f 3000 {}))
-  ([f limit] (!! 'ttl) (memo-ttl f limit {}))
-  ([f limit base] (!! 'ttl) (memo-ttl f base :ttl/threshold limit))
-  ([f base _ & [threshold & _]]
+  ([f] (memo-ttl f 3000 {}))
+  ([f limit] (memo-ttl f limit {}))
+  ([f limit base]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
        f
-       (or threshold 32)
-       base)))
+       limit
+       {})))
 
 (defn memo-lu
   "Similar to the implementation of memo-lru, except that this function removes all cache
@@ -276,12 +267,11 @@
        ;=> {[44] 44, [42] 42}
 
    The **L**east **U**sed values are cleared on cache misses."
-  ([f] (!! 'lu) (memo-lu f 32))
-  ([f limit] (!! 'lu) (memo-lu f limit {}))
-  ([f limit base] (!! 'lu) (memo-lu f base :lu/threshold limit))
-  ([f base _ & [threshold & _]]
+  ([f] (memo-lu f 32))
+  ([f limit] (memo-lu f limit {}))
+  ([f limit base]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
        f
-       (or threshold 32)
+       limit
        base)))
