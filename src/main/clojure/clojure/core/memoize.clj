@@ -160,6 +160,12 @@
        f
        seed)))
 
+(defn ^:private !! [c new-form]
+  (println "WARNING - Deprecated construction method for"
+           fun
+           "prefered way is:"
+           (str "(memo-" c " <base> :" c "/threshold <num>)")))
+
 (defn memo-fifo
   "Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
    when a given threshold is breached.  Observe the following:
@@ -180,7 +186,7 @@
 
    That is, the oldest entry `42` is pushed out of the memoization cache.  This is the standard
    **F**irst **I**n **F**irst **O**ut behavior."
-  ([f] (memo-fifo f 32 {}))
+  ([f] (!!) (memo-fifo f 32 {}))
   ([f limit] (memo-fifo f limit {}))
   ([f limit base] (memo-fifo f base :threshold limit))
   ([f base _ & [threshold & _]]
