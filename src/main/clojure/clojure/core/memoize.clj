@@ -164,7 +164,7 @@
   (println "WARNING - Deprecated construction method for"
            c
            "cache; prefered way is:"
-           (str "(memo-" c " <base> :" c "/threshold <num>)")))
+           (str "(memo-" c "<function> <base> :" c "/threshold <num>)")))
 
 (defn memo-fifo
   "Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
@@ -285,4 +285,3 @@
        f
        (or threshold 32)
        base)))
-
