@@ -160,6 +160,14 @@
        f
        seed)))
 
+
+(defn ^:private !! [c]
+  (println "WARNING - Deprecated construction method for"
+           c
+           "cache; prefered way is:"
+           (str "(memo-" c "<function> <base> :" c "/threshold <num>)")))
+
+
 (defn memo-fifo
   "Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
    when a given threshold is breached.  Observe the following:
