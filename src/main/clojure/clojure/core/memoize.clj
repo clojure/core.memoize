@@ -182,11 +182,12 @@
    **F**irst **I**n **F**irst **O**ut behavior."
   ([f] (memo-fifo f 32 {}))
   ([f limit] (memo-fifo f limit {}))
-  ([f limit base]
+  ([f limit base] (memo-fifo f base :threshold limit))
+  ([f base _ & [threshold & _]]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
        f
-       limit
+       (or threshold 32)
        base)))
 
 (defn memo-lru
