@@ -160,7 +160,7 @@
        f
        seed)))
 
-(defn ^:private !! [c new-form]
+(defn ^:private !! [c]
   (println "WARNING - Deprecated construction method for"
            c
            "cache prefered way is:"
@@ -186,9 +186,9 @@
 
    That is, the oldest entry `42` is pushed out of the memoization cache.  This is the standard
    **F**irst **I**n **F**irst **O**ut behavior."
-  ([f] (!!) (memo-fifo f 32 {}))
-  ([f limit] (!!) (memo-fifo f limit {}))
-  ([f limit base] (!!) (memo-fifo f base :threshold limit))
+  ([f] (!! 'fifo) (memo-fifo f 32 {}))
+  ([f limit] (!! 'fifo) (memo-fifo f limit {}))
+  ([f limit base] (!! 'fifo) (memo-fifo f base :threshold limit))
   ([f base _ & [threshold & _]]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
