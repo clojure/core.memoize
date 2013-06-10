@@ -188,7 +188,7 @@
    **F**irst **I**n **F**irst **O**ut behavior."
   ([f] (!! 'fifo) (memo-fifo f 32 {}))
   ([f limit] (!! 'fifo) (memo-fifo f limit {}))
-  ([f limit base] (!! 'fifo) (memo-fifo f base :threshold limit))
+  ([f limit base] (!! 'fifo) (memo-fifo f base :fifo/threshold limit))
   ([f base _ & [threshold & _]]
      (build-memoizer
        #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
