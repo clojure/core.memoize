@@ -285,11 +285,15 @@
        {})))
 
 (defn ttl
-  "Unlike many of the other core.memo memoization functions, `memo-ttl`'s cache policy is time-based
-   rather than algortihmic or explicit.  When memoizing a function using `memo-ttl` you should
-   should provide a **T**ime **T**o **L**ive parameter in milliseconds.
+  "Unlike many of the other core.memo memoization functions,
+   `memo-ttl`'s cache policy is time-based rather than algortihmic
+   or explicit.  When memoizing a function using `memo-ttl` you
+   should provide a **T**ime **T**o **L**ive parameter in
+   milliseconds.
 
-       (def id (memo-ttl identity 5000))
+       (require '[clojure.core.memoize :as memo])
+
+       (def id (memo/ttl identity :ttl/threshold 5000))
 
        (id 42)
        (snapshot id)
@@ -300,7 +304,7 @@
        (snapshot id)
        ;=> {[43] 43}
 
-   The expired cache entries will be removed on each cache miss."
+   The expired cache entries will be removed on each cache **miss**."
   ([f] (memo-ttl f 3000 {}))
   ([f limit] (memo-ttl f limit {}))
   ([f limit base]
