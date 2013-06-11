@@ -172,7 +172,18 @@
       ~@(for [[args body] arities]
           (list args `(!! (quote ~nom)) body))))
 
-(defn memo-fifo
+(def-deprecated fifo
+  "DEPRECATED"
+  ([f] (memo-fifo f 32 {}))
+  ([f limit] (memo-fifo f limit {}))
+  ([f limit base]
+     (build-memoizer
+       #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
+       f
+       limit
+       base)))
+
+(defn fifo
   "Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
    when a given threshold is breached.  Observe the following:
 
