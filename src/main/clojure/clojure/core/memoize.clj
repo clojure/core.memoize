@@ -184,25 +184,30 @@
        base)))
 
 (defn fifo
-  "Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
-   when a given threshold is breached.  Observe the following:
+  "Works the same as the basic memoization function (i.e. `memo`
+   and `core.memoize` except when a given threshold is breached.
 
-       (def id (memo-fifo identity 2))
+   Observe the following:
+
+       (require '[clojure.core.memoize :as memo])
+
+       (def id (memo/fifo identity :fifo/threshold 2))
 
        (id 42)
        (id 43)
        (snapshot id)
        ;=> {[42] 42, [43] 43}
 
-   As you see, the limit of `2` has not been breached yet, but if you call again with another
-   value, then it will:
+   As you see, the limit of `2` has not been breached yet, but
+   if you call again with another value, then it is:
 
        (id 44)
        (snapshot id)
        ;=> {[44] 44, [43] 43}
 
-   That is, the oldest entry `42` is pushed out of the memoization cache.  This is the standard
-   **F**irst **I**n **F**irst **O**ut behavior."
+   That is, the oldest entry `42` is pushed out of the
+   memoization cache.  This is the standard **F**irst **I**n
+   **F**irst **O**ut behavior."
   ([f] (memo-fifo f 32 {}))
   ([f limit] (memo-fifo f limit {}))
   ([f limit base]
