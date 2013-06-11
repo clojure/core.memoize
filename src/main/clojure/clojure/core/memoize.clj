@@ -217,6 +217,17 @@
        limit
        base)))
 
+(def-deprecated lru
+  "DEPRECATED: Please use clojure.core.memoize/lru instead."
+  ([f] (memo-lru f 32))
+  ([f limit] (memo-lru f limit {}))
+  ([f limit base]
+     (build-memoizer
+       #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
+       f
+       limit
+       base)))
+
 (defn memo-lru
   "Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
    when a given threshold is breached.  Observe the following:
