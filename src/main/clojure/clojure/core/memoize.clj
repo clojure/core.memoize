@@ -173,7 +173,7 @@
           (list args `(!! (quote ~nom)) body))))
 
 (def-deprecated fifo
-  "DEPRECATED"
+  "DEPRECATED: Please use clojure.core.memoize/fifo instead."
   ([f] (memo-fifo f 32 {}))
   ([f limit] (memo-fifo f limit {}))
   ([f limit base]
