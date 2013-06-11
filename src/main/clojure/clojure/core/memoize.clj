@@ -167,7 +167,7 @@
            "cache; prefered way is:"
            (str "(clojure.core.memoize/" c " function <base> <:" c "/threshold num>)")))
 
-(defmacro def-deprecated [nom ds & arities]
+(defmacro ^:private def-deprecated [nom ds & arities]
   `(defn ~(symbol (str "memo-" (name nom))) ~ds
       ~@(for [[args body] arities]
           (list args `(!! (quote ~nom)) body))))
