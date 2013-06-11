@@ -228,35 +228,42 @@
        limit
        base)))
 
-(defn memo-lru
-  "Works the same as the basic memoization function (i.e. `memo` and `core.memoize` except
-   when a given threshold is breached.  Observe the following:
+(defn lru
+  "Works the same as the basic memoization function (i.e. `memo`
+   and `core.memoize` except when a given threshold is breached.
 
-       (def id (memo-lru identity 2))
+   Observe the following:
+
+       (require '[clojure.core.memoize :as memo])
+
+       (def id (memo/lru identity :lru/threshold 2))
 
        (id 42)
        (id 43)
        (snapshot id)
        ;=> {[42] 42, [43] 43}
 
-   At this point the cache has not yet crossed the set threshold of `2`, but if you execute
-   yet another call the story will change:
+   At this point the cache has not yet crossed the set threshold
+   of `2`, but if you execute yet another call the story will
+   change:
 
        (id 44)
        (snapshot id)
        ;=> {[44] 44, [43] 43}
 
-   At this point the operation of the LRU cache looks exactly the same at the FIFO cache.
-   However, the difference becomes apparent on further use:
+   At this point the operation of the LRU cache looks exactly
+   the same at the FIFO cache.  However, the difference becomes
+   apparent on further use:
 
        (id 43)
        (id 0)
        (snapshot id)
        ;=> {[0] 0, [43] 43}
 
-   As you see, once again calling `id` with the argument `43` will expose the LRU nature
-   of the underlying cache.  That is, when the threshold is passed, the cache will expel
-   the **L**east **R**ecently **U**sed element in favor of the new."
+   As you see, once again calling `id` with the argument `43`
+   will expose the LRU nature of the underlying cache.  That is,
+   when the threshold is passed, the cache will expel the
+   **L**east **R**ecently **U**sed element in favor of the new."
   ([f] (memo-lru f 32))
   ([f limit] (memo-lru f limit {}))
   ([f limit base]
