@@ -273,7 +273,7 @@
        limit
        base)))
 
-(def-deprecated lru
+(def-deprecated ttl
   "DEPRECATED: Please use clojure.core.memoize/ttl instead."
   ([f] (memo-ttl f 3000 {}))
   ([f limit] (memo-ttl f limit {}))
@@ -284,7 +284,7 @@
        limit
        {})))
 
-(defn memo-ttl
+(defn ttl
   "Unlike many of the other core.memo memoization functions, `memo-ttl`'s cache policy is time-based
    rather than algortihmic or explicit.  When memoizing a function using `memo-ttl` you should
    should provide a **T**ime **T**o **L**ive parameter in milliseconds.
