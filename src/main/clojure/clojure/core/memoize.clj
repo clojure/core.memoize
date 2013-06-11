@@ -326,10 +326,13 @@
        base)))
 
 (defn memo-lu
-  "Similar to the implementation of memo-lru, except that this function removes all cache
-   values whose usage value is smallest.
+  "Similar to the implementation of memo-lru, except that this
+   function removes all cache values whose usage value is
+   smallest:
 
-       (def id (memo-lu identity 3))
+       (require '[clojure.core.memoize :as memo])
+
+       (def id (memo/lu identity :lu/threshold 3))
 
        (id 42)
        (id 42)
