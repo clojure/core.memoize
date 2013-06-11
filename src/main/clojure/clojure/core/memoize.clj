@@ -314,6 +314,17 @@
        limit
        {})))
 
+(def-deprecated lu
+  "DEPRECATED: Please use clojure.core.memoize/lu instead."
+  ([f] (memo-lu f 32))
+  ([f limit] (memo-lu f limit {}))
+  ([f limit base]
+     (build-memoizer
+       #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
+       f
+       limit
+       base)))
+
 (defn memo-lu
   "Similar to the implementation of memo-lru, except that this function removes all cache
    values whose usage value is smallest.
