@@ -217,6 +217,21 @@
        limit
        base)))
 
+(comment
+  (defn doit
+    ([f] f)
+    ([f base] [f base])
+    ([f arg1 arg2] [f arg1 arg2])
+    ([f base & more] [f more]))
+
+  (doit identity)
+  (doit identity {})
+  (doit identity {} :threshold 32)
+  (doit identity :threshold 32)
+  (doit identity :threshold 3)
+)
+
+
 (def-deprecated lru
   "DEPRECATED: Please use clojure.core.memoize/lru instead."
   ([f] (memo-lru f 32))
