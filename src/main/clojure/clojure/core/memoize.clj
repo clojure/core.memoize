@@ -288,6 +288,8 @@
   ([f base] (lru f base :lru/threshold 32))
   ([f tkey threshold] (lru f {} tkey threshold))
   ([f base key threshold]
+    (check-args "lru" f base key threshold)
+
     (build-memoizer
        #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
        f
