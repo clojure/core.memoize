@@ -296,6 +296,8 @@
        threshold
        base)))
 
+;; ### TTL
+
 (def-deprecated ttl
   "DEPRECATED: Please use clojure.core.memoize/ttl instead."
   ([f] (memo-ttl f 3000 {}))
@@ -328,14 +330,15 @@
        ;=> {[43] 43}
 
    The expired cache entries will be removed on each cache **miss**."
-  ([f] (memo-ttl f 3000 {}))
-  ([f limit] (memo-ttl f limit {}))
-  ([f limit base]
-     (build-memoizer
-       #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
+  ([f] (ttl f {} :ttl/threshold 32))
+  ([f base] (ttl f base :ttl/threshold 32))
+  ([f tkey threshold] (ttl f {} tkey threshold))
+  ([f base key threshold]
+    (build-memoizer
+       #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :threshold %2))
        f
-       limit
-       {})))
+       threshold
+       base)))
 
 (def-deprecated lu
   "DEPRECATED: Please use clojure.core.memoize/lu instead."
