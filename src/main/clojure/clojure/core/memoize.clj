@@ -355,7 +355,7 @@
        limit
        base)))
 
-(defn memo-lu
+(defn lu
   "Similar to the implementation of memo-lru, except that this
    function removes all cache values whose usage value is
    smallest:
