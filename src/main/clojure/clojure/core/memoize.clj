@@ -372,13 +372,14 @@
        ;=> {[44] 44, [42] 42}
 
    The **L**east **U**sed values are cleared on cache misses."
-  ([f] (memo-lu f 32))
-  ([f limit] (memo-lu f limit {}))
-  ([f limit base]
+  ([f] (lu f {} :lu/threshold 32))
+  ([f base] (lu f base :lu/threshold 32))
+  ([f tkey threshold] (lu f {} tkey threshold))
+  ([f base key threshold]
     (check-args "lu" f base key threshold)
 
     (build-memoizer
-       #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :lu %2))
+       #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
        f
        threshold
        base)))
