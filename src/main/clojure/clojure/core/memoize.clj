@@ -175,7 +175,7 @@
 
 (defmacro massert ^:private [condition msg]
   `(when-not ~condition
-      (throw (new AssertionError (str "Assert failed: " ~msg "\n" (pr-str '~condition))))))
+      (throw (new AssertionError (str "clojure.core.memoize/" ~msg "\n" (pr-str '~condition))))))
 
 (defmacro ^:private check-args [nom f base key threshold]
   (when *assert*
