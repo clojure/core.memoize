@@ -284,13 +284,14 @@
    will expose the LRU nature of the underlying cache.  That is,
    when the threshold is passed, the cache will expel the
    **L**east **R**ecently **U**sed element in favor of the new."
-  ([f] (memo-lru f 32))
-  ([f limit] (memo-lru f limit {}))
-  ([f limit base]
-     (build-memoizer
+  ([f] (lru f {} :lru/threshold 32))
+  ([f base] (lru f base :lru/threshold 32))
+  ([f tkey threshold] (lru f {} tkey threshold))
+  ([f base key threshold]
+    (build-memoizer
        #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
        f
-       limit
+       threshold
        base)))
 
 (def-deprecated ttl
