@@ -337,7 +337,7 @@
     (check-args "ttl" f base key threshold)
 
     (build-memoizer
-       #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :threshold %2))
+       #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
        f
        threshold
        base)))
