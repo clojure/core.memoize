@@ -183,6 +183,12 @@
        limit
        base)))
 
+(defmacro check-args [nom f base key threshold]
+  (when *assert*
+    (let [good-key (keyword nom "threshold")
+          key-error (str "Incorrect threshold key " key)]
+      `(assert (= ~key ~good-key) ~key-error))))
+
 (defn fifo
   "Works the same as the basic memoization function (i.e. `memo`
    and `core.memoize` except when a given threshold is breached.
@@ -212,7 +218,7 @@
   ([f base] (fifo f base :fifo/threshold 32))
   ([f tkey threshold] (fifo f {} tkey threshold))
   ([f base key threshold]
-    (assert (= key :fifo/threshold) "Threshold key should be :fifo/threshold")
+    (check-args "fifo" f base key threshold)
 
     (build-memoizer
        #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
