@@ -208,21 +208,14 @@
    That is, the oldest entry `42` is pushed out of the
    memoization cache.  This is the standard **F**irst **I**n
    **F**irst **O**ut behavior."
-  ([f] (memo-fifo f 32 {}))
-  ([f limit] (memo-fifo f limit {}))
-  ([f limit base]
-     (build-memoizer
-       #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
-       f
-       limit
-       base)))
+  ([f] (fifo f {} :fifo/threshold 32)))
 
 (comment
   (defn doit
     ([f] f)
     ([f base] [f base])
     ([f arg1 arg2] [f arg1 arg2])
-    ([f base & more] [f more]))
+    ([f base tkey threshold] [f base kw value]))
 
   (doit identity)
   (doit identity {})
