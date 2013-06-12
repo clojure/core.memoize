@@ -210,8 +210,14 @@
    **F**irst **O**ut behavior."
   ([f] (fifo f {} :fifo/threshold 32))
   ([f base] (fifo f base :fifo/threshold 32))
-  ([f tkey threshold] (fifo f {} :fifo/threshold threshold))
-  ([f base tkey threshold] (fifo f base :fifo/threshold threshold)))
+  ([f tkey threshold] (fifo f {} tkey threshold))
+  ([f base tkey threshold]
+    {:pre [(= tkey :fifo/threshold)]}
+    (build-memoizer
+       #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
+       f
+       threshold
+       base)))
 
 (comment
   (defn doit
