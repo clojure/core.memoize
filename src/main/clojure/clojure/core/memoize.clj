@@ -211,8 +211,8 @@
   ([f] (fifo f {} :fifo/threshold 32))
   ([f base] (fifo f base :fifo/threshold 32))
   ([f tkey threshold] (fifo f {} tkey threshold))
-  ([f base tkey threshold]
-    {:pre [(= tkey :fifo/threshold)]}
+  ([f base key threshold]
+    {:pre [(= key :fifo/threshold)]}
     (build-memoizer
        #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
        f
