@@ -334,6 +334,8 @@
   ([f base] (ttl f base :ttl/threshold 32))
   ([f tkey threshold] (ttl f {} tkey threshold))
   ([f base key threshold]
+    (check-args "ttl" f base key threshold)
+
     (build-memoizer
        #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :threshold %2))
        f
