@@ -210,7 +210,8 @@
    **F**irst **O**ut behavior."
   ([f] (fifo f {} :fifo/threshold 32))
   ([f base] (fifo f base :fifo/threshold 32))
-  ([f tkey threshold] (fifo f {} :fifo/threshold threshold)))
+  ([f tkey threshold] (fifo f {} :fifo/threshold threshold))
+  ([f base tkey threshold] (fifo f base :fifo/threshold threshold)))
 
 (comment
   (defn doit
