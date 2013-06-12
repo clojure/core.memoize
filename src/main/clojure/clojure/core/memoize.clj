@@ -160,6 +160,7 @@
        f
        seed)))
 
+;; ## Utilities
 
 (defn ^:private !! [c]
   (println "WARNING - Deprecated construction method for"
@@ -172,6 +173,18 @@
       ~@(for [[args body] arities]
           (list args `(!! (quote ~nom)) body))))
 
+(defmacro ^:private check-args [nom f base key threshold]
+  (when *assert*
+    (let [good-key (keyword nom "threshold")
+          key-error `(str "Incorrect threshold key " ~key)
+          fun-error `(str ~nom " expects a function as its first argument; given " ~f)
+          thresh-error `(str ~nom " expects an integer for its " ~good-key " argument; given " ~threshold)]
+      `(do (assert (= ~key ~good-key) ~key-error)
+           (assert (fn? ~f) ~fun-error)
+           (assert (number? ~threshold) ~thresh-error)))))
+
+;; ## Main API functions
+
 (def-deprecated fifo
   "DEPRECATED: Please use clojure.core.memoize/fifo instead."
   ([f] (memo-fifo f 32 {}))
@@ -182,16 +195,6 @@
        f
        limit
        base)))
-
-(defmacro check-args [nom f base key threshold]
-  (when *assert*
-    (let [good-key (keyword nom "threshold")
-          key-error `(str "Incorrect threshold key " ~key)
-          fun-error `(str ~nom " expects a function as its first argument; given " ~f)
-          thresh-error `(str ~nom " expects an integer for its " ~good-key " argument; given " ~threshold)]
-      `(do (assert (= ~key ~good-key) ~key-error)
-           (assert (fn? ~f) ~fun-error)
-           (assert (number? ~threshold) ~thresh-error)))))
 
 (defn fifo
   "Works the same as the basic memoization function (i.e. `memo`
