@@ -186,7 +186,7 @@
 (defmacro check-args [nom f base key threshold]
   (when *assert*
     (let [good-key (keyword nom "threshold")
-          key-error (str "Incorrect threshold key " key)]
+          key-error `(str "Incorrect threshold key " ~key)]
       `(assert (= ~key ~good-key) ~key-error))))
 
 (defn fifo
