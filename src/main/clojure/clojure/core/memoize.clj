@@ -186,8 +186,12 @@
 (defmacro check-args [nom f base key threshold]
   (when *assert*
     (let [good-key (keyword nom "threshold")
-          key-error `(str "Incorrect threshold key " ~key)]
-      `(assert (= ~key ~good-key) ~key-error))))
+          key-error `(str "Incorrect threshold key " ~key)
+          fun-error `(str ~nom " expects a function as its first argument; given " ~f)]
+      `(do (assert (= ~key ~good-key) ~key-error)
+           (assert (fn? ~f) ~fun-error)
+        ))))
+
 
 (defn fifo
   "Works the same as the basic memoization function (i.e. `memo`
