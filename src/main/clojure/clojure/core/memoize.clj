@@ -342,6 +342,8 @@
        threshold
        base)))
 
+;; ### LU
+
 (def-deprecated lu
   "DEPRECATED: Please use clojure.core.memoize/lu instead."
   ([f] (memo-lu f 32))
@@ -373,8 +375,8 @@
   ([f] (memo-lu f 32))
   ([f limit] (memo-lu f limit {}))
   ([f limit base]
-     (build-memoizer
-       #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
+    (build-memoizer
+       #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :lu %2))
        f
-       limit
+       threshold
        base)))
