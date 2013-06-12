@@ -375,6 +375,8 @@
   ([f] (memo-lu f 32))
   ([f limit] (memo-lu f limit {}))
   ([f limit base]
+    (check-args "lu" f base key threshold)
+
     (build-memoizer
        #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :lu %2))
        f
