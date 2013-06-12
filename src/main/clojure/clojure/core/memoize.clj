@@ -173,15 +173,19 @@
       ~@(for [[args body] arities]
           (list args `(!! (quote ~nom)) body))))
 
+(defmacro massert ^:private [condition msg]
+  `(when-not ~condition
+      (throw (new AssertionError (str "Assert failed: " ~msg "\n" (pr-str '~condition))))))
+
 (defmacro ^:private check-args [nom f base key threshold]
   (when *assert*
     (let [good-key (keyword nom "threshold")
           key-error `(str "Incorrect threshold key " ~key)
           fun-error `(str ~nom " expects a function as its first argument; given " ~f)
           thresh-error `(str ~nom " expects an integer for its " ~good-key " argument; given " ~threshold)]
-      `(do (assert (= ~key ~good-key) ~key-error)
-           (assert (fn? ~f) ~fun-error)
-           (assert (number? ~threshold) ~thresh-error)))))
+      `(do (massert (= ~key ~good-key) ~key-error)
+           (massert (fn? ~f) ~fun-error)
+           (massert (number? ~threshold) ~thresh-error)))))
 
 ;; ## Main API functions
 
