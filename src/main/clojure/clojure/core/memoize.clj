@@ -208,7 +208,8 @@
    That is, the oldest entry `42` is pushed out of the
    memoization cache.  This is the standard **F**irst **I**n
    **F**irst **O**ut behavior."
-  ([f] (fifo f {} :fifo/threshold 32)))
+  ([f] (fifo f {} :fifo/threshold 32))
+  ([f base] (fifo f base :fifo/threshold 32)))
 
 (comment
   (defn doit
