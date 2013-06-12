@@ -185,6 +185,8 @@
 
 ;; ## Main API functions
 
+;; ### FIFO
+
 (def-deprecated fifo
   "DEPRECATED: Please use clojure.core.memoize/fifo instead."
   ([f] (memo-fifo f 32 {}))
@@ -233,20 +235,7 @@
        threshold
        base)))
 
-(comment
-  (defn doit
-    ([f] f)
-    ([f base] [f base])
-    ([f arg1 arg2] [f arg1 arg2])
-    ([f base tkey threshold] [f base kw value]))
-
-  (doit identity)
-  (doit identity {})
-  (doit identity {} :threshold 32)
-  (doit identity :threshold 32)
-  (doit identity :threshold 3)
-)
-
+;; ### LRU
 
 (def-deprecated lru
   "DEPRECATED: Please use clojure.core.memoize/lru instead."
