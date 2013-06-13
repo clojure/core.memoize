@@ -14,3 +14,12 @@
         [clojure.core.cache :only [defcache lookup has? hit miss seed ttl-cache-factory]])
   (:import (clojure.core.memoize PluggableMemoization)
            (clojure.core.cache CacheProtocol)))
+
+(deftest test-regression-cmemoize-5
+  (testing "that the TTL doesn't bomb on race-condition"
+    (try
+      (let [id (ttl identity :ttl/threshold 100)]
+        (dotimes [_ 10000000] (id 1)))
+      (is (= 1 1))
+      (catch NullPointerException npe
+        (is (= 1 0))))))
