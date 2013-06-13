@@ -59,7 +59,7 @@ Example Usage
     ;=> 42
 ```
 
-Refer to docstrings in the `clojure.core.memoize` namespace.
+Refer to docstrings in the `clojure.core.memoize` namespace for more information.
 
 
 
