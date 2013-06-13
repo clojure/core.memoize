@@ -77,9 +77,9 @@
 
 
 (deftest test-ttl
-  (test-type-transparency #(memo-ttl % 2000))
+  (test-type-transparency #(ttl % :ttl/threshold 2000))
   
-  (let [mine (memo-ttl identity 2000)]
+  (let [mine (ttl identity :ttl/threshold 2000)]
     (are [x y] =
          42        (id 42)
          {[42] 42} (snapshot id))
