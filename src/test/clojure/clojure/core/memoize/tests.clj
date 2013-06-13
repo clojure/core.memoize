@@ -40,6 +40,26 @@
 (deftest test-memo
   (test-type-transparency memo))
 
+
+(deftest test-fifo
+  (let [mine (memo-fifo identity 2)]
+    ;; First check that the basic memo behavior holds
+    (test-type-transparency #(memo-fifo % 10))
+
+    ;; Now check FIFO-specific behavior
+    (testing "that when the limit threshold is not breached, the cache works like the basic version"
+      (are [x y] =
+           42                 (mine 42)
+           {[42] 42}          (snapshot mine)
+           43                 (mine 43)
+           {[42] 42, [43] 43} (snapshot mine)
+           42                 (mine 42)
+           {[42] 42, [43] 43} (snapshot mine)))
+    (testing "that when the limit is breached, the oldest value is dropped"
+      (are [x y] =
+           44                 (mine 44)
+           {[44] 44, [43] 43} (snapshot mine)))))
+
 (deftest test-memoization-utils
   (let [CACHE_IDENTITY (:clojure.core.memoize/cache (meta id))]
     (testing "that the stored cache is not null"
