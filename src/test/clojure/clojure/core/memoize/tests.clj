@@ -111,11 +111,11 @@
   (let [CACHE_IDENTITY (:clojure.core.memoize/cache (meta id))]
     (testing "that the stored cache is not null"
       (is (not= nil CACHE_IDENTITY)))
-    (testing "that an populated function looks correct at its inception"
+    (testing "that a populated function looks correct at its inception"
       (is (memoized? id))
       (is (snapshot id))
       (is (empty? (snapshot id))))
-    (testing "that an populated function looks correct after some interactions"
+    (testing "that a populated function looks correct after some interactions"
       ;; Memoize once
       (is (= 42 (id 42)))
       ;; Now check to see if it looks right.
@@ -153,7 +153,7 @@
       (lookup impl item)
       (delay nil)))
   (has? [_ item]
-    (has? impl item))
+    (clojure.core.cache/has? impl item))
   (hit [this item]
     (PassThrough. (hit impl item)))
   (miss [this item result]
