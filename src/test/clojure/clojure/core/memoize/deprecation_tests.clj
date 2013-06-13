@@ -64,7 +64,7 @@
          {[44] 44, [42] 42} (snapshot id))))
 
 
-(deftest test-memoization-utils
+#_(deftest test-memoization-utils
   (let [CACHE_IDENTITY (:clojure.core.memoize/cache (meta id))]
     (testing "that the stored cache is not null"
       (is (not= nil CACHE_IDENTITY)))
