@@ -42,9 +42,9 @@
 
 
 (deftest test-fifo
-  (let [mine (memo-fifo identity 2)]
+  (let [mine (fifo identity :fifo/threshold 2)]
     ;; First check that the basic memo behavior holds
-    (test-type-transparency #(memo-fifo % 10))
+    (test-type-transparency #(fifo % :fifo/threshold 10))
 
     ;; Now check FIFO-specific behavior
     (testing "that when the limit threshold is not breached, the cache works like the basic version"
