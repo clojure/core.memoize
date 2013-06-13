@@ -62,8 +62,10 @@
 
 
 (deftest test-lru
+  ;; First check that the basic memo behavior holds
   (test-type-transparency #(lru % :lru/threshold 10))
-  
+
+  ;; Now check LRU-specific behavior
   (let [mine (lru identity)]
     (are [x y] =
          42                 (id 42)
@@ -77,8 +79,10 @@
 
 
 (deftest test-ttl
+  ;; First check that the basic memo behavior holds
   (test-type-transparency #(ttl % :ttl/threshold 2000))
-  
+
+  ;; Now check TTL-specific behavior
   (let [mine (ttl identity :ttl/threshold 2000)]
     (are [x y] =
          42        (id 42)
@@ -90,8 +94,10 @@
 
 
 (deftest test-lu
+  ;; First check that the basic memo behavior holds
   (test-type-transparency #(lu % :lu/threshold 10))
-  
+
+  ;; Now check LU-specific behavior
   (let [mine (lu identity :lu/threshold 3)]
     (are [x y] =
          42                 (id 42)

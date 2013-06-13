@@ -19,7 +19,6 @@
 
 (deftest test-memo-fifo
   (let [mine (memo-fifo identity 2)]
-    ;; Now check FIFO-specific behavior
     (testing "that when the limit threshold is not breached, the cache works like the basic version"
       (are [x y] =
            42                 (mine 42)
