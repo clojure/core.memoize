@@ -6,10 +6,10 @@ clojure.core.memoize
 * An underlying `PluggableMemoization` protocol that allows the use of customizable and swappable memoization caches that adhere to the synchronous `CacheProtocol` found in [core.cache](http://github.com/clojure/core.cache)
 
 * Memoization builders for implementations of common caching strategies, including:
-  - First-in-first-out (`memo-fifo`)
-  - Least-recently-used (`memo-lru`)
-  - Least-used (`memo-lu`)
-  - Time-to-live (`memo-ttl`)
+  - First-in-first-out (`clojure.core.memoize/fifo`)
+  - Least-recently-used (`clojure.core.memoize/lru`)
+  - Least-used (`clojure.core.memoize/lu`)
+  - Time-to-live (`clojure.core.memoize/ttl`)
   - Naive cache (`memo`) that duplicates the functionality of Clojure's `memoize` function
 
 * Functions for manipulating the memoization cache of `core.memoize` backed functions
@@ -19,7 +19,7 @@ clojure.core.memoize
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.5.4
+Latest stable release: 0.5.5
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 
@@ -27,14 +27,14 @@ Latest stable release: 0.5.4
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "0.5.4"]
+    [org.clojure/core.memoize "0.5.5"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>0.5.4</version>
+      <version>0.5.5</version>
     </dependency>
 
 
@@ -44,9 +44,11 @@ Example Usage
 
 ```clojure
     (ns my.cool.lib
-      (:require [clojure.core.memoize :refer (memo-lu)]))
+      (:require clojure.core.memoize))
 
-    (def id (memo-lu #(do (Thread/sleep 5000) (identity %)) 3))
+    (def id (clojure.core.memoize/lu 
+	          #(do (Thread/sleep 5000) (identity %)) 
+			  :lu/threshold 3))
 
     (id 42)
     ; ... waits 5 seconds
@@ -77,6 +79,9 @@ Developer Information
 Change Log
 ====================
 
+* Release 0.5.5 on 2013.06.14
+  * Deprecates `memo-*` APIs
+  * Adds new API of form `(cache-type function <base> <:cache-type/threshold int>)`
 * Release 0.5.4 on 2013.06.03
   * Fixes [CMEMOIZE-5](http://dev.clojure.org/jira/browse/CMEMOIZE-5)
   * Fixes [CMEMOIZE-2](http://dev.clojure.org/jira/browse/CMEMOIZE-2)
