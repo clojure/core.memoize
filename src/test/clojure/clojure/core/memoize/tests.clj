@@ -39,3 +39,77 @@
 
 (deftest test-memo
   (test-type-transparency memo))
+
+(deftest test-memoization-utils
+  (let [CACHE_IDENTITY (:clojure.core.memoize/cache (meta id))]
+    (testing "that the stored cache is not null"
+      (is (not= nil CACHE_IDENTITY)))
+    (testing "that an populated function looks correct at its inception"
+      (is (memoized? id))
+      (is (snapshot id))
+      (is (empty? (snapshot id))))
+    (testing "that an populated function looks correct after some interactions"
+      ;; Memoize once
+      (is (= 42 (id 42)))
+      ;; Now check to see if it looks right.
+      (is (find (snapshot id) '(42)))
+      (is (= 1 (count (snapshot id))))
+      ;; Memoize again
+      (is (= [] (id [])))
+      (is (find (snapshot id) '([])))
+      (is (= 2 (count (snapshot id))))
+      (testing "that upon memoizing again, the cache should not change"
+        (is (= [] (id [])))
+        (is (find (snapshot id) '([])))
+        (is (= 2 (count (snapshot id)))))
+      (testing "if clearing the cache works as expected"
+        (is (memo-clear! id))
+        (is (empty? (snapshot id)))))
+    (testing "that after all manipulations, the cache maintains its identity"
+      (is (identical? CACHE_IDENTITY (:clojure.core.memoize/cache (meta id)))))
+    (testing "that a cache can be seeded and used normally"
+      (is (memo-swap! id {[42] 42}))
+      (is (= 42 (id 42)))
+      (is (= {[42] 42} (snapshot id)))
+      (is (= 108 (id 108)))
+      (is (= {[42] 42 [108] 108} (snapshot id))))
+    (testing "that we can get back the original function"
+      (is (memo-clear! id))
+      (is (memo-swap! id {[42] 24}))
+      (is 24 (id 42))
+      (is 42 ((memo-unwrap id) 42)))))
+
+(defcache PassThrough [impl]
+  CacheProtocol
+  (lookup [_ item]
+    (if (has? impl item)
+      (lookup impl item)
+      (delay nil)))
+  (has? [_ item]
+    (has? impl item))
+  (hit [this item]
+    (PassThrough. (hit impl item)))
+  (miss [this item result]
+    (PassThrough. (miss impl item result)))
+  (seed [_ base]
+    (PassThrough. (seed impl base))))
+
+(defn memo-pass-through [f limit]
+  (build-memoizer
+       #(PluggableMemoization. %1 (PassThrough. (ttl-cache-factory %3 :ttl %2)))
+       f
+       limit
+       {}))
+
+(deftest test-snapshot-without-cache-field
+  (testing "that we can call snapshot against an object without a 'cache' field"
+    (is (= {} (snapshot (memo-pass-through identity 2000))))))
+
+(deftest test-regression-cmemoize-5
+  (testing "that the TTL doesn't bomb on race-condition"
+    (try
+      (let [id (memo-ttl identity 100)]
+        (dotimes [_ 10000000] (id 1)))
+      (is (= 1 1))
+      (catch NullPointerException npe
+        (is (= 1 0))))))
