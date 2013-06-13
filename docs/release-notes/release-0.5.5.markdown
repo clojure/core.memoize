@@ -1,4 +1,4 @@
-core.memoize v0.5.4 Release Notes
+core.memoize v0.5.5 Release Notes
 =================================
 
 [core.memoize](https://github.com/clojure/core.memoize) is a Clojure contrib library providing the following features:
@@ -6,10 +6,10 @@ core.memoize v0.5.4 Release Notes
 * An underlying `PluggableMemoization` protocol that allows the use of customizable and swappable memoization caches that adhere to the synchronous `CacheProtocol` found in [core.cache](http://github.com/clojure/core.cache)
 
 * Memoization builders for implementations of common caching strategies, including:
-  - First-in-first-out (`memo-fifo`)
-  - Least-recently-used (`memo-lru`)
-  - Least-used (`memo-lu`)
-  - Time-to-live (`memo-ttl`)
+  - First-in-first-out (`clojure.core.memoize/fifo`)
+  - Least-recently-used (`clojure.core.memoize/lru`)
+  - Least-used (`clojure.core.memoize/lu`)
+  - Time-to-live (`clojure.core.memoize/ttl`)
   - Naive cache (`memo`) that duplicates the functionality of Clojure's `memoize` function
 
 * Functions for manipulating the memoization cache of `core.memoize` backed functions
@@ -19,14 +19,14 @@ Usage
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "0.5.4"]
+    [org.clojure/core.memoize "0.5.5"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>0.5.4</version>
+      <version>0.5.5</version>
     </dependency>
 
 Places
@@ -36,13 +36,13 @@ Places
 * [Ticket system](http://dev.clojure.org/jira/browse/CMEMOIZE)
 * [API Reference](https://clojure.github.com/core.memoize)
 
-Changes from v0.5.3
+Changes from v0.5.4
 -------------------
 
-The v0.5.4 version of core.memoize works with the v0.6.3 version of [core.cache](http://github.com/clojure/core.cache/wiki).  In addition, the following bugs have been fixed:
+The v0.5.5 version of core.memoize works with the v0.6.3 version of [core.cache](http://github.com/clojure/core.cache/wiki).  In addition, the following bugs have been fixed:
 
- * [CMEMOIZE-5](http://dev.clojure.org/jira/browse/CMEMOIZE-5): Changed to never assume that the value retrieved from the cache is non-nil.  This was causing an occassional issue with TTL caches that timed out between checking for a value and retrieving it.
- * [CMEMOIZE-2](http://dev.clojure.org/jira/browse/CMEMOIZE-2): All references to Unk have been removed.
+  * Deprecated `memo-*` API
+  * Added new API of form `(cache-type function <base> <:cache-type/threshold int>)`
 
 Plans
 -----

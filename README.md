@@ -80,8 +80,8 @@ Change Log
 ====================
 
 * Release 0.5.5 on 2013.06.14
-  * Deprecates `memo-*` APIs
-  * Adds new API of form `(cache-type function <base> <:cache-type/threshold int>)`
+  * Deprecated `memo-*` APIs
+  * Adds new API of form `(cache-type function <base><:cache-type/threshold int>)`
 * Release 0.5.4 on 2013.06.03
   * Fixes [CMEMOIZE-5](http://dev.clojure.org/jira/browse/CMEMOIZE-5)
   * Fixes [CMEMOIZE-2](http://dev.clojure.org/jira/browse/CMEMOIZE-2)
