@@ -17,29 +17,6 @@
 
 (def id (memo identity))
 
-(defn- test-type-transparency
-  [factory]
-  (let [mine (factory identity)
-        them (memoize identity)]
-    (testing "That the memo function works the same as core.memoize"
-      (are [x y] =
-           (mine 42) (them 42)
-           (mine ()) (them ())
-           (mine []) (them [])
-           (mine #{}) (them #{})
-           (mine {}) (them {})
-           (mine nil) (them nil)))
-    (testing "That the memo function has a proper cache"
-      (is (memoized? mine))
-      (is (not (memoized? them)))
-      (is (= 42 (mine 42)))
-      (is (not (empty? (snapshot mine))))
-      (is (memo-clear! mine))
-      (is (empty? (snapshot mine))))))
-
-(deftest test-memo
-  (test-type-transparency memo))
-
 (deftest test-memo-fifo
   (let [mine (memo-fifo identity 2)]
     ;; First check that the basic memo behavior holds
