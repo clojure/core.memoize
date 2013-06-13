@@ -34,8 +34,6 @@
            {[44] 44, [43] 43} (snapshot mine)))))
 
 (deftest test-memo-lru
-  ;; (test-type-transparency #(memo-lru % 10))
-  
   (let [mine (memo-lru identity)]
     (are [x y] =
          42                 (id 42)

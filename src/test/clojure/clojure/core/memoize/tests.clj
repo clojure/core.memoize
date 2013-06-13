@@ -60,6 +60,22 @@
            44                 (mine 44)
            {[44] 44, [43] 43} (snapshot mine)))))
 
+
+(deftest test-memo-lru
+  (test-type-transparency #(lru % :lru/threshold 10))
+  
+  (let [mine (lru identity)]
+    (are [x y] =
+         42                 (id 42)
+         43                 (id 43)
+         {[42] 42, [43] 43} (snapshot id)
+         44                 (id 44)
+         {[44] 44, [43] 43} (snapshot id)
+         43                 (id 43)
+         0                  (id 0)
+         {[0] 0, [43] 43}   (snapshot id))))
+
+
 (deftest test-memoization-utils
   (let [CACHE_IDENTITY (:clojure.core.memoize/cache (meta id))]
     (testing "that the stored cache is not null"
