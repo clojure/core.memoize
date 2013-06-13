@@ -162,22 +162,22 @@
 
 ;; ## Utilities
 
-(defn ^:private !! [c]
+(defn ^{:private true} !! [c]
   (println "WARNING - Deprecated construction method for"
            c
            "cache; prefered way is:"
            (str "(clojure.core.memoize/" c " function <base> <:" c "/threshold num>)")))
 
-(defmacro ^:private def-deprecated [nom ds & arities]
+(defmacro ^{:private true} def-deprecated [nom ds & arities]
   `(defn ~(symbol (str "memo-" (name nom))) ~ds
       ~@(for [[args body] arities]
           (list args `(!! (quote ~nom)) body))))
 
-(defmacro massert ^:private [condition msg]
+(defmacro ^{:private true} massert [condition msg]
   `(when-not ~condition
       (throw (new AssertionError (str "clojure.core.memoize/" ~msg "\n" (pr-str '~condition))))))
 
-(defmacro ^:private check-args [nom f base key threshold]
+(defmacro ^{:private true} check-args [nom f base key threshold]
   (when *assert*
     (let [good-key (keyword nom "threshold")
           key-error `(str "Incorrect threshold key " ~key)
