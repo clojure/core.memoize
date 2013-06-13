@@ -61,7 +61,7 @@
            {[44] 44, [43] 43} (snapshot mine)))))
 
 
-(deftest test-memo-lru
+(deftest test-lru
   (test-type-transparency #(lru % :lru/threshold 10))
   
   (let [mine (lru identity)]
@@ -74,6 +74,19 @@
          43                 (id 43)
          0                  (id 0)
          {[0] 0, [43] 43}   (snapshot id))))
+
+
+(deftest test-ttl
+  (test-type-transparency #(memo-ttl % 2000))
+  
+  (let [mine (memo-ttl identity 2000)]
+    (are [x y] =
+         42        (id 42)
+         {[42] 42} (snapshot id))
+    (Thread/sleep 3000)
+    (are [x y] =
+         43        (id 43)
+         {[43] 43} (snapshot id))))
 
 
 (deftest test-memoization-utils

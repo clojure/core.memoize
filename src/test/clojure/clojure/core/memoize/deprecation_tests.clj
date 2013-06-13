@@ -46,8 +46,6 @@
          {[0] 0, [43] 43}   (snapshot id))))
 
 (deftest test-ttl
-  ;;  (test-type-transparency #(memo-ttl % 2000))
-  
   (let [mine (memo-ttl identity 2000)]
     (are [x y] =
          42        (id 42)
