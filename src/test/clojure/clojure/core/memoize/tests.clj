@@ -9,11 +9,9 @@
 (ns ^{:doc "A memoization library for Clojure."
       :author "Michael Fogus"}
   clojure.core.memoize.tests
-  (:use [clojure.core.memoize] :reload-all)
   (:use [clojure.test]
-        [clojure.core.cache :only [defcache lookup has? hit miss seed ttl-cache-factory]])
-  (:import (clojure.core.memoize PluggableMemoization)
-           (clojure.core.cache CacheProtocol)))
+        [clojure.core.cache :only [defcache lookup has? hit miss seed ttl-cache-factory]]
+        [clojure.core.memoize] :reload-all))
 
 (def id (memo identity))
 
@@ -147,7 +145,7 @@
       (is 42 ((memo-unwrap id) 42)))))
 
 (defcache PassThrough [impl]
-  CacheProtocol
+  clojure.core.cache/CacheProtocol
   (lookup [_ item]
     (if (has? impl item)
       (lookup impl item)
@@ -163,7 +161,7 @@
 
 (defn memo-pass-through [f limit]
   (build-memoizer
-       #(PluggableMemoization. %1 (PassThrough. (ttl-cache-factory %3 :ttl %2)))
+       #(clojure.core.memoize.PluggableMemoization. %1 (PassThrough. (ttl-cache-factory %3 :ttl %2)))
        f
        limit
        {}))

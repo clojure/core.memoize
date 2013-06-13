@@ -28,7 +28,7 @@
 ;; Plugging Interface
 
 (deftype PluggableMemoization [f cache]
-  CacheProtocol
+  cache/CacheProtocol
   (has? [_ item]
     (clojure.core.cache/has? cache item))
   (hit  [_ item]
