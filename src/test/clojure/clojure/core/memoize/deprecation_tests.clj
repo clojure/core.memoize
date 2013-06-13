@@ -20,7 +20,7 @@
 (deftest test-memo-fifo
   (let [mine (memo-fifo identity 2)]
     ;; First check that the basic memo behavior holds
-    (test-type-transparency #(memo-fifo % 10))
+;;    (test-type-transparency #(memo-fifo % 10))
 
     ;; Now check FIFO-specific behavior
     (testing "that when the limit threshold is not breached, the cache works like the basic version"
@@ -37,7 +37,8 @@
            {[44] 44, [43] 43} (snapshot mine)))))
 
 (deftest test-memo-lru
-  (test-type-transparency #(memo-lru % 10))
+  ;; (test-type-transparency #(memo-lru % 10))
+  
   (let [mine (memo-lru identity)]
     (are [x y] =
          42                 (id 42)
@@ -50,7 +51,8 @@
          {[0] 0, [43] 43}   (snapshot id))))
 
 (deftest test-ttl
-  (test-type-transparency #(memo-ttl % 2000))
+  ;;  (test-type-transparency #(memo-ttl % 2000))
+  
   (let [mine (memo-ttl identity 2000)]
     (are [x y] =
          42        (id 42)
@@ -61,7 +63,8 @@
          {[43] 43} (snapshot id))))
 
 (deftest test-memo-lu
-  (test-type-transparency #(memo-lu % 10))
+  ;; (test-type-transparency #(memo-lu % 10))
+  
   (let [mine (memo-lu identity 3)]
     (are [x y] =
          42                 (id 42)
