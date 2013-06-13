@@ -89,10 +89,10 @@
          {[43] 43} (snapshot id))))
 
 
-(deftest test-memo-lu
-  ;; (test-type-transparency #(memo-lu % 10))
+(deftest test-lu
+  (test-type-transparency #(lu % :lu/threshold 10))
   
-  (let [mine (memo-lu identity 3)]
+  (let [mine (lu identity :lu/threshold 3)]
     (are [x y] =
          42                 (id 42)
          42                 (id 42)
