@@ -22,8 +22,7 @@
   "
   {:author "fogus"}
 
-  (:require [clojure.core.cache :as cache])
-  (:import [clojure.core.cache CacheProtocol]))
+  (:require [clojure.core.cache :as cache]))
 
 ;; Plugging Interface
 
