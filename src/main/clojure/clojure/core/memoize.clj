@@ -183,7 +183,12 @@
           fun-error `(str ~nom " expects a function as its first argument; given " ~f)
           thresh-error `(str ~nom " expects an integer for its " ~good-key " argument; given " ~threshold)]
       `(do (massert (= ~key ~good-key) ~key-error)
-           (massert (fn? ~f) ~fun-error)
+           (massert (some #{clojure.lang.IFn
+                            clojure.lang.AFn
+                            java.lang.Runnable
+                            java.util.concurrent.Callable}
+                          (ancestors (class ~f)))
+                    ~fun-error)
            (massert (number? ~threshold) ~thresh-error)))))
 
 ;; ## Main API functions
