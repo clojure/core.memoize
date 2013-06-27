@@ -68,7 +68,7 @@ Developer Information
 
 * [GitHub project](https://github.com/clojure/core.memoize)
 
-* [Bug Tracker](http://dev.clojure.org/jira/browse/memoize)
+* [Bug Tracker](http://dev.clojure.org/jira/browse/CMEMOIZE)
 
 * [Continuous Integration](http://build.clojure.org/job/core.memoize/)
 
