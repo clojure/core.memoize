@@ -19,7 +19,7 @@ clojure.core.memoize
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.5.5
+Latest stable release: 0.5.6
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 
@@ -27,14 +27,14 @@ Latest stable release: 0.5.5
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "0.5.5"]
+    [org.clojure/core.memoize "0.5.6"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>0.5.5</version>
+      <version>0.5.6</version>
     </dependency>
 
 
@@ -79,6 +79,9 @@ Developer Information
 Change Log
 ====================
 
+* Release 0.5.6 on 2013.06.28
+  * Added optional args to `memo-clear!`.
+  * Widened contract on factory functions to accept any callable.
 * Release 0.5.5 on 2013.06.14
   * Deprecated `memo-*` APIs
   * Adds new API of form `(cache-type function <base><:cache-type/threshold int>)`
