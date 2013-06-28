@@ -1,6 +1,6 @@
 {:namespaces
  ({:source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize/clojure.core.memoize-api.html",
    :name "clojure.core.memoize",
@@ -12,9 +12,9 @@
    :name "->PluggableMemoization",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L29",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L29",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/->PluggableMemoization",
    :doc
@@ -26,9 +26,9 @@
    :name "build-memoizer",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L119",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L119",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/build-memoizer",
    :doc
@@ -40,51 +40,51 @@
    :name "fifo",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L204",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L209",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/fifo",
    :doc
    "Works the same as the basic memoization function (i.e. `memo`\nand `core.memoize` except when a given threshold is breached.\n\nObserve the following:\n\n    (require '[clojure.core.memoize :as memo])\n\n    (def id (memo/fifo identity :fifo/threshold 2))\n\n    (id 42)\n    (id 43)\n    (snapshot id)\n    ;=> {[42] 42, [43] 43}\n\nAs you see, the limit of `2` has not been breached yet, but\nif you call again with another value, then it is:\n\n    (id 44)\n    (snapshot id)\n    ;=> {[44] 44, [43] 43}\n\nThat is, the oldest entry `42` is pushed out of the\nmemoization cache.  This is the standard **F**irst **I**n\n**F**irst **O**ut behavior.",
    :var-type "function",
-   :line 204,
+   :line 209,
    :file "src/main/clojure/clojure/core/memoize.clj"}
   {:arglists ([f] [f base] [f tkey threshold] [f base key threshold]),
    :name "lru",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L254",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L259",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/lru",
    :doc
    "Works the same as the basic memoization function (i.e. `memo`\nand `core.memoize` except when a given threshold is breached.\n\nObserve the following:\n\n    (require '[clojure.core.memoize :as memo])\n\n    (def id (memo/lru identity :lru/threshold 2))\n\n    (id 42)\n    (id 43)\n    (snapshot id)\n    ;=> {[42] 42, [43] 43}\n\nAt this point the cache has not yet crossed the set threshold\nof `2`, but if you execute yet another call the story will\nchange:\n\n    (id 44)\n    (snapshot id)\n    ;=> {[44] 44, [43] 43}\n\nAt this point the operation of the LRU cache looks exactly\nthe same at the FIFO cache.  However, the difference becomes\napparent on further use:\n\n    (id 43)\n    (id 0)\n    (snapshot id)\n    ;=> {[0] 0, [43] 43}\n\nAs you see, once again calling `id` with the argument `43`\nwill expose the LRU nature of the underlying cache.  That is,\nwhen the threshold is passed, the cache will expel the\n**L**east **R**ecently **U**sed element in favor of the new.",
    :var-type "function",
-   :line 254,
+   :line 259,
    :file "src/main/clojure/clojure/core/memoize.clj"}
   {:arglists ([f] [f base] [f tkey threshold] [f base key threshold]),
    :name "lu",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L361",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L366",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/lu",
    :doc
    "Similar to the implementation of memo-lru, except that this\nfunction removes all cache values whose usage value is\nsmallest:\n\n    (require '[clojure.core.memoize :as memo])\n\n    (def id (memo/lu identity :lu/threshold 3))\n\n    (id 42)\n    (id 42)\n    (id 43)\n    (id 44)\n    (snapshot id)\n    ;=> {[44] 44, [42] 42}\n\nThe **L**east **U**sed values are cleared on cache misses.",
    :var-type "function",
-   :line 361,
+   :line 366,
    :file "src/main/clojure/clojure/core/memoize.clj"}
   {:arglists ([f] [f seed]),
    :name "memo",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L138",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L138",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo",
    :doc
@@ -96,9 +96,9 @@
    :name "memo-clear!",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L80",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L80",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-clear!",
    :doc
@@ -110,48 +110,48 @@
    :name "memo-fifo",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L193",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L198",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-fifo",
    :doc "DEPRECATED: Please use clojure.core.memoize/fifo instead.",
    :var-type "function",
-   :line 193,
+   :line 198,
    :file "src/main/clojure/clojure/core/memoize.clj"}
   {:arglists ([f] [f limit] [f limit base]),
    :name "memo-lru",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L243",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L248",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-lru",
    :doc "DEPRECATED: Please use clojure.core.memoize/lru instead.",
    :var-type "function",
-   :line 243,
+   :line 248,
    :file "src/main/clojure/clojure/core/memoize.clj"}
   {:arglists ([f] [f limit] [f limit base]),
    :name "memo-lu",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L350",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L355",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-lu",
    :doc "DEPRECATED: Please use clojure.core.memoize/lu instead.",
    :var-type "function",
-   :line 350,
+   :line 355,
    :file "src/main/clojure/clojure/core/memoize.clj"}
   {:arglists ([f base]),
    :name "memo-swap!",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L92",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L92",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-swap!",
    :doc
@@ -163,22 +163,22 @@
    :name "memo-ttl",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L304",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L309",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memo-ttl",
    :doc "DEPRECATED: Please use clojure.core.memoize/ttl instead.",
    :var-type "function",
-   :line 304,
+   :line 309,
    :file "src/main/clojure/clojure/core/memoize.clj"}
   {:arglists ([f]),
    :name "memoized?",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L75",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L75",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/memoized?",
    :doc
@@ -190,9 +190,9 @@
    :name "snapshot",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L65",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L65",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/snapshot",
    :doc
@@ -204,15 +204,15 @@
    :name "ttl",
    :namespace "clojure.core.memoize",
    :source-url
-   "https://github.com/clojure/core.memoize/blob/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj#L315",
+   "https://github.com/clojure/core.memoize/blob/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj#L320",
    :raw-source-url
-   "https://github.com/clojure/core.memoize/raw/866b9cb369ae9866da472e50336a9a14ecd12cd4/src/main/clojure/clojure/core/memoize.clj",
+   "https://github.com/clojure/core.memoize/raw/7e466a448111782b380a922e3c26f61d7bf75973/src/main/clojure/clojure/core/memoize.clj",
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/ttl",
    :doc
    "Unlike many of the other core.memo memoization functions,\n`memo-ttl`'s cache policy is time-based rather than algortihmic\nor explicit.  When memoizing a function using `memo-ttl` you\nshould provide a **T**ime **T**o **L**ive parameter in\nmilliseconds.\n\n    (require '[clojure.core.memoize :as memo])\n\n    (def id (memo/ttl identity :ttl/threshold 5000))\n\n    (id 42)\n    (snapshot id)\n    ;=> {[42] 42}\n\n    ... wait 5 seconds ...\n    (id 43)\n    (snapshot id)\n    ;=> {[43] 43}\n\nThe expired cache entries will be removed on each cache **miss**.",
    :var-type "function",
-   :line 315,
+   :line 320,
    :file "src/main/clojure/clojure/core/memoize.clj"}
   {:file nil,
    :raw-source-url nil,
