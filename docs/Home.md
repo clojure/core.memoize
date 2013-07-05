@@ -14,6 +14,7 @@ Value caching is sometimes needed. This need is often driven by the desire is to
 
 Clojure provides a default way to cache the results of function calls using the `memoize` function:
 
+```clojure
     (defn slow-calc []
       (Thread/sleep 5000)
       42)
@@ -27,6 +28,7 @@ Clojure provides a default way to cache the results of function calls using the 
     (memo-calc)
     ;; instantly
     ;;=> 42
+```
 
 While appropriate for many problems, the naive caching provided by `memoize` can consume available memory as it never releases stored values.  Therefore, the ideal situation is to expunge stored results that have expired, meant for single-use or less likely to be needed again.  There are many general-purpose and domain-specific strategies for efficient cache population and eviction. The core.memoize library provides implementations of common caching strategies for use in memoization scenarios.
 
