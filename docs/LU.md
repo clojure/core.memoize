@@ -1,6 +1,6 @@
 # LU memoization
 
-The least-used memoization strategy (sometimes called "Least Frequently Used") is a [variant of LRU](./LRU) that evicts items that are used least frequently once its threshold has been exceeded.
+The least-used memoization strategy (sometimes called "Least Frequently Used") is a [variant of LRU](./LRU.md) that evicts items that are used least frequently once its threshold has been exceeded.
 
 > In simple terms, the LU cache will remove the element in the cache that has been accessed the least, regardless of time.
 
@@ -13,11 +13,11 @@ To create a core.memoize LU-backed memoized function use the `clojure.core.memoi
 Example code is as follows:
 
 ```clojure
-    (ns your.lib
-      (:require [clojure.core.memoize :as memo]))
+(ns your.lib
+  (:require [clojure.core.memoize :as memo]))
 
-    (def memoized-fun
-      (memo/lu identity {} :lu/threshold 3))
+(def memoized-fun
+  (memo/lu identity {} :lu/threshold 3))
 ```
 
 The default `:lu/threshold` value is 32 and refers to the number of elements in the cache required before the LU logic is applied.
