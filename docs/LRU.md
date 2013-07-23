@@ -13,11 +13,11 @@ To create a core.memoize LRU-backed memoized function use the `clojure.core.memo
 Example code is as follows:
 
 ```clojure
-    (ns your.lib
-      (:require [clojure.core.memoize :as memo]))
+(ns your.lib
+  (:require [clojure.core.memoize :as memo]))
 
-    (def memoized-fun
-      (memo/lru identity {} :lru/threshold 3))
+(def memoized-fun
+  (memo/lru identity {} :lru/threshold 3))
 ```
 
 The default `:lru/threshold` value is 32 and refers to the number of elements in the cache required before the LRU logic is applied.
