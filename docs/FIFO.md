@@ -13,11 +13,11 @@ To create a core.memoize FIFO-backed memoized function use the `clojure.core.mem
 Example code is as follows:
 
 ```clojure
-    (ns your.lib
-      (:require [clojure.core.memoize :as memo]))
+(ns your.lib
+  (:require [clojure.core.memoize :as memo]))
 
-    (def memoized-fun
-      (memo/fifo identity {} :fifo/threshold 3))
+(def memoized-fun
+  (memo/fifo identity {} :fifo/threshold 3))
 ```
 
 The default `:fifo/threshold` value is 32 and refers to the number of elements in the cache required before the FIFO logic is applied.
