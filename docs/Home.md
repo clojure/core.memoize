@@ -4,9 +4,9 @@ core.memoize
 ## Table of Topics
 
 * Overview (this page)
-* [Including core.memoize in your projects](./wiki/Including)
-* [Example usages of core.memoize](./wiki/Using)
-* [Building core.memoize](./wiki/Building)
+* [Including core.memoize in your projects](./Including.md)
+* [Example usages of core.memoize](./Using.md)
+* [Building core.memoize](./Building.md)
 
 ## The problem
 
@@ -37,10 +37,10 @@ While appropriate for many problems, the naive caching provided by `memoize` can
 core.memoize is a Clojure contrib library providing the following features:
 
 * Implementations of some common memoization caching strategies, including:
-  - [First-in-first-out](./wiki/FIFO)
-  - [Least-recently-used](./wiki/LRU)
-  - [Least-used](./wiki/LU)
-  - [Time-to-live](./wiki/TTL)
+  - [First-in-first-out](./FIFO.md)
+  - [Least-recently-used](./LRU.md)
+  - [Least-used](./LU.md)
+  - [Time-to-live](./TTL.md)
 
 *The implementation of core.memoize is based on and heavily influenced by the excellent ['Memoize done right'](http://kotka.de/blog/2010/03/memoize_done_right.html) by Meikel Brandmeyer*
 
