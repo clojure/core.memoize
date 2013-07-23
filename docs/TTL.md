@@ -11,11 +11,11 @@ To create a core.memoize TTL-backed memoized function use the `clojure.core.memo
 Example code is as follows:
 
 ```clojure
-    (ns your.lib
-      (:require [clojure.core.memoize :as memo]))
+(ns your.lib
+  (:require [clojure.core.memoize :as memo]))
 
-    (def memoized-fun
-      (memo/ttl identity {} :ttl/threshold 3))
+(def memoized-fun
+  (memo/ttl identity {} :ttl/threshold 3))
 ```
 
 The default `:ttl/threshold` value is 2 seconds before the TTL logic is applied.

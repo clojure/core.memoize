@@ -1,6 +1,6 @@
 # Using core.memoize
 
-*note: see the page on [[Including]] core.memoize before you begin this section*
+*note: see the page on [including core.memoize](./Including.md) before you begin this section*
 
 ## Basic usage pattern
 
@@ -78,9 +78,9 @@ For specific information about eviction policies and thresholds, view the specif
 
 core.memoize comes with a number of builtin memoization cache implementations, including (*click through for specific information*):
 
-* [FIFO cache](./FIFO)
-* [LRU cache](./LRU)
-* [LU cache](./LU)
-* [TTL cache](./TTL)
+* [FIFO cache](./FIFO.md)
+* [LRU cache](./LRU.md)
+* [LU cache](./LU.md)
+* [TTL cache](./TTL.md)
 
 Enjoy.
