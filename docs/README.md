@@ -42,7 +42,8 @@ core.memoize is a Clojure contrib library providing the following features:
   - [Least-used](./LU.md)
   - [Time-to-live](./TTL.md)
 
-*The implementation of core.memoize is based on and heavily influenced by the excellent ['Memoize done right'](http://kotka.de/blog/2010/03/memoize_done_right.html) by Meikel Brandmeyer*
+
+*The implementation of core.memoize is based on and heavily influenced by the excellent ['Memoize done right'](http://kotka.de/blog/2010/03/memoize_done_right.html) by Meikel Brandmeyer* and the [surrounding discussion with Christophe Grand and Eugen Dück](https://groups.google.com/forum/#!msg/clojure/NqE9FQ2DBoM/r3-q7FCHh_wJ).*
 
 ## Places
 
