@@ -23,3 +23,21 @@
       (is (= 1 1))
       (catch NullPointerException npe
         (is (= 1 0))))))
+
+(deftest test-regression-cmemoize-7
+  (testing "that a memoized function that throws a RTE continues to retry"
+    (let [doit (fn [] (throw (RuntimeException. "Foo")))
+          it   (lru doit)]
+      (is (= :RTE
+             (try
+               (it)
+               (catch Exception _
+                 (try
+                   (it)
+                   (catch NullPointerException _
+                     :NPE :RTE)
+                   (catch RuntimeException _
+                     :RTE)
+                   (catch Exception e
+                     (class e))))))))))
+
