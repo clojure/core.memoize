@@ -74,7 +74,7 @@
   "The basic hit/miss logic for the cache system based on `core.cache/through`.
   Clojure delays are used to hold the cache value."
   (clojure.core.cache/through
-    #(delay (%1 %2))
+    (fn [f a] (d-lay #(f a)))
     #(clojure.core/apply f %)
     cache
     item))
