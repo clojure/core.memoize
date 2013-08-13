@@ -35,7 +35,7 @@
                  (try
                    (it)
                    (catch NullPointerException _
-                     :NPE :RTE)
+                     :NPE)
                    (catch RuntimeException _
                      :RTE)
                    (catch Exception e
