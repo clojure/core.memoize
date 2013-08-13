@@ -55,18 +55,6 @@
             (swap! memory assoc fun ret)
             ret))))))
 
-(comment
-
-  (def d (d-lay #(+ 1 2)))
-
-  @d
-
-  (def d (d-lay #(do (println "Hi.") (throw (RuntimeException. "Bar")))))
-
-  @d
-
-)
-
 
 ;; # Auxilliary functions
 
@@ -421,22 +409,3 @@
        f
        threshold
        base)))
-
-
-(comment
-
-  (defn print-and-throw []
-    (do (println "hi") (throw (RuntimeException. "Foo"))))
-
-  (def normal (memoize print-and-throw))
-  
-  (def lru (lru print-and-throw))
-
-  (normal)
-
-  (normal)
-
-  (lru)
-
-  (lru)
-)
