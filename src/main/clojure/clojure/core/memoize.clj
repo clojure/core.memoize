@@ -45,16 +45,18 @@
 
 
 (defn ^:private d-lay [fun]
-  (let [memory (atom {})]
+  (let [sentinel (Object.)
+        memory (atom sentinel)]
     (reify
       clojure.lang.IDeref
       (deref [this]
-        (if-let [e (find @memory fun)]
-          (val e)
-          (let [ret (fun)]
-            (swap! memory assoc fun ret)
-            ret))))))
-
+        (locking sentinel
+          (let [value @memory]
+            (if (identical? sentinel value)
+              (let [ret (fun)]
+                (reset! memory ret)
+                ret)
+              value)))))))
 
 ;; # Auxilliary functions
 
