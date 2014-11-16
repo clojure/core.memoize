@@ -9,8 +9,8 @@
 (ns ^{:doc "A memoization library for Clojure."
       :author "Michael Fogus"}
   clojure.core.memoize.deprecation-tests
-  (:use [clojure.core.memoize] :reload-all)
   (:use [clojure.test]
+        [clojure.core.memoize]
         [clojure.core.cache :only [defcache lookup has? hit miss seed ttl-cache-factory]])
   (:import (clojure.core.memoize PluggableMemoization)
            (clojure.core.cache CacheProtocol)))

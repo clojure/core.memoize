@@ -11,7 +11,7 @@
   clojure.core.memoize.tests
   (:use [clojure.test]
         [clojure.core.cache :only [defcache lookup has? hit miss seed ttl-cache-factory]]
-        [clojure.core.memoize] :reload-all))
+        [clojure.core.memoize]))
 
 (def id (memo identity))
 
