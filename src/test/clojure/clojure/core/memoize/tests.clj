@@ -33,7 +33,15 @@
       (is (= 42 (mine 42)))
       (is (not (empty? (snapshot mine))))
       (is (memo-clear! mine))
-      (is (empty? (snapshot mine))))))
+      (is (empty? (snapshot mine))))
+    (testing "That the memo function does not have a race condition"
+      (let [access-count (atom 0)
+            slow-identity
+            (factory (fn [x] (swap! access-count inc)
+                       (Thread/sleep 1000)
+                       x))]
+        (and (future (slow-identity 5)) (slow-identity 5))
+        (is (= @access-count 1))))))
 
 (deftest test-memo
   (test-type-transparency memo))
@@ -130,4 +138,3 @@
 (deftest test-snapshot-without-cache-field
   (testing "that we can call snapshot against an object without a 'cache' field"
     (is (= {} (snapshot (memo-pass-through identity 2000))))))
-
