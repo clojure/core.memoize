@@ -15,7 +15,7 @@
 
 (def id (memo identity))
 
-(defn- test-type-transparency
+(defn- check-core-features
   [factory]
   (let [mine (factory identity)
         them (memoize identity)]
@@ -33,16 +33,34 @@
       (is (= 42 (mine 42)))
       (is (not (empty? (snapshot mine))))
       (is (memo-clear! mine))
-      (is (empty? (snapshot mine))))))
+      (is (empty? (snapshot mine)))))
+  (testing "That the cache retries in case of exceptions"
+    (let [access-count (atom 0)
+          f (factory
+              (fn []
+                (swap! access-count inc)
+                (throw (Exception.))))]
+      (is (thrown? Exception (f)))
+      (is (thrown? Exception (f)))
+      (is (= 2 @access-count))))
+  (testing "That the memo function does not have a race condition"
+    (let [access-count (atom 0)
+          slow-identity
+          (factory (fn [x]
+                     (swap! access-count inc)
+                     (Thread/sleep 100)
+                     x))]
+      (every? identity (pvalues (slow-identity 5) (slow-identity 5)))
+      (is (= @access-count 1)))))
 
 (deftest test-memo
-  (test-type-transparency memo))
+  (check-core-features memo))
 
 
 (deftest test-fifo
   (let [mine (fifo identity :fifo/threshold 2)]
     ;; First check that the basic memo behavior holds
-    (test-type-transparency #(fifo % :fifo/threshold 10))
+    (check-core-features #(fifo % :fifo/threshold 10))
 
     ;; Now check FIFO-specific behavior
     (testing "that when the limit threshold is not breached, the cache works like the basic version"
@@ -61,7 +79,7 @@
 
 (deftest test-lru
   ;; First check that the basic memo behavior holds
-  (test-type-transparency #(lru % :lru/threshold 10))
+  (check-core-features #(lru % :lru/threshold 10))
 
   ;; Now check LRU-specific behavior
   (let [mine (lru identity)]
@@ -78,7 +96,7 @@
 
 (deftest test-ttl
   ;; First check that the basic memo behavior holds
-  (test-type-transparency #(ttl % :ttl/threshold 2000))
+  (check-core-features #(ttl % :ttl/threshold 2000))
 
   ;; Now check TTL-specific behavior
   (let [mine (ttl identity :ttl/threshold 2000)]
@@ -93,7 +111,7 @@
 
 (deftest test-lu
   ;; First check that the basic memo behavior holds
-  (test-type-transparency #(lu % :lu/threshold 10))
+  (check-core-features #(lu % :lu/threshold 10))
 
   ;; Now check LU-specific behavior
   (let [mine (lu identity :lu/threshold 3)]
