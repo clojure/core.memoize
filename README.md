@@ -80,7 +80,7 @@ Change Log
 ====================
 
 * Release 0.5.7 on 2015.01.12
-  * Fixes [CMEMOIZE-7](http://dev.clojure.org/jira/browse/CMEMOIZE-7)
+  * Fixes [CMEMOIZE-8](http://dev.clojure.org/jira/browse/CMEMOIZE-8)
   * Fixes [CMEMOIZE-13](http://dev.clojure.org/jira/browse/CMEMOIZE-13)
   * Updated core.cache dependency version from 0.6.3 to 0.6.4
 * Release 0.5.6 on 2013.06.28
