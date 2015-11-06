@@ -19,7 +19,7 @@ clojure.core.memoize
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.5.7
+Latest stable release: 0.5.8
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 
@@ -27,14 +27,14 @@ Latest stable release: 0.5.7
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "0.5.7"]
+    [org.clojure/core.memoize "0.5.8"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>0.5.7</version>
+      <version>0.5.8</version>
     </dependency>
 
 
@@ -78,7 +78,8 @@ Developer Information
 
 Change Log
 ====================
-
+* Release 0.5.8 on 2015.11.06
+  * Fixes [CMEMOIZE-21](http://dev.clojure.org/jira/browse/CMEMOIZE-21) - race condition in delay
 * Release 0.5.7 on 2015.01.12
   * Fixes [CMEMOIZE-8](http://dev.clojure.org/jira/browse/CMEMOIZE-8)
   * Fixes [CMEMOIZE-13](http://dev.clojure.org/jira/browse/CMEMOIZE-13)
