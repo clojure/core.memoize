@@ -231,6 +231,7 @@
   {:name "PluggableMemoization",
    :var-type "type",
    :namespace "clojure.core.memoize",
+   :arglists nil,
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/PluggableMemoization",
    :source-url nil,
@@ -239,6 +240,7 @@
   {:name "RetryingDelay",
    :var-type "type",
    :namespace "clojure.core.memoize",
+   :arglists nil,
    :wiki-url
    "http://clojure.github.com/core.memoize//clojure.core.memoize-api.html#clojure.core.memoize/RetryingDelay",
    :source-url nil,
