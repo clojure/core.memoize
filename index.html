@@ -108,6 +108,9 @@ namespace.
       <a href="#clojure.core.memoize/ttl" class="toc-entry-anchor">ttl</a>
       
     </div>
+  </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#"></a>
+    
   </div>
 </div>
 </div>
@@ -171,6 +174,7 @@ clear it, modify it, and save it for later.
     <pre id="var-usage">Usage: (-&gt;PluggableMemoization f cache)
 </pre>
     <pre id="var-docstr">Positional factory function for class clojure.core.memoize.PluggableMemoization.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L29">Source</a>
@@ -182,6 +186,7 @@ clear it, modify it, and save it for later.
     <pre id="var-usage">Usage: (-&gt;RetryingDelay fun available? value)
 </pre>
     <pre id="var-docstr">Positional factory function for class clojure.core.memoize.RetryingDelay.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L52">Source</a>
@@ -196,6 +201,7 @@ clear it, modify it, and save it for later.
 version of it.  `build-memoizer` Takes a cache factory function, a function
 to memoize, and the arguments to the factory.  At least one of those
 functions should be the function to be memoized.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L152">Source</a>
@@ -233,6 +239,7 @@ if you call again with another value, then it is:
 That is, the oldest entry `42` is pushed out of the
 memoization cache.  This is the standard **F**irst **I**n
 **F**irst **O**ut behavior.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L242">Source</a>
@@ -281,6 +288,7 @@ As you see, once again calling `id` with the argument `43`
 will expose the LRU nature of the underlying cache.  That is,
 when the threshold is passed, the cache will expel the
 **L**east **R**ecently **U**sed element in favor of the new.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L292">Source</a>
@@ -310,6 +318,7 @@ smallest:
     ;=&gt; {[44] 44, [42] 42}
 
 The **L**east **U**sed values are cleared on cache misses.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L399">Source</a>
@@ -337,6 +346,7 @@ You can access the memoization cache directly via the `:clojure.core.memoize/cac
 on the memoized function's metadata.  However, it is advised to
 use the core.memo primitives instead as implementation details may
 change over time.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L171">Source</a>
@@ -358,6 +368,7 @@ Keep in mind that depending on what other threads or doing, an
 immediate call to `snapshot` may not yield an empty cache.  That's
 cool though, we've learned to deal with that stuff in Clojure by
 now.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L107">Source</a>
@@ -371,6 +382,7 @@ now.</pre>
        (memo-fifo f limit base)
 </pre>
     <pre id="var-docstr">DEPRECATED: Please use clojure.core.memoize/fifo instead.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L231">Source</a>
@@ -384,6 +396,7 @@ now.</pre>
        (memo-lru f limit base)
 </pre>
     <pre id="var-docstr">DEPRECATED: Please use clojure.core.memoize/lru instead.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L281">Source</a>
@@ -397,6 +410,7 @@ now.</pre>
        (memo-lu f limit base)
 </pre>
     <pre id="var-docstr">DEPRECATED: Please use clojure.core.memoize/lu instead.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L388">Source</a>
@@ -417,6 +431,7 @@ since you can effectively change the semantics of a function on the fly.
     ;=&gt; :omg
 
 With great power comes ... yadda yadda yadda.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L125">Source</a>
@@ -430,6 +445,7 @@ With great power comes ... yadda yadda yadda.</pre>
        (memo-ttl f limit base)
 </pre>
     <pre id="var-docstr">DEPRECATED: Please use clojure.core.memoize/ttl instead.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L342">Source</a>
@@ -441,6 +457,7 @@ With great power comes ... yadda yadda yadda.</pre>
     <pre id="var-usage">Usage: (memoized? f)
 </pre>
     <pre id="var-docstr">Returns true if a function has an core.memo-placed cache, false otherwise.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L102">Source</a>
@@ -454,6 +471,7 @@ With great power comes ... yadda yadda yadda.</pre>
     <pre id="var-docstr">Returns a snapshot of a core.memo-placed memoization cache.  By snapshot
 you can infer that what you get is only the cache contents at a
 moment in time.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L92">Source</a>
@@ -487,6 +505,7 @@ milliseconds.
     ;=&gt; {[43] 43}
 
 The expired cache entries will be removed on each cache **miss**.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L353">Source</a>
