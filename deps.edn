@@ -1,0 +1,2 @@
+{:paths ["src/main/clojure"]
+ :deps {org.clojure/core.cache {:mvn/version "0.6.5"}}}
