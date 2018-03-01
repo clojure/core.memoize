@@ -1,6 +1,7 @@
 target
 src/old.lein*
 .lein*
+.nrepl-port
 .idea/
 *.iml
 .cpcache/

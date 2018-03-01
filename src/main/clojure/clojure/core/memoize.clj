@@ -116,11 +116,11 @@
    cool though, we've learned to deal with that stuff in Clojure by
    now."
   ([f]
-     (when-let [cache (cache-id f)]
-       (swap! cache (constantly (clojure.core.cache/seed @cache {})))))
+   (when-let [cache (cache-id f)]
+     (swap! cache (constantly (clojure.core.cache/seed @cache {})))))
   ([f args]
-     (when-let [cache (cache-id f)]
-       (swap! cache (constantly (clojure.core.cache/evict @cache args))))))
+   (when-let [cache (cache-id f)]
+     (swap! cache (constantly (clojure.core.cache/evict @cache args))))))
 
 (defn memo-swap!
   "Takes a core.memo-populated function and a map and replaces the memoization cache
@@ -155,18 +155,18 @@
    to memoize, and the arguments to the factory.  At least one of those
    functions should be the function to be memoized."
   ([cache-factory f & args]
-     (let [cache (atom (apply cache-factory f args))]
-       (with-meta
-        (fn [& args]
-          (let [cs  (swap! cache through* f args)
-                val (clojure.core.cache/lookup cs args)]
-            ;; The assumption here is that if what we got
-            ;; from the cache was non-nil, then we can dereference
-            ;; it.  core.memo currently wraps all of its values in
-            ;; a `delay`.
-            (and val @val)))
-        {::cache cache
-         ::original f}))))
+   (let [cache (atom (apply cache-factory f args))]
+     (with-meta
+      (fn [& args]
+        (let [cs  (swap! cache through* f args)
+              val (clojure.core.cache/lookup cs args)]
+          ;; The assumption here is that if what we got
+          ;; from the cache was non-nil, then we can dereference
+          ;; it.  core.memo currently wraps all of its values in
+          ;; a `delay`.
+          (and val @val)))
+      {::cache cache
+       ::original f}))))
 
 (defn memo
   "Used as a more flexible alternative to Clojure's core `memoization`
@@ -187,10 +187,10 @@
    change over time."
   ([f] (memo f {}))
   ([f seed]
-     (build-memoizer
-       #(PluggableMemoization. %1 (cache/basic-cache-factory %2))
-       f
-       seed)))
+   (build-memoizer
+     #(PluggableMemoization. %1 (cache/basic-cache-factory %2))
+     f
+     seed)))
 
 ;; ## Utilities
 
@@ -233,11 +233,11 @@
   ([f] (memo-fifo f 32 {}))
   ([f limit] (memo-fifo f limit {}))
   ([f limit base]
-     (build-memoizer
-       #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
-       f
-       limit
-       base)))
+   (build-memoizer
+     #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
+     f
+     limit
+     base)))
 
 (defn fifo
   "Works the same as the basic memoization function (i.e. `memo`
@@ -268,13 +268,13 @@
   ([f base] (fifo f base :fifo/threshold 32))
   ([f tkey threshold] (fifo f {} tkey threshold))
   ([f base key threshold]
-    (check-args "fifo" f base key threshold)
+   (check-args "fifo" f base key threshold)
 
-    (build-memoizer
-       #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
-       f
-       threshold
-       base)))
+   (build-memoizer
+      #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
+      f
+      threshold
+      base)))
 
 ;; ### LRU
 
@@ -283,11 +283,11 @@
   ([f] (memo-lru f 32))
   ([f limit] (memo-lru f limit {}))
   ([f limit base]
-     (build-memoizer
-       #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
-       f
-       limit
-       base)))
+   (build-memoizer
+     #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
+     f
+     limit
+     base)))
 
 (defn lru
   "Works the same as the basic memoization function (i.e. `memo`
@@ -329,13 +329,13 @@
   ([f base] (lru f base :lru/threshold 32))
   ([f tkey threshold] (lru f {} tkey threshold))
   ([f base key threshold]
-    (check-args "lru" f base key threshold)
+   (check-args "lru" f base key threshold)
 
-    (build-memoizer
-       #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
-       f
-       threshold
-       base)))
+   (build-memoizer
+      #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
+      f
+      threshold
+      base)))
 
 ;; ### TTL
 
@@ -344,11 +344,11 @@
   ([f] (memo-ttl f 3000 {}))
   ([f limit] (memo-ttl f limit {}))
   ([f limit base]
-     (build-memoizer
-       #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
-       f
-       limit
-       {})))
+   (build-memoizer
+     #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
+     f
+     limit
+     {})))
 
 (defn ttl
   "Unlike many of the other core.memo memoization functions,
@@ -375,13 +375,13 @@
   ([f base] (ttl f base :ttl/threshold 32))
   ([f tkey threshold] (ttl f {} tkey threshold))
   ([f base key threshold]
-    (check-args "ttl" f base key threshold)
+   (check-args "ttl" f base key threshold)
 
-    (build-memoizer
-       #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
-       f
-       threshold
-       base)))
+   (build-memoizer
+      #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
+      f
+      threshold
+      base)))
 
 ;; ### LU
 
@@ -390,11 +390,11 @@
   ([f] (memo-lu f 32))
   ([f limit] (memo-lu f limit {}))
   ([f limit base]
-     (build-memoizer
-       #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
-       f
-       limit
-       base)))
+   (build-memoizer
+     #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
+     f
+     limit
+     base)))
 
 (defn lu
   "Similar to the implementation of memo-lru, except that this
@@ -417,10 +417,10 @@
   ([f base] (lu f base :lu/threshold 32))
   ([f tkey threshold] (lu f {} tkey threshold))
   ([f base key threshold]
-    (check-args "lu" f base key threshold)
+   (check-args "lu" f base key threshold)
 
-    (build-memoizer
-       #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
-       f
-       threshold
-       base)))
+   (build-memoizer
+      #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
+      f
+      threshold
+      base)))
