@@ -80,7 +80,6 @@
            {[44] 44, [43] 43} (snapshot mine)
            [[44] 44, [43] 43] (lazy-snapshot mine)))))
 
-
 (deftest test-lru
   ;; First check that the basic memo behavior holds
   (check-core-features #(lru % :lru/threshold 10))
@@ -211,4 +210,6 @@
       (is (= 41 (mine 41)))
       (is (= 99 (mine 42)))
       (is (= 43 (mine 43)))
-      (is (= {[41] 41, [42] 99, [43] 43} (snapshot mine))))))
+      (is (= {[41] 41, [42] 99, [43] 43} (snapshot mine)))
+      (are [x y] =
+        [[41] 41, [42] 99, [43] 43] (lazy-snapshot mine)))))
