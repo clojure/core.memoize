@@ -32,8 +32,10 @@
       (is (not (memoized? them)))
       (is (= 42 (mine 42)))
       (is (not (empty? (snapshot mine))))
+      (is (not (empty? (lazy-snapshot mine))))
       (is (memo-clear! mine))
-      (is (empty? (snapshot mine)))))
+      (is (empty? (snapshot mine)))
+      (is (empty? (lazy-snapshot mine)))))
   (testing "That the cache retries in case of exceptions"
     (let [access-count (atom 0)
           f (factory
@@ -70,11 +72,13 @@
            43                 (mine 43)
            {[42] 42, [43] 43} (snapshot mine)
            42                 (mine 42)
-           {[42] 42, [43] 43} (snapshot mine)))
+           {[42] 42, [43] 43} (snapshot mine)
+           [[42] 42, [43] 43] (lazy-snapshot mine)))
     (testing "that when the limit is breached, the oldest value is dropped"
       (are [x y] =
            44                 (mine 44)
-           {[44] 44, [43] 43} (snapshot mine)))))
+           {[44] 44, [43] 43} (snapshot mine)
+           [[44] 44, [43] 43] (lazy-snapshot mine)))))
 
 
 (deftest test-lru
@@ -91,7 +95,8 @@
          {[44] 44, [43] 43} (snapshot mine)
          43                 (mine 43)
          0                  (mine 0)
-         {[0] 0, [43] 43}   (snapshot mine))))
+         {[0] 0, [43] 43}   (snapshot mine)
+         [[0] 0, [43] 43]   (lazy-snapshot mine))))
 
 
 (deftest test-ttl
@@ -106,7 +111,8 @@
     (Thread/sleep 3000)
     (are [x y] =
          43        (mine 43)
-         {[43] 43} (snapshot mine)))
+         {[43] 43} (snapshot mine)
+         [[43] 43] (lazy-snapshot mine)))
 
   ;; CMEMOIZE-15 edge case where TTLCache expires on miss/lookup
   (let [mine (ttl identity :ttl/threshold 10)]
@@ -129,7 +135,8 @@
          42                 (mine 42)
          43                 (mine 43)
          44                 (mine 44)
-         {[44] 44, [42] 42} (snapshot mine))))
+         {[44] 44, [42] 42} (snapshot mine)
+         [[44] 44, [42] 42] (lazy-snapshot mine))))
 
 
 (defcache PassThrough [impl]

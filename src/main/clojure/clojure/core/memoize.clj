@@ -117,6 +117,18 @@
           (for [[k v] (.cache ^PluggableMemoization @cache)]
             [(vec k) @v]))))
 
+(defn lazy-snapshot
+  "Returns a lazy snapshot of a core.memo-placed memoization cache.  By
+   lazy snapshot you can infer that what you get is only the cache contents at a
+   moment in time -- and, being lazy, the cache could change while you are
+   realizing the snapshot elements.
+
+   Returns a sequence of key/value pairs."
+  [memoized-fn]
+  (when-let [cache (::cache (meta memoized-fn))]
+    (for [[k v] (.cache ^PluggableMemoization @cache)]
+      [(vec k) @v])))
+
 (defn memoized?
   "Returns true if a function has an core.memo-placed cache, false otherwise."
   [f]
