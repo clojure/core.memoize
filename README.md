@@ -80,6 +80,7 @@ Change Log
 ====================
 * Release next in progress
   * Fixes [CMEMOIZE-18](http://dev.clojure.org/jira/browse/CMEMOIZE-18) - automatically makes seed map values `deref`-able to match documentation and comply with core.memoize's world view
+  * Fixes [CMEMOIZE-15](http://dev.clojure.org/jira/browse/CMEMOIZE-15) - edge case where cache miss/lookup cross an eviction boundary (Ryan Fowler/Colin Jones)
   * Cleanup/improve/fix tests
   * Add multi-version testing locally via Leiningen
 * Release 0.5.9 on 2016.03.28

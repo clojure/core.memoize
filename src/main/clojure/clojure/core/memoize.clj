@@ -37,7 +37,9 @@
   (evict [_ key]
     (PluggableMemoization. f (clojure.core.cache/evict cache key)))
   (lookup [_ item]
-    (clojure.core.cache/lookup cache item))
+    (clojure.core.cache/lookup cache item nil))
+  (lookup [_ item not-found]
+    (clojure.core.cache/lookup cache item (delay not-found)))
   (seed [_ base]
     (PluggableMemoization. f (clojure.core.cache/seed cache base)))
   Object
@@ -178,12 +180,20 @@
      (with-meta
       (fn [& args]
         (let [cs  (swap! cache through* f args)
-              val (clojure.core.cache/lookup cs args)]
-          ;; The assumption here is that if what we got
-          ;; from the cache was non-nil, then we can dereference
-          ;; it.  core.memo currently wraps all of its values in
-          ;; a `delay`.
-          (and val @val)))
+              val (clojure.core.cache/lookup cs args ::not-found)]
+          ;; If `lookup` returns `(delay ::not-found)`, it's likely that
+          ;; we ran into a timing issue where eviction and access
+          ;; are happening at about the same time. Therefore, we retry
+          ;; the `swap!`.
+          ;;
+          ;; core.memoize currently wraps all of its values in a `delay`.
+          (when val
+            (if (= ::not-found @val)
+              (when-let [retry-val (clojure.core.cache/lookup
+                                    (swap! cache through* f args)
+                                    args)]
+                @retry-val)
+              @val))))
       {::cache cache
        ::original f}))))
 

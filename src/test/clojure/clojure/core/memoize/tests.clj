@@ -106,7 +106,16 @@
     (Thread/sleep 3000)
     (are [x y] =
          43        (mine 43)
-         {[43] 43} (snapshot mine))))
+         {[43] 43} (snapshot mine)))
+
+  ;; CMEMOIZE-15 edge case where TTLCache expires on miss/lookup
+  (let [mine (ttl identity :ttl/threshold 10)]
+    (loop [n 0]
+      (if-not (mine 42)
+        (do
+          (is false (str  "Failure on call " n)))
+        (if (< n 200000)
+          (recur (+ 1 n)))))))
 
 
 (deftest test-lu
