@@ -1,7 +1,7 @@
 clojure.core.memoize
 ========================================
 
-[core.memoize](https://github.com/clojure/core.memoize) is a new Clojure contrib library providing the following features:
+[core.memoize](https://github.com/clojure/core.memoize) is a Clojure contrib library providing the following features:
 
 * An underlying `PluggableMemoization` protocol that allows the use of customizable and swappable memoization caches that adhere to the synchronous `CacheProtocol` found in [core.cache](http://github.com/clojure/core.cache)
 
@@ -46,8 +46,8 @@ Example Usage
     (ns my.cool.lib
       (:require clojure.core.memoize))
 
-    (def id (clojure.core.memoize/lu 
-	          #(do (Thread/sleep 5000) (identity %)) 
+    (def id (clojure.core.memoize/lu
+	          #(do (Thread/sleep 5000) (identity %))
 			  :lu/threshold 3))
 
     (id 42)
@@ -78,6 +78,12 @@ Developer Information
 
 Change Log
 ====================
+* Release next in progress
+  * Fixes [CMEMOIZE-18](http://dev.clojure.org/jira/browse/CMEMOIZE-18) - automatically makes seed map values `deref`-able to match documentation and comply with core.memoize's world view
+  * Cleanup/improve/fix tests
+  * Add multi-version testing locally via Leiningen
+* Release 0.5.9 on 2016.03.28
+  * Updated core.cache dependency version from 0.6.4 to 0.6.5
 * Release 0.5.8 on 2015.11.06
   * Fixes [CMEMOIZE-21](http://dev.clojure.org/jira/browse/CMEMOIZE-21) - race condition in delay
 * Release 0.5.7 on 2015.01.12
@@ -107,4 +113,3 @@ Copyright and License
 ========================================
 
 Copyright (c) Rich Hickey and Michael Fogus, 2012, 2013. All rights reserved.  The use and distribution terms for this software are covered by the Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php) which can be found in the file epl-v10.html at the root of this distribution. By using this software in any fashion, you are agreeing to be bound bythe terms of this license.  You must not remove this notice, or any other, from this software.
-

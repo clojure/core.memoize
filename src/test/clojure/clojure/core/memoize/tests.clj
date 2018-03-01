@@ -84,14 +84,14 @@
   ;; Now check LRU-specific behavior
   (let [mine (lru identity)]
     (are [x y] =
-         42                 (id 42)
-         43                 (id 43)
-         {[42] 42, [43] 43} (snapshot id)
-         44                 (id 44)
-         {[44] 44, [43] 43} (snapshot id)
-         43                 (id 43)
-         0                  (id 0)
-         {[0] 0, [43] 43}   (snapshot id))))
+         42                 (mine 42)
+         43                 (mine 43)
+         {[42] 42, [43] 43} (snapshot mine)
+         44                 (mine 44)
+         {[44] 44, [43] 43} (snapshot mine)
+         43                 (mine 43)
+         0                  (mine 0)
+         {[0] 0, [43] 43}   (snapshot mine))))
 
 
 (deftest test-ttl
@@ -101,12 +101,12 @@
   ;; Now check TTL-specific behavior
   (let [mine (ttl identity :ttl/threshold 2000)]
     (are [x y] =
-         42        (id 42)
-         {[42] 42} (snapshot id))
+         42        (mine 42)
+         {[42] 42} (snapshot mine))
     (Thread/sleep 3000)
     (are [x y] =
-         43        (id 43)
-         {[43] 43} (snapshot id))))
+         43        (mine 43)
+         {[43] 43} (snapshot mine))))
 
 
 (deftest test-lu
@@ -116,11 +116,11 @@
   ;; Now check LU-specific behavior
   (let [mine (lu identity :lu/threshold 3)]
     (are [x y] =
-         42                 (id 42)
-         42                 (id 42)
-         43                 (id 43)
-         44                 (id 44)
-         {[44] 44, [42] 42} (snapshot id))))
+         42                 (mine 42)
+         42                 (mine 42)
+         43                 (mine 43)
+         44                 (mine 44)
+         {[44] 44, [42] 42} (snapshot mine))))
 
 
 (defcache PassThrough [impl]
@@ -149,3 +149,50 @@
   (testing "that we can call snapshot against an object without a 'cache' field"
     (is (= {} (snapshot (memo-pass-through identity 2000))))))
 
+
+(deftest test-memoization-utils
+ (let [CACHE_IDENTITY (:clojure.core.memoize/cache (meta id))]
+   (testing "that the stored cache is not null"
+     (is (not= nil CACHE_IDENTITY)))
+   (testing "that a populated function looks correct at its inception"
+     (is (memoized? id))
+     (is (snapshot id))
+     (is (empty? (snapshot id))))
+   (testing "that a populated function looks correct after some interactions"
+     ;; Memoize once
+     (is (= 42 (id 42)))
+     ;; Now check to see if it looks right.
+     (is (find (snapshot id) '(42)))
+     (is (= 1 (count (snapshot id))))
+     ;; Memoize again
+     (is (= [] (id [])))
+     (is (find (snapshot id) '([])))
+     (is (= 2 (count (snapshot id))))
+     (testing "that upon memoizing again, the cache should not change"
+       (is (= [] (id [])))
+       (is (find (snapshot id) '([])))
+       (is (= 2 (count (snapshot id)))))
+     (testing "if clearing the cache works as expected"
+       (is (memo-clear! id))
+       (is (empty? (snapshot id)))))
+   (testing "that after all manipulations, the cache maintains its identity"
+     (is (identical? CACHE_IDENTITY (:clojure.core.memoize/cache (meta id)))))
+   (testing "that a cache can be seeded and used normally"
+     (is (memo-swap! id {[42] 42}))
+     (is (= 42 (id 42)))
+     (is (= {[42] 42} (snapshot id)))
+     (is (= 108 (id 108)))
+     (is (= {[42] 42 [108] 108} (snapshot id))))
+   (testing "that we can get back the original function"
+     (is (memo-clear! id))
+     (is (memo-swap! id {[42] 24}))
+     (is (= 24 (id 42)))
+     (is (= 42 ((memo-unwrap id) 42))))))
+
+(deftest memo-with-seed-cmemoize-18
+  (let [mine (memo identity {[42] 99})]
+    (testing "that a memo seed works"
+      (is (= 41 (mine 41)))
+      (is (= 99 (mine 42)))
+      (is (= 43 (mine 43)))
+      (is (= {[41] 41, [42] 99, [43] 43} (snapshot mine))))))

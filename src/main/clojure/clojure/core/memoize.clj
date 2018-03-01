@@ -71,6 +71,22 @@
 (defn ^:private d-lay [fun]
   (->RetryingDelay fun false nil))
 
+(defn ^:private make-derefable
+  "If a value is not already derefable, wrap it up.
+
+  This is used to help rebuild seed/base maps passed in to the various
+  caches so that they conform to core.memoize's world view."
+  [v]
+  (if (instance? clojure.lang.IDeref v)
+    v
+    (reify clojure.lang.IDeref
+      (deref [_] v))))
+
+(defn ^:private derefable-seed
+  "Given a seed/base map, ensure all the values in it are derefable."
+  [seed]
+  (into {} (for [[k v] seed] [k (make-derefable v)])))
+
 ;; # Auxilliary functions
 
 (defn through* [cache f item]
@@ -137,6 +153,9 @@
   (when-let [cache (cache-id f)]
     (swap! cache
            (constantly (clojure.core.cache/seed @cache
+                             ;; this unconditionally wraps all values to make
+                             ;; them derefable -- it probably should be done
+                             ;; via derefable-seed but...
                              (into {}
                                    (for [[k v] base]
                                      [k (reify
@@ -190,7 +209,7 @@
    (build-memoizer
      #(PluggableMemoization. %1 (cache/basic-cache-factory %2))
      f
-     seed)))
+     (derefable-seed seed))))
 
 ;; ## Utilities
 
@@ -237,7 +256,7 @@
      #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
      f
      limit
-     base)))
+     (derefable-seed base))))
 
 (defn fifo
   "Works the same as the basic memoization function (i.e. `memo`
@@ -274,7 +293,7 @@
       #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
       f
       threshold
-      base)))
+      (derefable-seed base))))
 
 ;; ### LRU
 
@@ -287,7 +306,7 @@
      #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
      f
      limit
-     base)))
+     (derefable-seed base))))
 
 (defn lru
   "Works the same as the basic memoization function (i.e. `memo`
@@ -335,7 +354,7 @@
       #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
       f
       threshold
-      base)))
+      (derefable-seed base))))
 
 ;; ### TTL
 
@@ -348,6 +367,7 @@
      #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
      f
      limit
+     ;; this ignores the base but it's deprecated so it can stay broken
      {})))
 
 (defn ttl
@@ -381,7 +401,7 @@
       #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
       f
       threshold
-      base)))
+      (derefable-seed base))))
 
 ;; ### LU
 
@@ -394,7 +414,7 @@
      #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
      f
      limit
-     base)))
+     (derefable-seed base))))
 
 (defn lu
   "Similar to the implementation of memo-lru, except that this
@@ -423,4 +443,4 @@
       #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
       f
       threshold
-      base)))
+      (derefable-seed base))))
