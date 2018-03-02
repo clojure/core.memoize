@@ -213,3 +213,20 @@
       (is (= {[41] 41, [42] 99, [43] 43} (snapshot mine)))
       (are [x y] =
         [[41] 41, [42] 99, [43] 43] (lazy-snapshot mine)))))
+
+(defn- ^{:clojure.core.memoize/args-fn rest}
+  ignores-first-arg
+  "Even tho' this adds all three arguments, we're going to cache it as if
+  the first argument is irrelevant, so we can verify that the cache will
+  collapse the argument space."
+  [a b c]
+  (+ a b c))
+
+(deftest memo-with-args-fn-cmemoize-22
+  ;; must use var to preserve metadata
+  (let [mine (memo #'ignores-first-arg)]
+    (testing "that args-fn collapses the cache key space"
+      (is (= 13 (mine 1 2 10)))
+      (is (= 13 (mine 10 2 1)))
+      (is (= 13 (mine 10 2 10)))
+      (is (= {[2 10] 13, [2 1] 13} (snapshot mine))))))

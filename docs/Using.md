@@ -32,7 +32,7 @@ I can then memoize this function using `core.memoize/memo` which is an augmented
 ;;=> 42
 ```
 
-One advantage of using the `clojure.core.memoize/memo` function over the one provided in Clojure is that the former allows you to evict certain enties as needed, shown next.
+One advantage of using the `clojure.core.memoize/memo` function over the one provided in Clojure is that the former allows you to evict certain entries as needed, shown next.
 
 ### Evicting cached entries
 
@@ -47,6 +47,25 @@ To explicitly evict an element in a memoization cache, use the `clojure.core.mem
 ```
 
 The argument to `clojure.core.memoize/memo-clear!` is a vector of the precise argument values that you'd like to clear.  You can not pass the argument vector to instead clear the entire memoization cache for a function.
+
+### Overriding the cache keys
+
+By default, the entire argument list is used as a key into the cached results. Sometimes you will want to cache a function where one or more of its arguments don't affect the results directly and you would rather ignore them from a cache key point of view.
+
+You can do that by specifying metadata on the function being cached, telling the memoization functions how to turn the arguments into a cache key:
+
+```clojure
+(defn ^{:clojure.core.memoize/args-fn rest}
+  fetch-user-from-db
+  [db-spec user-id]
+  ...)
+
+(def get-user (memo/ttl #'fetch-user-from-db))
+```
+
+This tells memoization that the cache key for any given call is `(rest args)` so the `db-spec` argument will not be considered as part of the cache key. The supplied `args-fn` can perform any transformation from an argument list to a cache key but it is expected the most common use will be to remove one or more arguments from the cache key.
+
+Note: because you want memoization to read the metadata from your function, you must pass the Var in, rather than just the function name.
 
 ## Using a memoization cache strategy
 

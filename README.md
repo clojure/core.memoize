@@ -79,6 +79,7 @@ Developer Information
 Change Log
 ====================
 * Release next in progress
+  * Fixes [CMEMOIZE-22](http://dev.clojure.org/jira/browse/CMEMOIZE-20) - add `:clojure.core.memoize/args-fn` metadata support for memoizing functions which have one or more arguments that should not contribute to the cache key for calls
   * Fixes [CMEMOIZE-20](http://dev.clojure.org/jira/browse/CMEMOIZE-20) - add `lazy-snapshot` function
   * Fixes [CMEMOIZE-18](http://dev.clojure.org/jira/browse/CMEMOIZE-18) - automatically makes seed map values `deref`-able to match documentation and comply with core.memoize's world view
   * Fixes [CMEMOIZE-15](http://dev.clojure.org/jira/browse/CMEMOIZE-15) - edge case where cache miss/lookup cross an eviction boundary (Ryan Fowler/Colin Jones)

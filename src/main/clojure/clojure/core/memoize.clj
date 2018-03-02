@@ -70,10 +70,10 @@
               (set! available? true)
               v)))))))
 
-(defn ^:private d-lay [fun]
+(defn- d-lay [fun]
   (->RetryingDelay fun false nil))
 
-(defn ^:private make-derefable
+(defn- make-derefable
   "If a value is not already derefable, wrap it up.
 
   This is used to help rebuild seed/base maps passed in to the various
@@ -84,21 +84,26 @@
     (reify clojure.lang.IDeref
       (deref [_] v))))
 
-(defn ^:private derefable-seed
+(defn- derefable-seed
   "Given a seed/base map, ensure all the values in it are derefable."
   [seed]
   (into {} (for [[k v] seed] [k (make-derefable v)])))
 
 ;; # Auxilliary functions
 
-(defn through* [cache f item]
+(def ^{:private true
+       :doc "Returns a function's argument transformer."}
+  args-fn #(or (::args-fn (meta %)) identity))
+
+(defn- through*
   "The basic hit/miss logic for the cache system based on `core.cache/through`.
   Clojure delays are used to hold the cache value."
+  [cache f args item]
   (clojure.core.cache/through
-    (fn [f a] (d-lay #(f a)))
-    #(clojure.core/apply f %)
-    cache
-    item))
+   (fn [f _] (d-lay #(f args)))
+   #(clojure.core/apply f %)
+   cache
+   item))
 
 (def ^{:private true
        :doc "Returns a function's cache identity."}
@@ -188,11 +193,13 @@
    to memoize, and the arguments to the factory.  At least one of those
    functions should be the function to be memoized."
   ([cache-factory f & args]
-   (let [cache (atom (apply cache-factory f args))]
+   (let [cache   (atom (apply cache-factory f args))
+         ckey-fn (args-fn f)]
      (with-meta
       (fn [& args]
-        (let [cs  (swap! cache through* f args)
-              val (clojure.core.cache/lookup cs args ::not-found)]
+        (let [ckey (ckey-fn args)
+              cs   (swap! cache through* f args ckey)
+              val  (clojure.core.cache/lookup cs ckey ::not-found)]
           ;; If `lookup` returns `(delay ::not-found)`, it's likely that
           ;; we ran into a timing issue where eviction and access
           ;; are happening at about the same time. Therefore, we retry
@@ -202,8 +209,8 @@
           (when val
             (if (= ::not-found @val)
               (when-let [retry-val (clojure.core.cache/lookup
-                                    (swap! cache through* f args)
-                                    args)]
+                                    (swap! cache through* f args ckey)
+                                    ckey)]
                 @retry-val)
               @val))))
       {::cache cache
