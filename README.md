@@ -19,7 +19,7 @@ clojure.core.memoize
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.7.0
+Latest stable release: 0.7.1
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 
@@ -27,14 +27,14 @@ Latest stable release: 0.7.0
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "0.7.0"]
+    [org.clojure/core.memoize "0.7.1"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>0.7.0</version>
+      <version>0.7.1</version>
     </dependency>
 
 
@@ -78,6 +78,8 @@ Developer Information
 
 Change Log
 ====================
+* Release 0.7.1 on 2018.03.02
+  * Updated core.cache dependency version from 0.7.0 to 0.7.1 (for TTLCacheQ bug fix)
 * Release 0.7.0 on 2018.03.01
   * Fixes [CMEMOIZE-22](http://dev.clojure.org/jira/browse/CMEMOIZE-20) - add `:clojure.core.memoize/args-fn` metadata support for memoizing functions which have one or more arguments that should not contribute to the cache key for calls
   * Fixes [CMEMOIZE-20](http://dev.clojure.org/jira/browse/CMEMOIZE-20) - add `lazy-snapshot` function
