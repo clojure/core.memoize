@@ -207,12 +207,16 @@
           ;;
           ;; core.memoize currently wraps all of its values in a `delay`.
           (when val
-            (if (= ::not-found @val)
-              (when-let [retry-val (clojure.core.cache/lookup
-                                    (swap! cache through* f args ckey)
-                                    ckey)]
-                @retry-val)
-              @val))))
+            (loop [n 0 v @val]
+              (if (= ::not-found v)
+                (when-let [v' (clojure.core.cache/lookup
+                               (swap! cache through* f args ckey)
+                               ckey ::not-found)]
+                  (when (< n 10)
+                    (when-not (zero? n)
+                      (println "retrying swap/lookup" n))
+                    (recur (inc n) @v')))
+                v)))))
       {::cache cache
        ::original f}))))
 

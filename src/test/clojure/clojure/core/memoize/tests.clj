@@ -114,13 +114,17 @@
          [[43] 43] (lazy-snapshot mine)))
 
   ;; CMEMOIZE-15 edge case where TTLCache expires on miss/lookup
-  (let [mine (ttl identity :ttl/threshold 10)]
+  (let [mine  (ttl identity :ttl/threshold 5)
+        limit 2000000
+        start (System/currentTimeMillis)]
     (loop [n 0]
       (if-not (mine 42)
         (do
           (is false (str  "Failure on call " n)))
-        (if (< n 200000)
-          (recur (+ 1 n)))))))
+        (if (< n limit)
+          (recur (+ 1 n)))))
+    (println "ttl test completed" limit "calls in"
+             (- (System/currentTimeMillis) start) "ms")))
 
 
 (deftest test-lu
