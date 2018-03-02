@@ -79,12 +79,12 @@ Developer Information
 Change Log
 ====================
 * Release 0.7.1 on 2018.03.02
+  * Fixes [CMEMOIZE-15](http://dev.clojure.org/jira/browse/CMEMOIZE-15) - edge case where cache miss/lookup cross an eviction boundary (Ryan Fowler/Colin Jones)
   * Updated core.cache dependency version from 0.7.0 to 0.7.1 (for TTLCacheQ bug fix)
 * Release 0.7.0 on 2018.03.01
   * Fixes [CMEMOIZE-22](http://dev.clojure.org/jira/browse/CMEMOIZE-20) - add `:clojure.core.memoize/args-fn` metadata support for memoizing functions which have one or more arguments that should not contribute to the cache key for calls
   * Fixes [CMEMOIZE-20](http://dev.clojure.org/jira/browse/CMEMOIZE-20) - add `lazy-snapshot` function
   * Fixes [CMEMOIZE-18](http://dev.clojure.org/jira/browse/CMEMOIZE-18) - automatically makes seed map values `deref`-able to match documentation and comply with core.memoize's world view
-  * Fixes [CMEMOIZE-15](http://dev.clojure.org/jira/browse/CMEMOIZE-15) - edge case where cache miss/lookup cross an eviction boundary (Ryan Fowler/Colin Jones)
   * Cleanup/improve/fix tests
   * Add multi-version testing locally via Leiningen
   * Jump to 0.7.0 to match core.cache since these two libraries are so closely in sync

@@ -203,7 +203,7 @@
           ;; If `lookup` returns `(delay ::not-found)`, it's likely that
           ;; we ran into a timing issue where eviction and access
           ;; are happening at about the same time. Therefore, we retry
-          ;; the `swap!`.
+          ;; the `swap!` (potentially several times).
           ;;
           ;; core.memoize currently wraps all of its values in a `delay`.
           (when val
@@ -213,8 +213,6 @@
                                (swap! cache through* f args ckey)
                                ckey ::not-found)]
                   (when (< n 10)
-                    (when-not (zero? n)
-                      (println "retrying swap/lookup" n))
                     (recur (inc n) @v')))
                 v)))))
       {::cache cache
