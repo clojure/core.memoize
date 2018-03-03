@@ -8,10 +8,12 @@
 
 (ns ^{:doc "A memoization library for Clojure."
       :author "Michael Fogus"}
-  clojure.core.memoize.tests
+  clojure.core.memoize-test
   (:use [clojure.test]
         [clojure.core.cache :only [defcache lookup has? hit miss seed ttl-cache-factory]]
         [clojure.core.memoize]))
+
+(println "\nTesting with Clojure" (clojure-version))
 
 (def id (memo identity))
 

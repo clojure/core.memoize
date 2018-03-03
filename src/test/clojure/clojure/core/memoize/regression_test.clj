@@ -8,7 +8,7 @@
 
 (ns ^{:doc "A memoization library for Clojure."
       :author "Michael Fogus"}
-  clojure.core.memoize.regression-tests
+  clojure.core.memoize.regression-test
   (:use [clojure.test]
         [clojure.core.memoize]
         [clojure.core.cache :only [defcache lookup has? hit miss seed ttl-cache-factory]])
@@ -40,4 +40,3 @@
                      :RTE)
                    (catch Exception e
                      (class e))))))))))
-
