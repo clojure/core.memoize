@@ -188,10 +188,10 @@
 ;; # Public memoization API
 
 (defn build-memoizer
-  "Builds a function that given a function, returns a pluggable memoized
-   version of it.  `build-memoizer` Takes a cache factory function, a function
-   to memoize, and the arguments to the factory.  At least one of those
-   functions should be the function to be memoized."
+  "Builds a function that, given a function, returns a pluggable memoized
+   version of it.  `build-memoizer` takes a cache factory function, and the
+   argunments to that factory function -- at least one of those arguments
+   should be the function to be memoized (it's usually the first argument)."
   ([cache-factory f & args]
    (let [cache   (atom (apply cache-factory f args))
          ckey-fn (args-fn f)]
