@@ -33,7 +33,7 @@ Places
 ------
 
 * [Source code](https://github.com/clojure/core.memoize)
-* [Ticket system](http://dev.clojure.org/jira/browse/CMEMOIZE)
+* [Ticket system](http://clojure.atlassian.net/browse/CMEMOIZE)
 * [API Reference](https://clojure.github.com/core.memoize)
 
 Changes from v0.5.3
@@ -41,8 +41,8 @@ Changes from v0.5.3
 
 The v0.5.4 version of core.memoize works with the v0.6.3 version of [core.cache](http://github.com/clojure/core.cache/wiki).  In addition, the following bugs have been fixed:
 
- * [CMEMOIZE-5](http://dev.clojure.org/jira/browse/CMEMOIZE-5): Changed to never assume that the value retrieved from the cache is non-nil.  This was causing an occassional issue with TTL caches that timed out between checking for a value and retrieving it.
- * [CMEMOIZE-2](http://dev.clojure.org/jira/browse/CMEMOIZE-2): All references to Unk have been removed.
+ * [CMEMOIZE-5](http://clojure.atlassian.net/browse/CMEMOIZE-5): Changed to never assume that the value retrieved from the cache is non-nil.  This was causing an occassional issue with TTL caches that timed out between checking for a value and retrieving it.
+ * [CMEMOIZE-2](http://clojure.atlassian.net/browse/CMEMOIZE-2): All references to Unk have been removed.
 
 Plans
 -----

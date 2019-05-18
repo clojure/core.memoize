@@ -33,7 +33,7 @@ Places
 ------
 
 * [Source code](https://github.com/clojure/core.memoize)
-* [Ticket system](http://dev.clojure.org/jira/browse/CMEMOIZE)
+* [Ticket system](http://clojure.atlassian.net/browse/CMEMOIZE)
 * [API Reference](https://clojure.github.com/core.memoize)
 
 Changes from v0.5.4

@@ -48,5 +48,5 @@ core.memoize is a Clojure contrib library providing the following features:
 ## Places
 
 * [Source code](https://github.com/clojure/core.memoize)
-* [Ticket system](http://dev.clojure.org/jira/browse/CMEMOIZE)
+* [Ticket system](http://clojure.atlassian.net/browse/CMEMOIZE)
 * [Examples and documentation](http://github.com/clojure/core.memoize/wiki)

@@ -17,7 +17,7 @@ core.memoize is a new Clojure contrib library providing the following features:
 core.memoize is based on a library named Unk, found at <http://github.com/fogus/unk> that is planned for deprecation.
 
 * [Source code](https://github.com/clojure/core.memoize)
-* [Ticket system](http://dev.clojure.org/jira/browse/CMEMOIZE)
+* [Ticket system](http://clojure.atlassian.net/browse/CMEMOIZE)
 
 Changes from Unk
 -------------------

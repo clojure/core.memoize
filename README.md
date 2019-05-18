@@ -68,7 +68,7 @@ Developer Information
 
 * [GitHub project](https://github.com/clojure/core.memoize)
 
-* [Bug Tracker](http://dev.clojure.org/jira/browse/CMEMOIZE)
+* [Bug Tracker](http://clojure.atlassian.net/browse/CMEMOIZE)
 
 * [Continuous Integration](http://build.clojure.org/job/core.memoize/)
 
@@ -79,22 +79,22 @@ Developer Information
 Change Log
 ====================
 * Release 0.7.1 on 2018.03.02
-  * Fixes [CMEMOIZE-15](http://dev.clojure.org/jira/browse/CMEMOIZE-15) - edge case where cache miss/lookup cross an eviction boundary (Ryan Fowler/Colin Jones)
+  * Fixes [CMEMOIZE-15](http://clojure.atlassian.net/browse/CMEMOIZE-15) - edge case where cache miss/lookup cross an eviction boundary (Ryan Fowler/Colin Jones)
   * Updated core.cache dependency version from 0.7.0 to 0.7.1 (for TTLCacheQ bug fix)
 * Release 0.7.0 on 2018.03.01
-  * Fixes [CMEMOIZE-22](http://dev.clojure.org/jira/browse/CMEMOIZE-22) - add `:clojure.core.memoize/args-fn` metadata support for memoizing functions which have one or more arguments that should not contribute to the cache key for calls
-  * Fixes [CMEMOIZE-20](http://dev.clojure.org/jira/browse/CMEMOIZE-20) - add `lazy-snapshot` function
-  * Fixes [CMEMOIZE-18](http://dev.clojure.org/jira/browse/CMEMOIZE-18) - automatically makes seed map values `deref`-able to match documentation and comply with core.memoize's world view
+  * Fixes [CMEMOIZE-22](http://clojure.atlassian.net/browse/CMEMOIZE-22) - add `:clojure.core.memoize/args-fn` metadata support for memoizing functions which have one or more arguments that should not contribute to the cache key for calls
+  * Fixes [CMEMOIZE-20](http://clojure.atlassian.net/browse/CMEMOIZE-20) - add `lazy-snapshot` function
+  * Fixes [CMEMOIZE-18](http://clojure.atlassian.net/browse/CMEMOIZE-18) - automatically makes seed map values `deref`-able to match documentation and comply with core.memoize's world view
   * Cleanup/improve/fix tests
   * Add multi-version testing locally via Leiningen
   * Jump to 0.7.0 to match core.cache since these two libraries are so closely in sync
 * Release 0.5.9 on 2016.03.28
   * Updated core.cache dependency version from 0.6.4 to 0.6.5
 * Release 0.5.8 on 2015.11.06
-  * Fixes [CMEMOIZE-21](http://dev.clojure.org/jira/browse/CMEMOIZE-21) - race condition in delay
+  * Fixes [CMEMOIZE-21](http://clojure.atlassian.net/browse/CMEMOIZE-21) - race condition in delay
 * Release 0.5.7 on 2015.01.12
-  * Fixes [CMEMOIZE-8](http://dev.clojure.org/jira/browse/CMEMOIZE-8)
-  * Fixes [CMEMOIZE-13](http://dev.clojure.org/jira/browse/CMEMOIZE-13)
+  * Fixes [CMEMOIZE-8](http://clojure.atlassian.net/browse/CMEMOIZE-8)
+  * Fixes [CMEMOIZE-13](http://clojure.atlassian.net/browse/CMEMOIZE-13)
   * Updated core.cache dependency version from 0.6.3 to 0.6.4
 * Release 0.5.6 on 2013.06.28
   * Added optional args to `memo-clear!`.
@@ -103,8 +103,8 @@ Change Log
   * Deprecated `memo-*` APIs
   * Adds new API of form `(cache-type function <base><:cache-type/threshold int>)`
 * Release 0.5.4 on 2013.06.03
-  * Fixes [CMEMOIZE-5](http://dev.clojure.org/jira/browse/CMEMOIZE-5)
-  * Fixes [CMEMOIZE-2](http://dev.clojure.org/jira/browse/CMEMOIZE-2)
+  * Fixes [CMEMOIZE-5](http://clojure.atlassian.net/browse/CMEMOIZE-5)
+  * Fixes [CMEMOIZE-2](http://clojure.atlassian.net/browse/CMEMOIZE-2)
 * Release 0.5.3 on 2013.03.18
   * Works with core.cache v0.6.3
 * Release 0.5.2 on 2012.07.13

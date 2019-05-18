@@ -33,7 +33,7 @@ Places
 ------
 
 * [Source code](https://github.com/clojure/core.memoize)
-* [Ticket system](http://dev.clojure.org/jira/browse/CMEMOIZE)
+* [Ticket system](http://clojure.atlassian.net/browse/CMEMOIZE)
 * [API Reference](https://clojure.github.com/core.memoize)
 
 Changes from v0.5.5
@@ -41,11 +41,11 @@ Changes from v0.5.5
 
 The v0.5.6 version of core.memoize works with the v0.6.3 version of [core.cache](http://github.com/clojure/core.cache/wiki).  In addition, the following bugs have been fixed, or features added:
 
-  * [CMEMOIZE-4](http://dev.clojure.org/jira/browse/CMEMOIZE-4) - `memo-clear!` function now takes an optional args to limit evictions.
+  * [CMEMOIZE-4](http://clojure.atlassian.net/browse/CMEMOIZE-4) - `memo-clear!` function now takes an optional args to limit evictions.
 
-  * [CMEMOIZE-6](http://dev.clojure.org/jira/browse/CMEMOIZE-6) - Widenes the contract on the types of callables allowed.
+  * [CMEMOIZE-6](http://clojure.atlassian.net/browse/CMEMOIZE-6) - Widenes the contract on the types of callables allowed.
 
-  * [CMEMOIZE-7](http://dev.clojure.org/jira/browse/CMEMOIZE-7) - Fixed issues link in README.
+  * [CMEMOIZE-7](http://clojure.atlassian.net/browse/CMEMOIZE-7) - Fixed issues link in README.
 
 Plans
 -----
