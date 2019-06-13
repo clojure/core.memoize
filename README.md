@@ -19,7 +19,7 @@ clojure.core.memoize
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.7.1
+Latest stable release: 0.7.2
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 
@@ -27,14 +27,14 @@ Latest stable release: 0.7.1
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "0.7.1"]
+    [org.clojure/core.memoize "0.7.2"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>0.7.1</version>
+      <version>0.7.2</version>
     </dependency>
 
 
@@ -78,6 +78,10 @@ Developer Information
 
 Change Log
 ====================
+* Release 0.7.2 on 2019.06.13
+  * Fixes [CMEMOIZE-26](http://clojure.atlassian.net/browse/CMEMOIZE-26) - zero-arity function cache could not be replaced by `memo-swap!` (discovered by Teemu Kaukoranta)
+  * Updated core.cache dependency version from 0.7.1 to 0.7.2
+  * Updated test matrix locally to include Clojure 1.10.1, 1.11 master
 * Release 0.7.1 on 2018.03.02
   * Fixes [CMEMOIZE-15](http://clojure.atlassian.net/browse/CMEMOIZE-15) - edge case where cache miss/lookup cross an eviction boundary (Ryan Fowler/Colin Jones)
   * Updated core.cache dependency version from 0.7.0 to 0.7.1 (for TTLCacheQ bug fix)

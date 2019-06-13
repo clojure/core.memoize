@@ -40,3 +40,22 @@
                      :RTE)
                    (catch Exception e
                      (class e))))))))))
+
+(defn- test-helper-26
+  ([] 100)
+  ([i] (inc i)))
+
+(deftest test-regression-cmemoize-26
+  (let [mine (memo test-helper-26)]
+    (testing "that memo-swap! is respected for zero arity"
+      (is (= 100 (mine)))
+      (is (= 201 (mine 200)))
+      (is (= {[] 100, [200] 201} (snapshot mine)))
+      (memo-swap! mine {[] :something [200] :else})
+      (is (= {[] :something, [200] :else} (snapshot mine)))
+      ;; unary works...
+      (is (= :else (mine 200)))
+      ;; ...but 0-arity still has old value...
+      (is (= :something (mine)))
+      ;; ...and snapshot gets changed
+      (is (= {[] :something, [200] :else} (snapshot mine))))))

@@ -197,7 +197,7 @@
          ckey-fn (args-fn f)]
      (with-meta
       (fn [& args]
-        (let [ckey (ckey-fn args)
+        (let [ckey (or (ckey-fn args) [])
               cs   (swap! cache through* f args ckey)
               val  (clojure.core.cache/lookup cs ckey ::not-found)]
           ;; If `lookup` returns `(delay ::not-found)`, it's likely that
