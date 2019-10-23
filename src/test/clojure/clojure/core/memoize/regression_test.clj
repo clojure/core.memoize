@@ -59,3 +59,12 @@
       (is (= :something (mine)))
       ;; ...and snapshot gets changed
       (is (= {[] :something, [200] :else} (snapshot mine))))))
+
+(deftest test-regression-cmemoize-27
+  (testing "that seed makes elements derefable"
+    (let [mine (memo identity)
+          mine (vary-meta mine update :clojure.core.memoize/cache
+                          swap! seed {[:a] :b [:b] :c})]
+      (is (= :b (mine :a)))
+      (is (= :c (mine :b)))
+      (is (= :x (mine :x))))))

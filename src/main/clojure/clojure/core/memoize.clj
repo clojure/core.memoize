@@ -24,26 +24,6 @@
 
   (:require [clojure.core.cache :as cache]))
 
-;; Plugging Interface
-
-(deftype PluggableMemoization [f cache]
-  cache/CacheProtocol
-  (has? [_ item]
-    (clojure.core.cache/has? cache item))
-  (hit  [_ item]
-    (PluggableMemoization. f (clojure.core.cache/hit cache item)))
-  (miss [_ item result]
-    (PluggableMemoization. f (clojure.core.cache/miss cache item result)))
-  (evict [_ key]
-    (PluggableMemoization. f (clojure.core.cache/evict cache key)))
-  (lookup [_ item]
-    (clojure.core.cache/lookup cache item nil))
-  (lookup [_ item not-found]
-    (clojure.core.cache/lookup cache item (delay not-found)))
-  (seed [_ base]
-    (PluggableMemoization. f (clojure.core.cache/seed cache base)))
-  Object
-  (toString [_] (str cache)))
 
 
 ;; Similar to clojure.lang.Delay, but will not memoize an exception and will
@@ -88,6 +68,28 @@
   "Given a seed/base map, ensure all the values in it are derefable."
   [seed]
   (into {} (for [[k v] seed] [k (make-derefable v)])))
+
+;; Plugging Interface
+
+(deftype PluggableMemoization [f cache]
+  cache/CacheProtocol
+  (has? [_ item]
+    (clojure.core.cache/has? cache item))
+  (hit  [_ item]
+    (PluggableMemoization. f (clojure.core.cache/hit cache item)))
+  (miss [_ item result]
+    (PluggableMemoization. f (clojure.core.cache/miss cache item result)))
+  (evict [_ key]
+    (PluggableMemoization. f (clojure.core.cache/evict cache key)))
+  (lookup [_ item]
+    (clojure.core.cache/lookup cache item nil))
+  (lookup [_ item not-found]
+    (clojure.core.cache/lookup cache item (delay not-found)))
+  (seed [_ base]
+    (PluggableMemoization.
+     f (clojure.core.cache/seed cache (derefable-seed base))))
+  Object
+  (toString [_] (str cache)))
 
 ;; # Auxilliary functions
 
@@ -171,15 +173,7 @@
   [f base]
   (when-let [cache (cache-id f)]
     (swap! cache
-           (constantly (clojure.core.cache/seed @cache
-                             ;; this unconditionally wraps all values to make
-                             ;; them derefable -- it probably should be done
-                             ;; via derefable-seed but...
-                             (into {}
-                                   (for [[k v] base]
-                                     [k (reify
-                                          clojure.lang.IDeref
-                                          (deref [this] v))])))))))
+           (constantly (clojure.core.cache/seed @cache (derefable-seed base))))))
 
 (defn memo-unwrap
   [f]

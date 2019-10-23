@@ -78,6 +78,8 @@ Developer Information
 
 Change Log
 ====================
+* Release next in progress
+  * Fixes [CMEMOIZE-27](http://clojure.atlassian.net/browse/CMEMOIZE-27) - the `seed` function on `PluggableMemoization` now makes elements derefable (this case was missed when [CMEMOIZE-18](http://clojure.atlassian.net/browse/CMEMOIZE-18) was fixed)
 * Release 0.7.2 on 2019.06.13
   * Fixes [CMEMOIZE-26](http://clojure.atlassian.net/browse/CMEMOIZE-26) - zero-arity function cache could not be replaced by `memo-swap!` (discovered by Teemu Kaukoranta)
   * Updated core.cache dependency version from 0.7.1 to 0.7.2
