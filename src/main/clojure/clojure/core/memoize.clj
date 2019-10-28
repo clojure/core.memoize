@@ -119,7 +119,7 @@
    you can infer that what you get is only the cache contents at a
    moment in time."
   [memoized-fn]
-  (when-let [cache (::cache (meta memoized-fn))]
+  (when-let [cache (cache-id memoized-fn)]
     (into {}
           (for [[k v] (.cache ^PluggableMemoization @cache)]
             [(vec k) @v]))))
@@ -132,14 +132,14 @@
 
    Returns a sequence of key/value pairs."
   [memoized-fn]
-  (when-let [cache (::cache (meta memoized-fn))]
+  (when-let [cache (cache-id memoized-fn)]
     (for [[k v] (.cache ^PluggableMemoization @cache)]
       [(vec k) @v])))
 
 (defn memoized?
   "Returns true if a function has an core.memo-placed cache, false otherwise."
   [f]
-  (boolean (::cache (meta f))))
+  (boolean (cache-id f)))
 
 (defn memo-clear!
   "Reaches into an core.memo-memoized function and clears the cache.  This is a
@@ -179,38 +179,67 @@
   [f]
   (::original (meta f)))
 
+(defn- cached-function
+  "Given a function, an atom containing a (pluggable memoization cache), and
+  and cache key function, return a new function that behaves like the original
+  function except it is cached, based on its arguments, with the cache and the
+  original function in its metadata."
+  [f cache-atom ckey-fn]
+  (with-meta
+   (fn [& args]
+     (let [ckey (or (ckey-fn args) [])
+           cs   (swap! cache-atom through* f args ckey)
+           val  (clojure.core.cache/lookup cs ckey ::not-found)]
+       ;; If `lookup` returns `(delay ::not-found)`, it's likely that
+       ;; we ran into a timing issue where eviction and access
+       ;; are happening at about the same time. Therefore, we retry
+       ;; the `swap!` (potentially several times).
+       ;;
+       ;; core.memoize currently wraps all of its values in a `delay`.
+       (when val
+         (loop [n 0 v @val]
+           (if (= ::not-found v)
+             (when-let [v' (clojure.core.cache/lookup
+                            (swap! cache-atom through* f args ckey)
+                            ckey ::not-found)]
+               (when (< n 10)
+                 (recur (inc n) @v')))
+             v)))))
+   {::cache cache-atom
+    ::original f}))
+
 ;; # Public memoization API
+
+(defn memoizer
+  "Build a pluggable memoized version of a function. Given a function and a
+  (pluggable memoized) cache, and an optional seed (hash map of arguments to
+  return values), return a cached version of that function.
+
+  If you want to build your own cached function, perhaps with combined caches
+  or customized caches, this is the preferred way to do so now."
+  ([f cache]
+   (let [cache   (atom (PluggableMemoization. f cache))
+         ckey-fn (args-fn f)]
+     (cached-function f cache ckey-fn)))
+  ([f cache seed]
+   (let [cache   (atom (clojure.core.cache/seed (PluggableMemoization. f cache)
+                                                (derefable-seed seed)))
+         ckey-fn (args-fn f)]
+     (cached-function f cache ckey-fn))))
 
 (defn build-memoizer
   "Builds a function that, given a function, returns a pluggable memoized
    version of it.  `build-memoizer` takes a cache factory function, and the
    argunments to that factory function -- at least one of those arguments
-   should be the function to be memoized (it's usually the first argument)."
+   should be the function to be memoized (it's usually the first argument).
+
+  `memoizer` above is a simpler version of `build-memoizer` that 'does the
+  right thing' with a cache and a seed hash map. `build-memoizer` remains
+  for backward compatibility."
   ([cache-factory f & args]
    (let [cache   (atom (apply cache-factory f args))
          ckey-fn (args-fn f)]
-     (with-meta
-      (fn [& args]
-        (let [ckey (or (ckey-fn args) [])
-              cs   (swap! cache through* f args ckey)
-              val  (clojure.core.cache/lookup cs ckey ::not-found)]
-          ;; If `lookup` returns `(delay ::not-found)`, it's likely that
-          ;; we ran into a timing issue where eviction and access
-          ;; are happening at about the same time. Therefore, we retry
-          ;; the `swap!` (potentially several times).
-          ;;
-          ;; core.memoize currently wraps all of its values in a `delay`.
-          (when val
-            (loop [n 0 v @val]
-              (if (= ::not-found v)
-                (when-let [v' (clojure.core.cache/lookup
-                               (swap! cache through* f args ckey)
-                               ckey ::not-found)]
-                  (when (< n 10)
-                    (recur (inc n) @v')))
-                v)))))
-      {::cache cache
-       ::original f}))))
+     (cached-function f cache ckey-fn))))
 
 (defn memo
   "Used as a more flexible alternative to Clojure's core `memoization`
@@ -231,10 +260,7 @@
    change over time."
   ([f] (memo f {}))
   ([f seed]
-   (build-memoizer
-     #(PluggableMemoization. %1 (cache/basic-cache-factory %2))
-     f
-     (derefable-seed seed))))
+   (memoizer f (cache/basic-cache-factory {}) seed)))
 
 ;; ## Utilities
 
@@ -277,11 +303,7 @@
   ([f] (memo-fifo f 32 {}))
   ([f limit] (memo-fifo f limit {}))
   ([f limit base]
-   (build-memoizer
-     #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
-     f
-     limit
-     (derefable-seed base))))
+   (memoizer f (cache/fifo-cache-factory {} :threshold limit) base)))
 
 (defn fifo
   "Works the same as the basic memoization function (i.e. `memo`
@@ -313,12 +335,7 @@
   ([f tkey threshold] (fifo f {} tkey threshold))
   ([f base key threshold]
    (check-args "fifo" f base key threshold)
-
-   (build-memoizer
-      #(PluggableMemoization. %1 (cache/fifo-cache-factory %3 :threshold %2))
-      f
-      threshold
-      (derefable-seed base))))
+   (memoizer f (cache/fifo-cache-factory {} :threshold threshold) base)))
 
 ;; ### LRU
 
@@ -327,11 +344,7 @@
   ([f] (memo-lru f 32))
   ([f limit] (memo-lru f limit {}))
   ([f limit base]
-   (build-memoizer
-     #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
-     f
-     limit
-     (derefable-seed base))))
+   (memoizer f (cache/lru-cache-factory {} :threshold limit) base)))
 
 (defn lru
   "Works the same as the basic memoization function (i.e. `memo`
@@ -374,12 +387,7 @@
   ([f tkey threshold] (lru f {} tkey threshold))
   ([f base key threshold]
    (check-args "lru" f base key threshold)
-
-   (build-memoizer
-      #(PluggableMemoization. %1 (cache/lru-cache-factory %3 :threshold %2))
-      f
-      threshold
-      (derefable-seed base))))
+   (memoizer f (cache/lru-cache-factory {} :threshold threshold) base)))
 
 ;; ### TTL
 
@@ -388,12 +396,7 @@
   ([f] (memo-ttl f 3000 {}))
   ([f limit] (memo-ttl f limit {}))
   ([f limit base]
-   (build-memoizer
-     #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
-     f
-     limit
-     ;; this ignores the base but it's deprecated so it can stay broken
-     {})))
+   (memoizer f (cache/ttl-cache-factory {} :ttl limit) base)))
 
 (defn ttl
   "Unlike many of the other core.memo memoization functions,
@@ -421,12 +424,7 @@
   ([f tkey threshold] (ttl f {} tkey threshold))
   ([f base key threshold]
    (check-args "ttl" f base key threshold)
-
-   (build-memoizer
-      #(PluggableMemoization. %1 (cache/ttl-cache-factory %3 :ttl %2))
-      f
-      threshold
-      (derefable-seed base))))
+   (memoizer f (cache/ttl-cache-factory {} :ttl threshold) base)))
 
 ;; ### LU
 
@@ -435,11 +433,7 @@
   ([f] (memo-lu f 32))
   ([f limit] (memo-lu f limit {}))
   ([f limit base]
-   (build-memoizer
-     #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
-     f
-     limit
-     (derefable-seed base))))
+   (memoizer f (cache/lu-cache-factory {} :threshold limit) base)))
 
 (defn lu
   "Similar to the implementation of memo-lru, except that this
@@ -463,9 +457,4 @@
   ([f tkey threshold] (lu f {} tkey threshold))
   ([f base key threshold]
    (check-args "lu" f base key threshold)
-
-   (build-memoizer
-      #(PluggableMemoization. %1 (cache/lu-cache-factory %3 :threshold %2))
-      f
-      threshold
-      (derefable-seed base))))
+   (memoizer f (cache/lu-cache-factory {} :threshold threshold) base)))

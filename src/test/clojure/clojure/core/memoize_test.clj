@@ -159,17 +159,23 @@
   (seed [_ base]
     (PassThrough. (seed impl base))))
 
-(defn memo-pass-through [f limit]
+(defn memo-pass-through-1 [f limit]
   (build-memoizer
        #(clojure.core.memoize.PluggableMemoization. %1 (PassThrough. (ttl-cache-factory %3 :ttl %2)))
        f
        limit
        {}))
 
-(deftest test-snapshot-without-cache-field
+(deftest test-snapshot-without-cache-field-1
   (testing "that we can call snapshot against an object without a 'cache' field"
-    (is (= {} (snapshot (memo-pass-through identity 2000))))))
+    (is (= {} (snapshot (memo-pass-through-1 identity 2000))))))
 
+(defn memo-pass-through-2 [f limit]
+  (memoizer f (PassThrough. (ttl-cache-factory {} :ttl limit))))
+
+(deftest test-snapshot-without-cache-field-2
+  (testing "that we can call snapshot against an object without a 'cache' field"
+    (is (= {} (snapshot (memo-pass-through-2 identity 2000))))))
 
 (deftest test-memoization-utils
  (let [CACHE_IDENTITY (:clojure.core.memoize/cache (meta id))]

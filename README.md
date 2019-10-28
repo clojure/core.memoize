@@ -79,6 +79,7 @@ Developer Information
 Change Log
 ====================
 * Release next in progress
+  * Fixes [CMEMOIZE-28](http://clojure.atlassian.net/browse/CMEMOIZE-28) - provides `memorizer` as a more convenient way to build custom cached functions that may provide a seed hash map of arguments to return values.
   * Fixes [CMEMOIZE-27](http://clojure.atlassian.net/browse/CMEMOIZE-27) - the `seed` function on `PluggableMemoization` now makes elements derefable (this case was missed when [CMEMOIZE-18](http://clojure.atlassian.net/browse/CMEMOIZE-18) was fixed)
 * Release 0.7.2 on 2019.06.13
   * Fixes [CMEMOIZE-26](http://clojure.atlassian.net/browse/CMEMOIZE-26) - zero-arity function cache could not be replaced by `memo-swap!` (discovered by Teemu Kaukoranta)
