@@ -7,18 +7,19 @@
 ;   You must not remove this notice, or any other, from this software.
 
 (ns clojure.core.memoize
-  "core.memoize is a memoization library offering functionality above Clojure's core `memoize`
-  function in the following ways:
+  "core.memoize is a memoization library offering functionality above
+  Clojure's core `memoize` function in the following ways:
 
   **Pluggable memoization**
 
-  core.memoize allows for different back-end cache implmentations to be used as appropriate without
-  changing the memoization modus operandi.
+  core.memoize allows for different back-end cache implmentations to
+  be used as appropriate without changing the memoization modus operandi.
+  See the `memoizer` function.
 
   **Manipulable memoization**
 
-  Because core.memoize allows you to access a function's memoization store, you do interesting things like
-  clear it, modify it, and save it for later.
+  Because core.memoize allows you to access a function's memoization store,
+  you do interesting things like clear it, modify it, and save it for later.
   "
   {:author "fogus"}
 
@@ -235,7 +236,7 @@
 
   `memoizer` above is a simpler version of `build-memoizer` that 'does the
   right thing' with a cache and a seed hash map. `build-memoizer` remains
-  for backward compatibility."
+  for backward compatibility but should be considered deprecated."
   ([cache-factory f & args]
    (let [cache   (atom (apply cache-factory f args))
          ckey-fn (args-fn f)]

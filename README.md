@@ -19,7 +19,7 @@ clojure.core.memoize
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.7.2
+Latest stable release: 0.8.2
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 
@@ -27,14 +27,14 @@ Latest stable release: 0.7.2
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "0.7.2"]
+    [org.clojure/core.memoize "0.8.2"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>0.7.2</version>
+      <version>0.8.2</version>
     </dependency>
 
 
@@ -78,8 +78,9 @@ Developer Information
 
 Change Log
 ====================
-* Release next in progress
-  * Fixes [CMEMOIZE-28](http://clojure.atlassian.net/browse/CMEMOIZE-28) - provides `memorizer` as a more convenient way to build custom cached functions that may provide a seed hash map of arguments to return values.
+* Release 0.8.2 on 2019.11.01 (to match core.cache again)
+  * Update `core.cache` dependency version from 0.7.2 to 0.8.2.
+  * Fixes [CMEMOIZE-28](http://clojure.atlassian.net/browse/CMEMOIZE-28) - provides `memoizer` as a more convenient way to build custom cached functions that may provide a seed hash map of arguments to return values. `build-memoizer` should be considered deprecated at this point.
   * Fixes [CMEMOIZE-27](http://clojure.atlassian.net/browse/CMEMOIZE-27) - the `seed` function on `PluggableMemoization` now makes elements derefable (this case was missed when [CMEMOIZE-18](http://clojure.atlassian.net/browse/CMEMOIZE-18) was fixed)
 * Release 0.7.2 on 2019.06.13
   * Fixes [CMEMOIZE-26](http://clojure.atlassian.net/browse/CMEMOIZE-26) - zero-arity function cache could not be replaced by `memo-swap!` (discovered by Teemu Kaukoranta)
