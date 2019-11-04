@@ -78,6 +78,8 @@ Developer Information
 
 Change Log
 ====================
+* Release 'next' in progress
+  * Fixes [CMEMOIZE-9](http://clojure.atlassian.net/browse/CMEMOIZE-9) - adds `memo-reset!` and deprecates 2-arity version of `memo-swap!`; adds 3+-arity version of `memo-swap!` to behave more like a `swap!` operation on the underlying cache
 * Release 0.8.2 on 2019.11.01 (to match core.cache again)
   * Update `core.cache` dependency version from 0.7.2 to 0.8.2.
   * Fixes [CMEMOIZE-28](http://clojure.atlassian.net/browse/CMEMOIZE-28) - provides `memoizer` as a more convenient way to build custom cached functions that may provide a seed hash map of arguments to return values. `build-memoizer` should be considered deprecated at this point.

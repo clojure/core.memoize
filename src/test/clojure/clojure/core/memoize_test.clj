@@ -204,13 +204,30 @@
        (is (empty? (snapshot id)))))
    (testing "that after all manipulations, the cache maintains its identity"
      (is (identical? CACHE_IDENTITY (:clojure.core.memoize/cache (meta id)))))
+   (testing "that a cache can be swapped and used normally"
+     (is (memo-swap! id clojure.core.cache/miss [42] 42))
+     (is (= 42 (id 42)))
+     (is (= {[42] 42} (snapshot id)))
+     (is (= 108 (id 108)))
+     (is (= {[42] 42 [108] 108} (snapshot id))))
    (testing "that a cache can be seeded and used normally"
-     (is (memo-swap! id {[42] 42}))
+     (is (memo-reset! id {[42] 42}))
      (is (= 42 (id 42)))
      (is (= {[42] 42} (snapshot id)))
      (is (= 108 (id 108)))
      (is (= {[42] 42 [108] 108} (snapshot id))))
    (testing "that we can get back the original function"
+     (is (memo-clear! id))
+     (is (memo-reset! id {[42] 24}))
+     (is (= 24 (id 42)))
+     (is (= 42 ((memo-unwrap id) 42))))
+   (testing "that a cache can be seeded and used normally - deprecated memo-swap!"
+     (is (memo-swap! id {[42] 42}))
+     (is (= 42 (id 42)))
+     (is (= {[42] 42} (snapshot id)))
+     (is (= 108 (id 108)))
+     (is (= {[42] 42 [108] 108} (snapshot id))))
+   (testing "that we can get back the original function - deprecated memo-swap!"
      (is (memo-clear! id))
      (is (memo-swap! id {[42] 24}))
      (is (= 24 (id 42)))

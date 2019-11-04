@@ -160,7 +160,7 @@
    (when-let [cache (cache-id f)]
      (swap! cache (constantly (clojure.core.cache/evict @cache args))))))
 
-(defn memo-swap!
+(defn memo-reset!
   "Takes a core.memo-populated function and a map and replaces the memoization cache
    with the supplied map.  This is potentially some serious voodoo,
    since you can effectively change the semantics of a function on the fly.
@@ -175,6 +175,36 @@
   (when-let [cache (cache-id f)]
     (swap! cache
            (constantly (clojure.core.cache/seed @cache (derefable-seed base))))))
+
+(defn memo-swap!
+  "The 2-arity version takes a core.memo-populated function and a map and
+  replaces the memoization cache with the supplied map. Use `memo-reset!`
+  instead for replacing the cache as this 2-arity version of `memo-swap!`
+  should be considered deprecated.
+
+  The 3+-arity version takes a core.memo-populated function and arguments
+  similar to what you would pass to `clojure.core/swap!` and performs a
+  `swap!` on the underlying cache. In order to satisfy core.memoize's
+  world view, the assumption is that you will generally be calling it like:
+
+        (def id (memo identity))
+        (memo-swap! id clojure.core.cache/miss [13] :omg)
+        (id 13)
+        ;=> :omg
+
+  You'll nearly always use `clojure.core.cache/miss` for this operation but
+  you could pass any function that would work on an immutable cache, such
+  as `evict` or `assoc` etc.
+
+  Be aware that `memo-swap!` assumes it can wrap each of the `results` values
+  in a `delay` so that items conform to `clojure.core.memoize`'s world view."
+  ([f base]
+   (when-let [cache (cache-id f)]
+     (swap! cache
+            (constantly (clojure.core.cache/seed @cache (derefable-seed base))))))
+  ([f swap-fn args & results]
+   (when-let [cache (cache-id f)]
+     (apply swap! cache swap-fn args (map #(delay %) results)))))
 
 (defn memo-unwrap
   [f]
