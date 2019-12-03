@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Index - A manipulable, pluggable, memoization framework 0.5.10 API documentation</title>
+    <title>Index - core.memoize 0.8.3-SNAPSHOT API documentation</title>
     <link rel="icon" href="static/favicon.png" />
     <link rel="shortcut icon" href="static/favicon.png" />
     <link rel="stylesheet" href="static/clojure.css" type="text/css" media="all" />
@@ -25,14 +25,14 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
-    <span class="toc-header"><span id="project-name">A manipulable, pluggable, memoization framework</span> <span id="version">0.5.10</span> API</span><br />
+    <span class="toc-header"><span id="project-name">core.memoize</span> <span id="version">0.8.3-SNAPSHOT</span> API</span><br />
     <ul>
       <li><a href="index.html" class="wiki_link">Overview</a></li>
       <li><a href="api-index.html" class="wiki_link">API Index</a></li>
     </ul>
     
     
-    <a class="wiki_link" href="http://clojure.org">Clojure Home</a>
+    <a class="wiki_link" href="https://clojure.org">Clojure Home</a>
   </div>
 </div>
 </div>
@@ -41,9 +41,9 @@ namespace.
 	  <div class="contentBox"><div class="innerContentBox">
               <div class="wiki wikiPage" id="content_view">
                 <div id="right-sidebar"></div>
-                <div id="content-tag"><h1 id="overview">Index of Public Functions and Variables - <span id="header-project">A manipulable, pluggable, memoization framework</span> <span id="header-version">0.5.10</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span></h1>
+                <div id="content-tag"><h1 id="overview">Index of Public Functions and Variables - <span id="header-project">core.memoize</span> <span id="header-version">0.8.3-SNAPSHOT</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span></h1>
 This page has an alphabetical index of all the documented functions and variables
-in <span class="project-name-span">A manipulable, pluggable, memoization framework</span>.
+in <span class="project-name-span">core.memoize</span>.
 
 <!-- TODO: enable this functionality on github?
 
@@ -75,7 +75,7 @@ Shortcuts:<br />
 </div><div id="index-body">
   <h2 id="B"><span id="section-head">B</span></h2>
   <pre>
-<span id="section-content"> <a href="index.html#clojure.core.memoize/build-memoizer">build-memoizer</a><span id="line-content">               function      clojure.core.memoize Builds a function that given a function, returns...
+<span id="section-content"> <a href="index.html#clojure.core.memoize/build-memoizer">build-memoizer</a><span id="line-content">               function      clojure.core.memoize Builds a function that, given a function, return...
 </span></span>
   </pre>
 </div><div id="index-body">
@@ -127,7 +127,8 @@ Shortcuts:<br />
 </div><div id="index-body">
   <h2 id="L"><span id="section-head">L</span></h2>
   <pre>
-<span id="section-content"> <a href="index.html#clojure.core.memoize/lru">lru</a><span id="line-content">                          function      clojure.core.memoize Works the same as the basic memoization function...
+<span id="section-content"> <a href="index.html#clojure.core.memoize/lazy-snapshot">lazy-snapshot</a><span id="line-content">                function      clojure.core.memoize Returns a lazy snapshot of a core.memo-placed me...
+</span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/lru">lru</a><span id="line-content">                          function      clojure.core.memoize Works the same as the basic memoization function...
 </span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/lu">lu</a><span id="line-content">                           function      clojure.core.memoize Similar to the implementation of memo-lru, excep...
 </span></span>
   </pre>
@@ -139,9 +140,11 @@ Shortcuts:<br />
 </span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/memo-fifo">memo-fifo</a><span id="line-content">                    function      clojure.core.memoize DEPRECATED: Please use clojure.core.memoize/fifo...
 </span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/memo-lru">memo-lru</a><span id="line-content">                     function      clojure.core.memoize DEPRECATED: Please use clojure.core.memoize/lru ...
 </span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/memo-lu">memo-lu</a><span id="line-content">                      function      clojure.core.memoize DEPRECATED: Please use clojure.core.memoize/lu i...
-</span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/memo-swap!">memo-swap!</a><span id="line-content">                   function      clojure.core.memoize Takes a core.memo-populated function and a map a...
+</span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/memo-reset!">memo-reset!</a><span id="line-content">                  function      clojure.core.memoize Takes a core.memo-populated function and a map a...
+</span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/memo-swap!">memo-swap!</a><span id="line-content">                   function      clojure.core.memoize The 2-arity version takes a core.memo-populated ...
 </span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/memo-ttl">memo-ttl</a><span id="line-content">                     function      clojure.core.memoize DEPRECATED: Please use clojure.core.memoize/ttl ...
 </span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/memoized?">memoized?</a><span id="line-content">                    function      clojure.core.memoize Returns true if a function has an core.memo-plac...
+</span></span><span id="section-content"> <a href="index.html#clojure.core.memoize/memoizer">memoizer</a><span id="line-content">                     function      clojure.core.memoize Build a pluggable memoized version of a function...
 </span></span>
   </pre>
 </div><div id="index-body">
@@ -230,7 +233,7 @@ Shortcuts:<br />
           </div>
 	</div>
 	<div id="foot">
-	  <div id="copyright" style="text-align: center;">Copyright 2007-2017 by Rich Hickey and the various contributors</div>
+	  <div id="copyright" style="text-align: center;">Copyright 2007-2019 by Rich Hickey and the various contributors</div>
 	</div>
       </div>
       <div id="DesignedBy">Logo &amp; site design by <a href="http://www.tomhickey.com" title="Visit Tom Hickey's website.">Tom Hickey</a>.<br />

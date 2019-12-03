@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>clojure.core.memoize - A manipulable, pluggable, memoization framework 0.5.10 API documentation</title>
+    <title>clojure.core.memoize - core.memoize 0.8.3-SNAPSHOT API documentation</title>
     <link rel="icon" href="static/favicon.png" />
     <link rel="shortcut icon" href="static/favicon.png" />
     <link rel="stylesheet" href="static/clojure.css" type="text/css" media="all" />
@@ -25,14 +25,14 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
-    <span class="toc-header"><span id="project-name">A manipulable, pluggable, memoization framework</span> <span id="version">0.5.10</span> API</span><br />
+    <span class="toc-header"><span id="project-name">core.memoize</span> <span id="version">0.8.3-SNAPSHOT</span> API</span><br />
     <ul>
       <li><a href="index.html" class="wiki_link">Overview</a></li>
       <li><a href="api-index.html" class="wiki_link">API Index</a></li>
     </ul>
     
     
-    <a class="wiki_link" href="http://clojure.org">Clojure Home</a>
+    <a class="wiki_link" href="https://clojure.org">Clojure Home</a>
   </div>
 </div>
 </div>
@@ -72,6 +72,9 @@ namespace.
       <a href="#clojure.core.memoize/fifo" class="toc-entry-anchor">fifo</a>
       
     </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.memoize/lazy-snapshot" class="toc-entry-anchor">lazy-snapshot</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
       <a href="#clojure.core.memoize/lru" class="toc-entry-anchor">lru</a>
       
     </div><div class="toc-entry" style="margin-left: 1em;">
@@ -93,6 +96,9 @@ namespace.
       <a href="#clojure.core.memoize/memo-lu" class="toc-entry-anchor">memo-lu</a>
       
     </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.memoize/memo-reset!" class="toc-entry-anchor">memo-reset!</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
       <a href="#clojure.core.memoize/memo-swap!" class="toc-entry-anchor">memo-swap!</a>
       
     </div><div class="toc-entry" style="margin-left: 1em;">
@@ -100,6 +106,9 @@ namespace.
       
     </div><div class="toc-entry" style="margin-left: 1em;">
       <a href="#clojure.core.memoize/memoized?" class="toc-entry-anchor">memoized?</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.memoize/memoizer" class="toc-entry-anchor">memoizer</a>
       
     </div><div class="toc-entry" style="margin-left: 1em;">
       <a href="#clojure.core.memoize/snapshot" class="toc-entry-anchor">snapshot</a>
@@ -115,25 +124,26 @@ namespace.
 </div>
 </div>
                 <div id="content-tag"><h1 id="overview">API for <span id="clojure.core.memoize">clojure.core.memoize</span>
-  - <span id="header-project">A manipulable, pluggable, memoization framework</span> <span id="header-version">0.5.10</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
+  - <span id="header-project">core.memoize</span> <span id="header-version">0.8.3-SNAPSHOT</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 <span id="author-line">by <span id="author-name">fogus</span><br /></span>
 <br />Full namespace name: <span id="long-name">clojure.core.memoize</span>
 <p></p>
 <h2>Overview</h2>
-<div id="home-page">Project home page is <a href="http://github.com/clojure/core.memoize/">http://github.com/clojure/core.memoize/</a></div>
-<pre id="namespace-docstr">core.memoize is a memoization library offering functionality above Clojure's core `memoize`
-function in the following ways:
+<div id="home-page">Project home page is <a href="https://github.com/clojure/core.memoize/">https://github.com/clojure/core.memoize/</a></div>
+<pre id="namespace-docstr">core.memoize is a memoization library offering functionality above
+Clojure's core `memoize` function in the following ways:
 
 **Pluggable memoization**
 
-core.memoize allows for different back-end cache implmentations to be used as appropriate without
-changing the memoization modus operandi.
+core.memoize allows for different back-end cache implmentations to
+be used as appropriate without changing the memoization modus operandi.
+See the `memoizer` function.
 
 **Manipulable memoization**
 
-Because core.memoize allows you to access a function's memoization store, you do interesting things like
-clear it, modify it, and save it for later.
+Because core.memoize allows you to access a function's memoization store,
+you do interesting things like clear it, modify it, and save it for later.
 </pre>
 
 
@@ -177,7 +187,7 @@ clear it, modify it, and save it for later.
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L29">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L75">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -189,7 +199,7 @@ clear it, modify it, and save it for later.
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L52">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L35">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -197,14 +207,18 @@ clear it, modify it, and save it for later.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (build-memoizer cache-factory f &amp; args)
 </pre>
-    <pre id="var-docstr">Builds a function that given a function, returns a pluggable memoized
-version of it.  `build-memoizer` Takes a cache factory function, a function
-to memoize, and the arguments to the factory.  At least one of those
-functions should be the function to be memoized.</pre>
+    <pre id="var-docstr">Builds a function that, given a function, returns a pluggable memoized
+ version of it.  `build-memoizer` takes a cache factory function, and the
+ argunments to that factory function -- at least one of those arguments
+ should be the function to be memoized (it's usually the first argument).
+
+`memoizer` above is a simpler version of `build-memoizer` that 'does the
+right thing' with a cache and a seed hash map. `build-memoizer` remains
+for backward compatibility but should be considered deprecated.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L152">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L261">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -242,7 +256,24 @@ memoization cache.  This is the standard **F**irst **I**n
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L242">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L339">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.memoize/lazy-snapshot">lazy-snapshot</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (lazy-snapshot memoized-fn)
+</pre>
+    <pre id="var-docstr">Returns a lazy snapshot of a core.memo-placed memoization cache.  By
+lazy snapshot you can infer that what you get is only the cache contents at a
+moment in time -- and, being lazy, the cache could change while you are
+realizing the snapshot elements.
+
+Returns a sequence of key/value pairs.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L128">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -291,7 +322,7 @@ when the threshold is passed, the cache will expel the
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L292">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L380">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -321,7 +352,7 @@ The **L**east **U**sed values are cleared on cache misses.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L399">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L469">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -349,7 +380,7 @@ change over time.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L171">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L275">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -371,7 +402,7 @@ now.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L107">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L145">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -385,7 +416,7 @@ now.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L231">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L332">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -399,7 +430,7 @@ now.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L281">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L373">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -413,13 +444,13 @@ now.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L388">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L462">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
-    <h2 id="clojure.core.memoize/memo-swap!">memo-swap!</h2>
+    <h2 id="clojure.core.memoize/memo-reset!">memo-reset!</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (memo-swap! f base)
+    <pre id="var-usage">Usage: (memo-reset! f base)
 </pre>
     <pre id="var-docstr">Takes a core.memo-populated function and a map and replaces the memoization cache
 with the supplied map.  This is potentially some serious voodoo,
@@ -434,7 +465,40 @@ With great power comes ... yadda yadda yadda.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L125">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L163">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.memoize/memo-swap!">memo-swap!</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (memo-swap! f base)
+       (memo-swap! f swap-fn args &amp; results)
+</pre>
+    <pre id="var-docstr">The 2-arity version takes a core.memo-populated function and a map and
+replaces the memoization cache with the supplied map. Use `memo-reset!`
+instead for replacing the cache as this 2-arity version of `memo-swap!`
+should be considered deprecated.
+
+The 3+-arity version takes a core.memo-populated function and arguments
+similar to what you would pass to `clojure.core/swap!` and performs a
+`swap!` on the underlying cache. In order to satisfy core.memoize's
+world view, the assumption is that you will generally be calling it like:
+
+      (def id (memo identity))
+      (memo-swap! id clojure.core.cache/miss [13] :omg)
+      (id 13)
+      ;=&gt; :omg
+
+You'll nearly always use `clojure.core.cache/miss` for this operation but
+you could pass any function that would work on an immutable cache, such
+as `evict` or `assoc` etc.
+
+Be aware that `memo-swap!` assumes it can wrap each of the `results` values
+in a `delay` so that items conform to `clojure.core.memoize`'s world view.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L179">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -448,7 +512,7 @@ With great power comes ... yadda yadda yadda.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L342">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L425">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -460,7 +524,25 @@ With great power comes ... yadda yadda yadda.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L102">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L140">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.memoize/memoizer">memoizer</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (memoizer f cache)
+       (memoizer f cache seed)
+</pre>
+    <pre id="var-docstr">Build a pluggable memoized version of a function. Given a function and a
+(pluggable memoized) cache, and an optional seed (hash map of arguments to
+return values), return a cached version of that function.
+
+If you want to build your own cached function, perhaps with combined caches
+or customized caches, this is the preferred way to do so now.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L244">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -474,7 +556,7 @@ moment in time.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L92">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L118">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -508,7 +590,7 @@ The expired cache entries will be removed on each cache **miss**.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/0f82bdd867600e7f526b0688aac6e9b82f70e5ee/src/main/clojure/clojure/core/memoize.clj#L353">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.memoize/blob/e1b448aec9b0aa9ce6754373681cfc54c0d5359e/src/main/clojure/clojure/core/memoize.clj#L432">Source</a>
   </div>
 </div>
 
@@ -519,7 +601,7 @@ The expired cache entries will be removed on each cache **miss**.</pre>
           </div>
 	</div>
 	<div id="foot">
-	  <div id="copyright" style="text-align: center;">Copyright 2007-2017 by Rich Hickey and the various contributors</div>
+	  <div id="copyright" style="text-align: center;">Copyright 2007-2019 by Rich Hickey and the various contributors</div>
 	</div>
       </div>
       <div id="DesignedBy">Logo &amp; site design by <a href="http://www.tomhickey.com" title="Visit Tom Hickey's website.">Tom Hickey</a>.<br />
