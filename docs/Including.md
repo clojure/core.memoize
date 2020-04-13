@@ -10,7 +10,7 @@ The core.memoize releases and snapshots are stored in the following repositories
 `
 You can use core.memoize in your [Leiningen](https://github.com/technomancy/leiningen) projects with the following `:dependencies` directive in your `project.clj` file:
 
-    [org.clojure/core.memoize "0.5.6"]
+    [org.clojure/core.memoize "1.0.236"]
 
 ## Maven
 
@@ -19,7 +19,7 @@ For Maven-driven projects, use the following slice of XML in your `pom.xml`'s `<
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>0.5.6</version>
+      <version>1.0.236</version>
     </dependency>
 
 Enjoy!
