@@ -27,6 +27,11 @@ Latest stable release: 1.0.236
 
 * [Development Snapshot Versions](https://oss.sonatype.org/index.html#nexus-search;gav~org.clojure~core.memoize~~~)
 
+[CLI/`deps.edn`](https://clojure.org/reference/deps_and_cli) dependency information:
+```clojure
+org.clojure/core.memoize {:mvn/version "1.0.236"}
+```
+
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
     [org.clojure/core.memoize "1.0.236"]
