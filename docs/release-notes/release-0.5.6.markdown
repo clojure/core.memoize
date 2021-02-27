@@ -34,7 +34,7 @@ Places
 
 * [Source code](https://github.com/clojure/core.memoize)
 * [Ticket system](http://clojure.atlassian.net/browse/CMEMOIZE)
-* [API Reference](https://clojure.github.com/core.memoize)
+* [API Reference](https://clojure.github.io/core.memoize)
 
 Changes from v0.5.5
 -------------------
