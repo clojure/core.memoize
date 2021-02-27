@@ -10,7 +10,7 @@ clojure.core.memoize
   - Least-recently-used (`clojure.core.memoize/lru`)
   - Least-used (`clojure.core.memoize/lu`)
   - Time-to-live (`clojure.core.memoize/ttl`)
-  - Naive cache (`memo`) that duplicates the functionality of Clojure's `memoize` function
+  - Naive cache (`memo`) that duplicates the functionality of Clojure's `memoize` function _but, unlike the built-in `memoize` function, ensures that in the case of concurrent calls with the same arguments, the memoized function is only invoked once_; in addition `memo` can use metadata from the memoized function to ignore certain arguments for the purpose of creating the cache key, e.g., allowing you to memoize `clojure.java.jdbc` functions where the first argument includes a (mutable) JDBC `Connection` object by specifying `:clojure.core.memoize/args-fn rest` in the metadata
 
 * Functions for manipulating the memoization cache of `core.memoize` backed functions
 
@@ -75,45 +75,47 @@ Developer Information
 
 * [GitHub project](https://github.com/clojure/core.memoize)
 
-* [Bug Tracker](http://clojure.atlassian.net/browse/CMEMOIZE)
+* [Bug Tracker](https://clojure.atlassian.net/browse/CMEMOIZE)
 
-* [Continuous Integration](http://build.clojure.org/job/core.memoize/)
+* [Continuous Integration](https://build.clojure.org/job/core.memoize/)
 
-* [Compatibility Test Matrix](http://build.clojure.org/job/core.memoize-test-matrix/)
+* [Compatibility Test Matrix](https://build.clojure.org/job/core.memoize-test-matrix/)
 
 
 
 Change Log
 ====================
+* Release 1.0.next in progress
+  * Clarify differences between `clojure.core/memoize` and `clojure.core.memoize/memo` functions [CMEMOIZE-25](https://clojure.atlassian.net/browse/CMEMOIZE-25).
 * Release 1.0.236 on 2020.04.13
-  * Switch to 1.0.x versioning [CMEMOIZE-29](http://clojure.atlassian.net/browse/CMEMOIZE-29).
+  * Switch to 1.0.x versioning [CMEMOIZE-29](https://clojure.atlassian.net/browse/CMEMOIZE-29).
   * Update `core.cache` dependency version from 0.8.2 to 1.0.207.
-  * Fixes [CMEMOIZE-9](http://clojure.atlassian.net/browse/CMEMOIZE-9) - adds `memo-reset!` and deprecates 2-arity version of `memo-swap!`; adds 3+-arity version of `memo-swap!` to behave more like a `swap!` operation on the underlying cache
+  * Fixes [CMEMOIZE-9](https://clojure.atlassian.net/browse/CMEMOIZE-9) - adds `memo-reset!` and deprecates 2-arity version of `memo-swap!`; adds 3+-arity version of `memo-swap!` to behave more like a `swap!` operation on the underlying cache
 * Release 0.8.2 on 2019.11.01 (to match core.cache again)
   * Update `core.cache` dependency version from 0.7.2 to 0.8.2.
-  * Fixes [CMEMOIZE-28](http://clojure.atlassian.net/browse/CMEMOIZE-28) - provides `memoizer` as a more convenient way to build custom cached functions that may provide a seed hash map of arguments to return values. `build-memoizer` should be considered deprecated at this point.
-  * Fixes [CMEMOIZE-27](http://clojure.atlassian.net/browse/CMEMOIZE-27) - the `seed` function on `PluggableMemoization` now makes elements derefable (this case was missed when [CMEMOIZE-18](http://clojure.atlassian.net/browse/CMEMOIZE-18) was fixed)
+  * Fixes [CMEMOIZE-28](https://clojure.atlassian.net/browse/CMEMOIZE-28) - provides `memoizer` as a more convenient way to build custom cached functions that may provide a seed hash map of arguments to return values. `build-memoizer` should be considered deprecated at this point.
+  * Fixes [CMEMOIZE-27](https://clojure.atlassian.net/browse/CMEMOIZE-27) - the `seed` function on `PluggableMemoization` now makes elements derefable (this case was missed when [CMEMOIZE-18](https://clojure.atlassian.net/browse/CMEMOIZE-18) was fixed)
 * Release 0.7.2 on 2019.06.13
-  * Fixes [CMEMOIZE-26](http://clojure.atlassian.net/browse/CMEMOIZE-26) - zero-arity function cache could not be replaced by `memo-swap!` (discovered by Teemu Kaukoranta)
+  * Fixes [CMEMOIZE-26](https://clojure.atlassian.net/browse/CMEMOIZE-26) - zero-arity function cache could not be replaced by `memo-swap!` (discovered by Teemu Kaukoranta)
   * Updated core.cache dependency version from 0.7.1 to 0.7.2
   * Updated test matrix locally to include Clojure 1.10.1, 1.11 master
 * Release 0.7.1 on 2018.03.02
-  * Fixes [CMEMOIZE-15](http://clojure.atlassian.net/browse/CMEMOIZE-15) - edge case where cache miss/lookup cross an eviction boundary (Ryan Fowler/Colin Jones)
+  * Fixes [CMEMOIZE-15](https://clojure.atlassian.net/browse/CMEMOIZE-15) - edge case where cache miss/lookup cross an eviction boundary (Ryan Fowler/Colin Jones)
   * Updated core.cache dependency version from 0.7.0 to 0.7.1 (for TTLCacheQ bug fix)
 * Release 0.7.0 on 2018.03.01
-  * Fixes [CMEMOIZE-22](http://clojure.atlassian.net/browse/CMEMOIZE-22) - add `:clojure.core.memoize/args-fn` metadata support for memoizing functions which have one or more arguments that should not contribute to the cache key for calls
-  * Fixes [CMEMOIZE-20](http://clojure.atlassian.net/browse/CMEMOIZE-20) - add `lazy-snapshot` function
-  * Fixes [CMEMOIZE-18](http://clojure.atlassian.net/browse/CMEMOIZE-18) - automatically makes seed map values `deref`-able to match documentation and comply with core.memoize's world view
+  * Fixes [CMEMOIZE-22](https://clojure.atlassian.net/browse/CMEMOIZE-22) - add `:clojure.core.memoize/args-fn` metadata support for memoizing functions which have one or more arguments that should not contribute to the cache key for calls
+  * Fixes [CMEMOIZE-20](https://clojure.atlassian.net/browse/CMEMOIZE-20) - add `lazy-snapshot` function
+  * Fixes [CMEMOIZE-18](https://clojure.atlassian.net/browse/CMEMOIZE-18) - automatically makes seed map values `deref`-able to match documentation and comply with core.memoize's world view
   * Cleanup/improve/fix tests
   * Add multi-version testing locally via Leiningen
   * Jump to 0.7.0 to match core.cache since these two libraries are so closely in sync
 * Release 0.5.9 on 2016.03.28
   * Updated core.cache dependency version from 0.6.4 to 0.6.5
 * Release 0.5.8 on 2015.11.06
-  * Fixes [CMEMOIZE-21](http://clojure.atlassian.net/browse/CMEMOIZE-21) - race condition in delay
+  * Fixes [CMEMOIZE-21](https://clojure.atlassian.net/browse/CMEMOIZE-21) - race condition in delay
 * Release 0.5.7 on 2015.01.12
-  * Fixes [CMEMOIZE-8](http://clojure.atlassian.net/browse/CMEMOIZE-8)
-  * Fixes [CMEMOIZE-13](http://clojure.atlassian.net/browse/CMEMOIZE-13)
+  * Fixes [CMEMOIZE-8](https://clojure.atlassian.net/browse/CMEMOIZE-8)
+  * Fixes [CMEMOIZE-13](https://clojure.atlassian.net/browse/CMEMOIZE-13)
   * Updated core.cache dependency version from 0.6.3 to 0.6.4
 * Release 0.5.6 on 2013.06.28
   * Added optional args to `memo-clear!`.
@@ -122,8 +124,8 @@ Change Log
   * Deprecated `memo-*` APIs
   * Adds new API of form `(cache-type function <base><:cache-type/threshold int>)`
 * Release 0.5.4 on 2013.06.03
-  * Fixes [CMEMOIZE-5](http://clojure.atlassian.net/browse/CMEMOIZE-5)
-  * Fixes [CMEMOIZE-2](http://clojure.atlassian.net/browse/CMEMOIZE-2)
+  * Fixes [CMEMOIZE-5](https://clojure.atlassian.net/browse/CMEMOIZE-5)
+  * Fixes [CMEMOIZE-2](https://clojure.atlassian.net/browse/CMEMOIZE-2)
 * Release 0.5.3 on 2013.03.18
   * Works with core.cache v0.6.3
 * Release 0.5.2 on 2012.07.13
@@ -137,4 +139,4 @@ Change Log
 Copyright and License
 ========================================
 
-Copyright (c) Rich Hickey and Michael Fogus, 2012, 2013. All rights reserved.  The use and distribution terms for this software are covered by the Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php) which can be found in the file epl-v10.html at the root of this distribution. By using this software in any fashion, you are agreeing to be bound bythe terms of this license.  You must not remove this notice, or any other, from this software.
+Copyright (c) Rich Hickey and Michael Fogus, 2012, 2013. All rights reserved.  The use and distribution terms for this software are covered by the Eclipse Public License 1.0 (https://opensource.org/licenses/eclipse-1.0.php) which can be found in the file epl-v10.html at the root of this distribution. By using this software in any fashion, you are agreeing to be bound bythe terms of this license.  You must not remove this notice, or any other, from this software.
