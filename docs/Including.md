@@ -7,7 +7,7 @@ The core.memoize releases and snapshots are stored in the following repositories
  * Snapshot versions stored at [Sonatype](https://oss.sonatype.org/index.html#nexus-search;gav~org.clojure~core.memoize~~~) (url at <http://oss.sonatype.org/content/repositories/snapshots>)
 
 ## Leiningen
-`
+
 You can use core.memoize in your [Leiningen](https://github.com/technomancy/leiningen) projects with the following `:dependencies` directive in your `project.clj` file:
 
     [org.clojure/core.memoize "1.0.236"]
