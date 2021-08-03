@@ -21,7 +21,7 @@ Releases and Dependency Information
 
 This project follows the version scheme MAJOR.MINOR.COMMITS where MAJOR and MINOR provide some relative indication of the size of the change, but do not follow semantic versioning. In general, all changes endeavor to be non-breaking (by moving to new names rather than by breaking existing names). COMMITS is an ever-increasing counter of commits since the beginning of this repository.
 
-Latest stable release: 1.0.236
+Latest stable release: 1.0.250
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 
@@ -29,19 +29,19 @@ Latest stable release: 1.0.236
 
 [CLI/`deps.edn`](https://clojure.org/reference/deps_and_cli) dependency information:
 ```clojure
-org.clojure/core.memoize {:mvn/version "1.0.236"}
+org.clojure/core.memoize {:mvn/version "1.0.250"}
 ```
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "1.0.236"]
+    [org.clojure/core.memoize "1.0.250"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>1.0.236</version>
+      <version>1.0.250</version>
     </dependency>
 
 
@@ -85,7 +85,7 @@ Developer Information
 
 Change Log
 ====================
-* Release 1.0.next in progress
+* Release 1.0.250 on 2021.08.02
   * Clarify differences between `clojure.core/memoize` and `clojure.core.memoize/memo` functions [CMEMOIZE-25](https://clojure.atlassian.net/browse/CMEMOIZE-25).
   * Update `core.cache` to 1.0.217.
 * Release 1.0.236 on 2020.04.13
