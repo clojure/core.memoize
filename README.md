@@ -87,6 +87,7 @@ Change Log
 ====================
 * Release 1.0.next in progress
   * Clarify differences between `clojure.core/memoize` and `clojure.core.memoize/memo` functions [CMEMOIZE-25](https://clojure.atlassian.net/browse/CMEMOIZE-25).
+  * Update `core.cache` to 1.0.217.
 * Release 1.0.236 on 2020.04.13
   * Switch to 1.0.x versioning [CMEMOIZE-29](https://clojure.atlassian.net/browse/CMEMOIZE-29).
   * Update `core.cache` dependency version from 0.8.2 to 1.0.207.

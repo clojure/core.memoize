@@ -37,7 +37,7 @@
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.cache</artifactId>
-      <version>1.0.207</version>
+      <version>1.0.217</version>
     </dependency>
   </dependencies>
 
