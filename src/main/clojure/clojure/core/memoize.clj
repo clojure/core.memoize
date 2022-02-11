@@ -49,7 +49,10 @@
               ;; or you have a race with the first check above
               (set! value v)
               (set! available? true)
-              v)))))))
+              v))))))
+  clojure.lang.IPending
+  (isRealized [this]
+    available?))
 
 (defn- d-lay [fun]
   (->RetryingDelay fun false nil))
