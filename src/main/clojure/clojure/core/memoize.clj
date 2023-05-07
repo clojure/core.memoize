@@ -449,7 +449,7 @@
 
 (defn ttl
   "Unlike many of the other core.memo memoization functions,
-   `memo-ttl`'s cache policy is time-based rather than algortihmic
+   `memo-ttl`'s cache policy is time-based rather than algorithmic
    or explicit.  When memoizing a function using `memo-ttl` you
    should provide a **T**ime **T**o **L**ive parameter in
    milliseconds.

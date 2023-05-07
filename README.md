@@ -85,6 +85,8 @@ Developer Information
 
 Change Log
 ====================
+* Release 1.0.next in progress
+  * Fixes [CMEMOIZE-30](https://clojure.atlassian.net/browse/CMEMOIZE-30) - typo in `ttl` docstring (j-mckitrick).
 * Release 1.0.257 on 2022.02.11
   * Implement `IPending` for `RetryingDelay` for folks trying to do low-level availability tests on long-running memoized functions.
 * Release 1.0.253 on 2021.12.06

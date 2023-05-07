@@ -1,9 +1,11 @@
 .classpath
+.clj-kondo/.cache
 .cpcache/
 .idea
 .lein*
-.lsp/sqlite.db
+.lsp/.cache
 .nrepl-port
+.portal/vs-code.edn
 .project
 .settings
 .vscode
