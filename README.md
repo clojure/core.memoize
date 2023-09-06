@@ -44,6 +44,11 @@ org.clojure/core.memoize {:mvn/version "1.0.257"}
       <version>1.0.257</version>
     </dependency>
 
+Documentation
+========================================
+
+* [Auto-generated API docs](https://clojure.github.io/core.memoize/)
+* [core.memoize on cljdoc.org](https://cljdoc.org/d/org.clojure/core.memoize/)
 
 
 Example Usage
