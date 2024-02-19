@@ -10,7 +10,7 @@
            :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-master-SNAPSHOT"}}}
            :test
            {:extra-paths ["src/test/clojure"]
-            :extra-deps {org.clojure/test.check {:mvn/version "1.0.0"}
+            :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
                          io.github.cognitect-labs/test-runner
                          {:git/tag "v0.4.0" :git/sha "334f2e2"}}
             :main-opts ["-m" "cognitect.test-runner"
