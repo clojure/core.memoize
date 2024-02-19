@@ -3,7 +3,7 @@ clojure.core.memoize
 
 [core.memoize](https://github.com/clojure/core.memoize) is a Clojure contrib library providing the following features:
 
-* An underlying `PluggableMemoization` protocol that allows the use of customizable and swappable memoization caches that adhere to the synchronous `CacheProtocol` found in [core.cache](http://github.com/clojure/core.cache)
+* An underlying `PluggableMemoization` protocol that allows the use of customizable and swappable memoization caches that adhere to the synchronous `CacheProtocol` found in [core.cache](https://github.com/clojure/core.cache)
 
 * Memoization builders for implementations of common caching strategies, including:
   - First-in-first-out (`clojure.core.memoize/fifo`)
@@ -21,27 +21,26 @@ Releases and Dependency Information
 
 This project follows the version scheme MAJOR.MINOR.COMMITS where MAJOR and MINOR provide some relative indication of the size of the change, but do not follow semantic versioning. In general, all changes endeavor to be non-breaking (by moving to new names rather than by breaking existing names). COMMITS is an ever-increasing counter of commits since the beginning of this repository.
 
-Latest stable release: 1.0.257
+Latest stable release: 1.1.266
 
-* [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
-
+* [All Released Versions](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 * [Development Snapshot Versions](https://oss.sonatype.org/index.html#nexus-search;gav~org.clojure~core.memoize~~~)
 
 [CLI/`deps.edn`](https://clojure.org/reference/deps_and_cli) dependency information:
 ```clojure
-org.clojure/core.memoize {:mvn/version "1.0.257"}
+org.clojure/core.memoize {:mvn/version "1.1.266"}
 ```
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "1.0.257"]
+    [org.clojure/core.memoize "1.1.266"]
 
-[Maven](http://maven.apache.org/) dependency information:
+[Maven](https://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>1.0.257</version>
+      <version>1.1.266</version>
     </dependency>
 
 Documentation
@@ -85,7 +84,8 @@ Developer Information
 
 Change Log
 ====================
-* Release 1.0.next in progress
+* Release 1.1.266 on 2024.02.19
+  * Update parent pom and deps
   * Fixes [CMEMOIZE-30](https://clojure.atlassian.net/browse/CMEMOIZE-30) - typo in `ttl` docstring (j-mckitrick).
 * Release 1.0.257 on 2022.02.11
   * Implement `IPending` for `RetryingDelay` for folks trying to do low-level availability tests on long-running memoized functions.
