@@ -84,6 +84,9 @@ Developer Information
 
 Change Log
 ====================
+
+* Release 1.2.273 on 2026.01.05
+  * Update parent pom and deps
 * Release 1.1.266 on 2024.02.19
   * Update parent pom and deps
   * Fixes [CMEMOIZE-30](https://clojure.atlassian.net/browse/CMEMOIZE-30) - typo in `ttl` docstring (j-mckitrick).
