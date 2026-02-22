@@ -1,0 +1,3 @@
+{:hooks
+ {:macroexpand
+  {clojure.core.memoize/def-deprecated clojure.core.memoize/def-deprecated}}}

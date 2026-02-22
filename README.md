@@ -85,6 +85,9 @@ Developer Information
 Change Log
 ====================
 
+* Release 1.2.276 on 2026.02.22
+  * Update `core.cache` dep
+  * Add clj-kondo support
 * Release 1.2.273 on 2026.01.05
   * Update parent pom and deps
 * Release 1.1.266 on 2024.02.19

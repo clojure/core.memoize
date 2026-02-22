@@ -1,5 +1,6 @@
 .classpath
 .clj-kondo/.cache
+.clj-kondo/imports
 .cpcache/
 .idea
 .lein*
@@ -14,3 +15,4 @@ lib
 multi-lib
 target
 .calva/repl.calva-repl
+.calva/mcp-server/port
