@@ -21,26 +21,26 @@ Releases and Dependency Information
 
 This project follows the version scheme MAJOR.MINOR.COMMITS where MAJOR and MINOR provide some relative indication of the size of the change, but do not follow semantic versioning. In general, all changes endeavor to be non-breaking (by moving to new names rather than by breaking existing names). COMMITS is an ever-increasing counter of commits since the beginning of this repository.
 
-Latest stable release: 1.2.278
+Latest stable release: 1.2.281
 
 * [All Released Versions](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.memoize%22)
 * [Development Snapshot Versions](https://oss.sonatype.org/index.html#nexus-search;gav~org.clojure~core.memoize~~~)
 
 [CLI/`deps.edn`](https://clojure.org/reference/deps_and_cli) dependency information:
 ```clojure
-org.clojure/core.memoize {:mvn/version "1.2.278"}
+org.clojure/core.memoize {:mvn/version "1.2.281"}
 ```
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.memoize "1.2.278"]
+    [org.clojure/core.memoize "1.2.281"]
 
 [Maven](https://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.memoize</artifactId>
-      <version>1.2.278</version>
+      <version>1.2.281</version>
     </dependency>
 
 Documentation
