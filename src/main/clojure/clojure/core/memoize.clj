@@ -42,14 +42,13 @@
         ;; second check (race condition with locking)
         (if available?
           value
-          (do
-            ;; fun may throw - will retry on next deref
-            (let [v (fun)]
-              ;; this ordering is important - MUST set value before setting available?
-              ;; or you have a race with the first check above
-              (set! value v)
-              (set! available? true)
-              v))))))
+          ;; fun may throw - will retry on next deref
+          (let [v (fun)]
+            ;; this ordering is important - MUST set value before setting available?
+            ;; or you have a race with the first check above
+            (set! value v)
+            (set! available? true)
+            v)))))
   clojure.lang.IPending
   (isRealized [this]
     available?))
@@ -437,6 +436,16 @@
   ([f base key threshold]
    (check-args "lru" f base key threshold)
    (memoizer f (cache/lru-cache-factory {} :threshold threshold) base)))
+
+(comment
+  (def counter (atom 0))
+  (defn f [x] (println x) (throw (ex-info "error" {:c (swap! counter inc) :x x})))
+  (f {:a 1 :b 2})
+  (def f' (lru (with-meta f {::args-fn (fn [args] (:a (first args)))})))
+  (meta f')
+  (try (f' {:a "A" :b 1}) (catch Exception e (ex-data e)))
+  (try (f' {:a "A" :b 3}) (catch Exception e (ex-data e)))
+  )
 
 ;; ### TTL
 
